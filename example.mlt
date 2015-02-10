@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<mlt>
+  <producer id="title:poc">
+    <property name="mlt_type">producer</property>
+    <property name="mlt_service">webvfx</property>
+    <property name="resource">example.html</property>
+	<property name="length">300</property>
+	<property name="width">1920</property>
+	<property name="height">1080</property>
+	<property name="frame_rate_num">30000</property>
+	<property name="frame_rate_den">1001</property>
+	<property name="progressive">1</property>
+  </producer>
+</mlt>
+
