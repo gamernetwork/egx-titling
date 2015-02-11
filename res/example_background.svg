@@ -14,7 +14,10 @@
    version="1.1"
    id="svg2"
    height="100"
-   width="1000">
+   width="1000"
+   inkscape:export-filename="/home/mark/Documents/Work/egx/2015/sessions/titling/res/example_background.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -35,8 +38,8 @@
      borderlayer="true"
      inkscape:window-width="1411"
      inkscape:window-height="752"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-x="91"
+     inkscape:window-y="214"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
