@@ -12,7 +12,7 @@
               -webkit-box-orient: vertical;
               /* set chromakey color */
               /*background-color: #ff00ff;*/
-              background-color: rgba(0,0,0,0);
+              background-color: rgba(0,0,0,255);
            }
 
            #slate {
@@ -45,6 +45,7 @@
                 this.tl = tl;
             }
             Producer.prototype.sync = function(time) {
+              
                 // Use em units which are proportional to font-size,
                 // which is being set to proportional to page render size.
                 // Vary x offset from -0.2 to 0.2.
