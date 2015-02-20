@@ -11,7 +11,8 @@
               display: -webkit-box;
               -webkit-box-orient: vertical;
               /* set chromakey color */
-              background-color: #ff00ff;
+              /*background-color: #ff00ff;*/
+              background-color: rgba(0,0,0,0);
            }
 
            #slate {
@@ -58,6 +59,7 @@
                     // read parameters supplied by webvfx and update template values
                     $('#speaker').text(webvfx.getStringParameter("speaker"));
                     $('#company').text(webvfx.getStringParameter("company"));
+                    $('body').css({'background-color': webvfx.getStringParameter("company")});
                 }
 
                 var tl = new TimelineLite();
