@@ -45,7 +45,7 @@
                 this.tl = tl;
             }
             Producer.prototype.sync = function(time) {
-              
+
                 // Use em units which are proportional to font-size,
                 // which is being set to proportional to page render size.
                 // Vary x offset from -0.2 to 0.2.
@@ -60,7 +60,7 @@
                     // read parameters supplied by webvfx and update template values
                     $('#speaker').text(webvfx.getStringParameter("speaker"));
                     $('#company').text(webvfx.getStringParameter("company"));
-                    $('body').css({'background-color': webvfx.getStringParameter("company")});
+                    $('body').css({'background-color': webvfx.getStringParameter("bgcolor")});
                 }
 
                 var tl = new TimelineLite();

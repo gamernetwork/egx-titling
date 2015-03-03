@@ -1,0 +1,404 @@
+<html>
+    <head>
+        <style type="text/css">
+		        
+		   @font-face {
+		   font-family:'egx';
+		   src:url('fonts/egx/bold/egx.eot');
+		   src:url('bold/egx.eot?#iefix') format('embedded-opentype'),url('fonts/egx/bold/egx.woff2') format('woff2'),url('fonts/egx/bold/egx.woff') format('woff'),url('fonts/egx/bold/egx.ttf') format('truetype'),url('fonts/egx/bold/egx.svg#egx') format('svg');
+		   font-weight:bold;
+		   font-style:normal
+			}
+
+			@font-face {
+			    font-family:'egx';
+			    src:url('fonts/egx/regular/egx.eot');
+			    src:url('fonts/egx/regular/egx.eot?#iefix') format('embedded-opentype'),url('fonts/egx/regular/egx.woff2') format('woff2'),url('fonts/egx/regular/egx.woff') format('woff'),url('fonts/egx/regular/egx.ttf') format('truetype'),url('fonts/egx/regular/egx.svg#egx') format('svg');
+			    font-weight:normal;
+			    font-style:normal
+			}
+
+
+	        
+		  body {
+		        
+		        margin: 0px !important;
+		        	height: 100%;
+
+		}
+	        
+		
+				.wrapper {
+			 	
+			 	background-color: grey;
+		 
+			  
+		
+			 	
+			 	background: url(images/background) no-repeat  ;
+			 	background-position: right top;
+			 	background-size: 1500px;
+			 	background-color: #360c40;
+			 
+			  
+			 	line-height: 1.1;	height: 100%;
+			 	padding-top: 150px;
+			 	
+			 	}		
+		
+	
+	
+	
+	
+	
+		
+		
+				
+		#slate {
+			display: inline-block;
+		 
+			margin-left: 415px;	
+			height: 100%;
+			
+
+			
+			}
+
+		
+		
+		
+	
+		h1, h2 {
+				
+			font-family: Helvetica Neue;
+			color: white;
+			font-weight: 300;
+			width: 1500px;
+			line-height: 1.1;
+			font-size: 90px;
+		
+			
+		}
+		
+	
+		h2 {
+			font-weight: 100;
+			line-height: 1.1;font-size: 70px;
+		}
+		
+		
+		
+		
+		.slateText {
+			
+			color: #50e7e8;
+			text-transform: uppercase;			
+			color: #50e7e8;
+			font-family: egx;		
+			font-size: 36px;
+			 
+		}
+		
+		
+		
+		.laterText {
+			
+			margin-top: 160px;
+			opacity: 0;
+			
+			}
+		
+		#time {
+			
+			
+			color: #e65d9b;
+			font-size: 50px;
+			font-family: egx;
+			font-weight: normal;
+			margin-top: 50px;
+
+
+}
+
+			
+			
+	
+			
+	#sessionName {
+		
+		margin-top: 120px;
+		}
+
+
+
+			
+			
+	.later  {
+		
+		display: inline-block;
+		float: left;
+		color: white;
+
+		font-family: egx;
+		
+		display: block;
+	
+		line-height: 1.1;
+		
+		margin-left:50px;
+		width: 700px;
+		
+		
+		
+		}
+		
+		
+	  .line {
+			
+			width: 3px;
+			height: 150px;
+			display: inline-block;
+			float: left;
+			padding: 0px;
+			margin-top: 20px;
+			
+		
+		}
+			
+					
+		
+		
+		
+		#laterTime {
+			
+			font-size: 40px;
+		 
+			margin-right: 90px;
+			color: #e65d9b;
+			margin-top: 20px;
+	 
+			}
+			
+			
+			#latersessionName {
+			font-size: 40px;
+			margin-bottom: 0px;
+			 
+		
+		}
+
+				#latersessionInfo {
+			font-size: 30px;
+			margin-top: 0; 		}
+		
+		
+		
+	
+	
+	
+			
+		#latersessionName, #latersessionInfo {
+		
+		width:740px;	
+		
+
+			
+		}
+/*
+  
+			END OF STYLING
+*/
+
+
+        </style>
+        
+        
+        
+        
+       <script src="lib/jquery-2.1.3.min.js"></script>
+        <script src="lib/TweenMax.min.js"></script>
+			
+			
+			
+			
+		       <script type="text/javascript">
+            function Producer(tl) {
+                this.tl = tl;
+            }
+            Producer.prototype.sync = function(time) {
+
+                // Use em units which are proportional to font-size,
+                // which is being set to proportional to page render size.
+                // Vary x offset from -0.2 to 0.2.
+                //this.textStyle.textShadow = ((time * 0.4) - 0.2) + "em -0.2em 0.3em black";
+                console.log(time);
+                this.tl.progress(time);
+
+            }
+            function onLoad() {
+                handleFontSize();
+                if( typeof webvfx !== "undefined" ) {
+                    // read parameters supplied by webvfx and update template values
+                    $('#sessionName').text(webvfx.getStringParameter("sessionName"));
+                    $('#sessionInfo').text(webvfx.getStringParameter("sessionInfo"));
+                    $('body').css({'background-color': webvfx.getStringParameter("bgcolor")});
+                }
+
+				
+				
+				
+				
+				var tl = new TimelineLite();
+                
+                
+                
+                var sessionNameName = document.getElementById("sessionName");
+                var devName = document.getElementById("sessionInfo");
+              
+             
+                
+                
+                
+
+         
+                     
+      
+		
+                   
+                tl .from(".wrapper", 4, { css: { width: "0px", backgroundSize: "0px" }, ease:Power4. easeOut }, "start" )
+
+				       
+ 
+                
+              
+             
+                .from( "#next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "next" )
+				.from( "#time", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "next+=0.2", "time" )
+
+                
+               .from( "#sessionName", 0.7, { css: { marginTop: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "time -=0.4", "one")
+              
+               .from( "#sessionInfo", 0.7, { css: { marginTop: "-60", autoAlpha:0 },ease: Power4. easeInOut },  "one -=0.5", "info" )
+            
+              
+              
+
+			 
+                 .from( ".lateOne", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "info -=0.5", "l1")
+                  .from( ".lineOne", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "info -=0.5")
+               
+	
+				   .from( ".lateTwo", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "l1 -=0.5")
+                  .from( ".lineTwo", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "l1 -=0.5")
+               
+
+              
+               
+               
+              		
+						
+
+
+
+
+
+
+
+
+                if( typeof webvfx !== "undefined" ) {
+                    tl.pause();  // start paused
+                    var producer = new Producer(tl);
+                    webvfx.renderRequested.connect(producer, Producer.prototype.sync);
+                    webvfx.readyRender(true);
+                }
+            }
+            function handleFontSize() {
+                // Set base font size to 2.4% of window height (as recommended by OFCOM)
+                // All other font sizes to be calculated as multiple in the set (1, inf)
+                document.body.style.fontSize = Math.round( window.innerHeight * 0.024 ) + "px";
+            }
+            window.addEventListener("load", onLoad, false);
+        </script>
+		
+		
+		
+		
+		
+
+
+
+        </script>
+
+
+    </head>
+    
+    
+    <body>
+        
+    <div class="wrapper">
+        
+        
+        <div id="slate">
+	
+			
+				<h1 class = "slateText" id="next"> NEXT: </h1>
+			
+					<h1 class = "slateText" id = "time"> 00:00 - 00:00 </h1>
+				
+				
+			
+					<div class="session">
+						<h1 id="sessionName"> Titan Souls </h1>
+						<h2 id="sessionInfo"> Mark Foster and David Fenn from Devolver Digital </p>
+					</div>		
+					  			
+       
+				<h1 class = "slateText laterText"> Later: </h1>
+  	
+			  	
+			  	
+			      	 <img class = "line lineOne" src="images/line2.svg"> 
+				  	 <div class = "later lateOne">
+			
+					  
+					       	<h1 id = "laterTime"> 00:00 - 00:00 </h1>
+							<h1 id="latersessionName"> Total War  </h1>
+							<h2 id = "latersessionInfo"> Creative Assembly </h2>  	
+					       
+						</div>
+	       
+	         	
+						
+						<img class = "line lineTwo" src="images/line2.svg"> 
+						<div class = "later lateTwo">
+			
+	       
+
+							<h1 id = "laterTime"> 00:00 - 00:00 </h1>
+							<h1 id="latersessionName"> Name of Session</h1>
+							<h2 id = "latersessionInfo"> Developer name </h2>  	
+	       
+						</div>
+       
+
+	     </div>  
+       
+      
+      
+     </div>
+    
+    
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
