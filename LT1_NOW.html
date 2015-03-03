@@ -18,119 +18,74 @@
 			    font-style:normal
 			}
 
-		
-	  body {
-		        
-		        margin: 0px !important;
-		        padding: 0px !important;
-		        
-		        height: 100%;
-		     
-		}
-	        
-	        
 
-	        
-	        
-
-		.triangle {
-						
-			 position: fixed;
-			 bottom:  -80;
-		 
-			 width: 100%;
-			z-index: 0;
-			left: 0px;
-			
+	body {
+			margin: 0px !important;
+		    padding: 0px !important;
+			height: 100%;
 	}
 	
+	.triangle {		
+			position: fixed;
+			bottom:  0;
+			width: 100%;
+			z-index: 0;
+			left: 0px;
+	}
 	
-
 	.wrapper {
-		
-		
 		display: block;
 		height: 500px;
 		width: 890px;
- 
 		position: fixed;
 		bottom: -90;
 		margin: 0px;
 		padding: 0px;
 		z-index: 15;
- 	
 	}
 	
-			
-		
-		.lowerThirdText {
-			 
-				font-family: Helvetica Neue;	
-				z-index: 5;
-						padding-left: 70px;
-						margin-top: 90px;
+	.lowerThirdText {
+		font-family: Helvetica Neue;	
+		z-index: 5;
+		padding-left: 70px;
+		margin-top: 90px;
 		padding-bottom: 20px;
-			
-				color: white;
-			
-
-		}
-		
+		color: white;
+	}
 	
-		#now {
-			
-			
-			font-family: egx;	
-			text-transform: uppercase;			
-			color: #50e7e8;
-			font-weight: 300;		
-			font-size: 36px;
-			z-index: 5;
-			 position: relative;
-			 margin-top:  -20px;		 
+	#now {
+		font-family: egx;	
+		text-transform: uppercase;			
+		color: #50e7e8;
+		font-weight: 300;		
+		font-size: 36px;
+		z-index: 5;
+		position: relative;
+		margin-top:  -20px;		 
+	}
 
-		}
-		
-				 	
-		 	
-		 	
 	#sessionName {
+	font-size: 60px;
+	font-weight: 300;
+	position: relative;		  
+	}
 
-font-size: 60px;
-font-weight: 300;
- position: relative;
-			  
-		}
-
-		
-		
-		#sessionInfo {
-		
-		font-size: 50px;
-		font-weight: 100;
-		 position: relative;
-			 }
+	#sessionInfo {		
+	font-size: 50px;
+	font-weight: 100;
+	position: relative;
+	}
  
  		
 		
-/*
-  
-			END OF STYLING
-*/
+/* END OF STYLING */
 
 
-        </style>
+    </style>
         
-        
-        
-        
-       <script src="lib/jquery-2.1.3.min.js"></script>
-        <script src="lib/TweenMax.min.js"></script>
-			
-			
-			
-			
-		        <script type="text/javascript">
+    <script src="lib/jquery-2.1.3.min.js"></script>
+    <script src="lib/TweenMax.min.js"></script>
+		    <script type="text/javascript">
             function Producer(tl) {
                 this.tl = tl;
             }
@@ -153,47 +108,19 @@ font-weight: 300;
                     $('body').css({'background-color': webvfx.getStringParameter("bgcolor")});
                 }
 
-					
+
+//  ANIMATION //
 
 
 
-
-// CHANGE THIS STUFF FOR ANIMATION //
-
-
-
-
-
-                var tl = new TimelineLite();
-                
-                              
-                  
-                
-                tl.from(".triangle", 1, { css: { width: "0px", left: "-900" }, ease:Power4. easeOut } , "entry") 
-
-               
- 
- 
-                
-
-                
-               
-                
-                .from( ".slateText", 0.5, { css: {  autoAlpha:0 },ease: Power4. easeInOut }, "entry -=0.5", "now" )
-                
-           
-                .from( "#sessionName", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut }, "now -=0.45", "sessionName" )
-                .from( "#sessionInfo", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut }, "sessionName-=0.45", "end") 
-
-					
-					
-					
-    										
-							
-               
-// CHANGE THIS STUFF FOR ANIMATION //
+var tl = new TimelineLite();
+tl.from(".triangle", 1, { css: { width: "0px", left: "-900" }, ease:Power4. easeOut } , "entry") 
+	.from( ".slateText", 0.5, { css: {  autoAlpha:0 },ease: Power4. easeInOut }, "entry -=0.5", "now" )
+	.from( "#sessionName", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut }, "now -=0.45", "sessionName" )
+	.from( "#sessionInfo", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut }, "sessionName-=0.45", "end"); 
 
 
+//  ANIMATION //
 
                 if( typeof webvfx !== "undefined" ) {
                     tl.pause();  // start paused
@@ -209,62 +136,23 @@ font-weight: 300;
             }
             window.addEventListener("load", onLoad, false);
         </script>
-		
-		
-		
-		
-		
-
-
-
-        </script>
-
+		</script>
 
     </head>
     
-    
-    <body>
-        
-        
-        
-        <div class="wrapper">
-	        
-	        
-      	        
-	         <img class="triangle" src="images/lower-third2.png"> 
-	        
+<body>
 
-	 <div class="lowerThirdText">
-			<h1 class = "slateText" id="now"> NOW: </h1>
-			
-	
+	<div class="wrapper">
 		
-		<div class="session">
-		
-					<h1 id="sessionName"> Guild Wars 2: Heart of Thorns </h1>
-					<h2 id="sessionInfo">Designers from ArenaNet</h2>
-			
-		</div>		
-		  			
-
-       
-  
-	 </div>
-      
-        </div>
-       
-  
+		<img class="triangle" src="images/lower-third2.png"> 
+			<div class="lowerThirdText">
+				<h1 class = "slateText" id="now"> NOW: </h1>
+					<div class="session">
+					<h1 id="sessionName"> Name of Session of Session </h1>
+					<h2 id="sessionInfo"> Information about the session </h2>
+			</div>		
+		</div>  
+    </div>      
     </body>
-
-
-
-
-
-
-
-
-
-
-
 
 </html>
