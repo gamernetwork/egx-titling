@@ -19,39 +19,45 @@
 			}
 
 
-	        
-		body {
-			margin: 0px !important;
-			height: 100%;
-		}
-	        
-		.wrapper {	
-			background-color: grey;
-			background: url(images/background) no-repeat  ;
-			background-position: right top;
-			background-size: 1500px;
-			background-color: #360c40;
-			line-height: 1.1;	
-			height: 100%;
-			padding-top: 150px;
-		}		
 		
+			body {
+		        
+		        margin: 0px !important;  height: 100%;
+		     }
+	        
+			
+			.wrapper {
+				
+				background-color: grey;
+				background: url(images/background) no-repeat  ;
+				background-position: right top;
+				background-size: 1500px;
+				background-color: #360c40;	   
+				line-height: 1.1;
+			 	height: 100%;
+			}
+		
+	 		
+			#slate {
+		
+			display: inline-block;
+			margin-top: 200px;
+			margin-left: 415px;		 	
+ 
+		
+			}
 
-		#slate {
-			display: inline-block; 
-			margin-left: 415px;	
-			height: 100%;
-		}
-
-
-		h1, h2 {		
+			
+			h1, h2 {
+				
 			font-family: Helvetica Neue;
 			color: white;
-			font-weight: 300;
-			width: 1500px;
-			line-height: 1.1;
 			font-size: 90px;
-		}
+			font-weight: 300;
+			
+			}
+		
+
 		
 	
 		h2 {
@@ -171,7 +177,7 @@
                 var sessionNameName = document.getElementById("sessionName");
                 var devName = document.getElementById("sessionInfo");            
                 
-                tl .from(".wrapper", 4, { css: { width: "0px", backgroundSize: "0px" }, ease:Power4. easeOut }, "start" )
+                  tl.from(".wrapper", 2, { css: { width: "0px"}, ease:Power4. easeOut }, "start" )
 					.from( "#next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "next" )
 					.from( "#time", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "next+=0.2", "time" )
 					.from( "#sessionName", 0.7, { css: { marginTop: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "time -=0.4", "one")
@@ -179,7 +185,39 @@
 					.from( ".lateOne", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "info -=0.5", "l1")
 					.from( ".lineOne", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "info -=0.5")
 					.from( ".lateTwo", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "l1 -=0.5")
-                    .from( ".lineTwo", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "l1 -=0.5");
+                    .from( ".lineTwo", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "l1 -=0.5", "end")  
+                    
+                   
+ 
+                  
+                    .to( "#next", 0.2, { css: {  autoAlpha:0 },ease: Power4. easeInOut }, "end+=6"  )
+					.to( "#time", 0.2, { css: {autoAlpha:0 },ease: Power4. easeInOut }, "end+=6" )
+                    .to( "#sessionName", 0.2, { css: {autoAlpha:0 },ease: Power4. easeInOut }, "end+=6"  )             
+					.to( "#sessionInfo", 0.2, { css: { autoAlpha:0 },ease: Power4. easeInOut }, "end+=6" )
+
+					.to( ".lateOne", 0.2, { css: {autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6" )
+					.to( ".lineOne", 0.2, { css: {autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6" )
+					.to( ".lateTwo", 0.2, { css: {autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6" )
+                    .to( ".lineTwo", 0.2, { css: {autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6", "ending" ) 
+                     .to( ".wrapper", 1, { css: { width: "0px"},ease: Power4. easeInOut }, "end+=5.5" );
+ 
+				  
+        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                  			
+                    
+                    
+                    
+                    
                
                 if( typeof webvfx !== "undefined" ) {
                     tl.pause();  // start paused
