@@ -128,7 +128,7 @@ tl.from(".triangle", 1, { css: { width: "0px", left: "-900" }, ease:Power4. ease
 //  ANIMATION //
 
                 if( typeof webvfx !== "undefined" ) {
-                    tl.pause();  // start paused
+                    tl.pause(); // start paused
                     var producer = new Producer(tl);
                     webvfx.renderRequested.connect(producer, Producer.prototype.sync);
                     webvfx.readyRender(true);
