@@ -1,0 +1,131 @@
+<html>
+	<head>
+		<style type="text/css">
+			body {
+			margin: 0px !important;  height: 100%;
+			}
+			.wrapper {
+			background-color: grey;
+			background: url(../../res/images/background) no-repeat  ;
+			background-position: right top;
+			background-size: 1500px;
+			background-color: #360c40;	   
+			line-height: 1.1;
+			height: 100%;
+			}
+			#slate {
+			display: inline-block;
+			margin-top: 390px;
+			margin-left: 415px;		 	
+			}
+			h1, h2 {
+			font-family: Helvetica Neue;
+			color: white;
+			font-size: 90px;
+			font-weight: 300;
+			}
+			h2 {
+			font-size: 70px;
+			font-weight: 100;
+			}
+			.slateText {
+			color: #50e7e8;
+			text-transform: uppercase;			
+			color: #50e7e8;
+			font-family: "NB Grotesk";		
+			font-size: 36px;
+			}
+			#sessionName {
+			margin-top: 120px;
+			}
+			.hashtag {
+			color: #e55b9a;
+			}
+			.links  {
+			display: block;
+			color: white;
+			font-family: "NB Grotesk";
+			font-size: 25px;
+			display: block;
+			margin-top: 90px;
+			margin-left: 40px;
+			}
+			.links img {
+			width: 3px;
+			height: auto;
+			display: inline-block;
+			padding: 0px;
+			margin-left: -20px;	
+			}
+			.links h1 {
+			margin-top: -100px;
+			margin-left: 40px;		
+			}
+			.links p {
+			margin-left: 40px;	
+			line-height: 0.1;
+			margin-top:  -3px;
+			}
+		</style>
+		<script src="../../lib/jquery-2.1.3.min.js"></script>
+		<script src="../../lib/TweenMax.min.js"></script>
+			<script type="text/javascript">
+			function Producer(tl) {
+				this.tl = tl;
+			}
+			Producer.prototype.sync = function(time) {
+				// Use em units which are proportional to font-size,
+				// which is being set to proportional to page render size.
+				// Vary x offset from -0.2 to 0.2.
+				//this.textStyle.textShadow = ((time * 0.4) - 0.2) + "em -0.2em 0.3em black";
+				console.log(time);
+				this.tl.progress(time);
+			}
+			function onLoad() {
+				handleFontSize();
+				if( typeof webvfx !== "undefined" ) {
+					// read parameters supplied by webvfx and update template values
+					$('#sessionName').text(webvfx.getStringParameter("sessionName"));
+					$('#sessionInfo').text(webvfx.getStringParameter("sessionInfo"));
+					$('body').css({'background-color': webvfx.getStringParameter("bgcolor")});
+				}
+			var tl = new TimelineLite();
+			tl.from(".wrapper", 2, { css: { width: "0px"}, ease:Power4. easeOut }, "start" )
+			.from( "#now", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "start -=1.5", "day" )
+			.from( "#sessionName", 0.7, { css: { marginTop: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "start -=1.4", "one")			 
+			.from( "#sessionInfo", 0.7, { css: { marginTop: "-60", autoAlpha:0 },ease: Power4. easeInOut },  "start -=1.3", "two" )
+			.from( ".links", 0.2, { css: {marginLeft: "-10px", autoAlpha:0   }, ease: Power4. easeInout }, "two-=0.8", "end");
+			//adjust the number added to "end" label to increase the time the slate is on the screen.
+/*
+			.to( "#now", 0.3, { css: {  autoAlpha: 0},ease: Power4. easeInOut }, "end+=6" )
+			.to( "#sessionName", 0.1, { css: {   marginLeft: "-9000" },ease: Power4. easeInOut }, "end+=6"  )			 
+			.to( "#sessionInfo", 0.1, { css: { marginLeft: "-9000"  },ease: Power4. easeInOut }, "end+=6" )
+			.to( ".links", 0.1, { css: { marginLeft: "-9000"  }, ease: Power4. easeInout }, "end+=6"  )
+			.to(".wrapper", 1, { css: { width: "0px"}, ease:Power4. easeOut }, "end+=6"  );
+*/
+					if( typeof webvfx !== "undefined" ) {
+					tl.pause();  // start paused
+					var producer = new Producer(tl);
+					webvfx.renderRequested.connect(producer, Producer.prototype.sync);
+					webvfx.readyRender(true);
+				}
+			}
+			function handleFontSize() {
+				// Set base font size to 2.4% of window height (as recommended by OFCOM)
+				// All other font sizes to be calculated as multiple in the set (1, inf)
+				document.body.style.fontSize = Math.round( window.innerHeight * 0.024 ) + "px";
+			}
+			window.addEventListener("load", onLoad, false);
+		</script>
+	</head>
+<body>
+<div class="wrapper">   
+	<div id="slate">
+			<div class="session">
+					<h1 id="sessionName"> We're experiencing technical difficulties. </h1>
+					<h2 id="sessionInfo">  Sorry, we'll be back soon!  </h2>
+			</div>		
+	</div>   
+</div> 
+</body>
+</html>

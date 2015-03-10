@@ -1,0 +1,12 @@
+- mlt_service: sdl
+  audio_off: 1
+  frame_rate_num: 60
+  frame_rate_den: 1
+  width: 960
+  height: 540
+  display_aspect_num: 1920
+  display_aspect_den: 1080
+  progressive: 0
+  sample_aspect_num: 1
+  sample_aspect_den: 1
+  terminate_on_pause: 1
