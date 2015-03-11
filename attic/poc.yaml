@@ -1,0 +1,10 @@
+- mlt_service: webvfx
+  mlt_type: producer
+  resource: /home/mark/Documents/Work/egx/2015/sessions/titling/poc.html
+  length: 300
+  width: 1920
+  height: 1080
+  frame_rate_num: 60
+  frame_rate_den: 1
+  progressive: 0
+

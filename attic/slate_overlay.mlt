@@ -1,0 +1,23 @@
+<mlt LC_NUMERIC="en_US.UTF-8">
+  <producer id="0">
+    <property name="resource">/home/mark/Videos/bbb_sunflower_1080p_30fps_normal.mp4</property>
+  </producer>
+  <tractor>
+    <multitrack>
+      <tractor>
+        <multitrack>
+          <tractor>
+            <playlist>
+              <entry producer="0" in="0" out="240">
+                <filter>
+                  <property name="mlt_service">webvfx</property>
+                  <property name="resource">plain:example.html</property>
+                </filter>
+              </entry>
+            </playlist>
+          </tractor>
+        </multitrack>
+      </tractor>
+    </multitrack>
+  </tractor>
+</mlt>

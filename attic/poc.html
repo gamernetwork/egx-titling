@@ -1,0 +1,93 @@
+<html>
+<head>
+<style type="text/css">
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+	font-family: sans-serif;
+}
+body {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+	background-color: #ff00ff;
+}
+#slate {
+	background-color: white;
+	box-shadow: 2px 4px 8px 1px rgba(0,0,0,0.41);
+	position: absolute;
+	width: 40%;
+	left: -45%;
+	padding: 0.5em;
+}
+h1 {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0px;
+}
+p {
+	font-size: 1em;
+	font-weight: normal;
+	margin: 0px;
+}
+</style>
+<script type="text/javascript">
+
+// shapes:
+// __/^^^\__
+// __/^^^^^^
+
+function Producer(slate, speaker, company) {
+    this.slate = slate;
+    this.speaker = speaker;
+    this.company = company;
+}
+Producer.prototype.render = function(time) {
+    // Use em units which are proportional to font-size,
+    // which is being set to proportional to page render size.
+    // Vary x offset from -0.2 to 0.2.
+    //this.textStyle.textShadow = ((time * 0.4) - 0.2) + "em -0.2em 0.3em black";
+
+	// first 
+	if( time < 0.2 ) {
+		this.slate.style.left = "-45%";
+	}
+	if( time >= 0.2 && time < 0.4 ) {
+		this.slate.style.left = (-45 * ((0.4-time)/0.2)) + "%";
+	}
+	if( time >= 0.4 && time < 0.6 ) {
+		this.slate.style.left = "0%";
+	}
+	if( time >= 0.6 && time < 0.8 ) {
+		this.slate.style.left = (45 * ((0.6-time)/0.2)) + "%";
+	}
+	if( time >= 0.8 ) {
+		this.slate.style.left = "-45%";
+	}
+}
+function onLoad() {
+    handleFontSize();
+    var d_slate = document.getElementById("slate");
+    var d_speaker = document.getElementById("speaker");
+    var d_company = document.getElementById("company");
+    var speaker = webvfx.getStringParameter("speaker");
+    var company = webvfx.getStringParameter("company");
+    var producer = new Producer(slate, speaker, company);
+    webvfx.renderRequested.connect(producer, Producer.prototype.render);
+    webvfx.readyRender(true);
+}
+function handleFontSize() {
+    // Set base font-size to 10% of window height
+    document.body.style.fontSize = (window.innerHeight * 0.1) + "px";
+}
+window.addEventListener("load", onLoad, false);
+window.addEventListener("resize", handleFontSize, false);
+</script>
+</head>
+<body>
+    <div id="slate">
+		<h1 id="speaker">Mark Kennedy</h1>
+		<p id="company">Gamer Network Ltd.</p>
+	</div>
+</body>
+</html>
