@@ -2,7 +2,7 @@
 	<head>
 		<style type="text/css">
 			body {
-			margin: 0px !important;  height: 100%;
+			margin: 0px !important;  height: 1080px; width: 1920px;
 			}
 			.wrapper {
 			background-color: grey;
@@ -90,7 +90,7 @@
 					$('body').css({'background-color': webvfx.getStringParameter("bgcolor")});
 				}
 			var tl = new TimelineLite();
-			tl.from(".wrapper", 2, { css: { width: "0px"}, ease:Power4. easeOut }, "start" )
+			tl
 			.from( "#now", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "start -=1.5", "day" )
 			.from( "#sessionName", 0.7, { css: { marginTop: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "start -=1.4", "one")			 
 			.from( "#sessionInfo", 0.7, { css: { marginTop: "-60", autoAlpha:0 },ease: Power4. easeInOut },  "start -=1.3", "two" )

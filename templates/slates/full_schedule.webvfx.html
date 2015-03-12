@@ -2,8 +2,9 @@
 	<head>
 		<style type="text/css">
 			body {
-				margin: 0px !important;
-			}
+				margin: 0px !important;  height: 1080px; width: 1920px;
+			 }
+			
 			.wrapper {
 				width: 100%;
 				margin-top: -50px;
@@ -66,7 +67,7 @@
 				width: 100%;
 			}	
 			.line {
-				width: 3px;
+			
 				height: 195px;
 				display: inline-block;
 				float: left;
@@ -76,11 +77,11 @@
 			}
 			.lineTwo {
 				margin-top: 64px;
-				width: 5px;
+				
 			}
 			.lineFour {
 				margin-top: 64px;
-				width: 5px;
+				
 			}
 			.logo {
 				width: 300px;
@@ -143,8 +144,7 @@
 					$('#company').text(webvfx.getStringParameter("company"));
 				}
 				var tl = new TimelineLite();
-				tl.from(".wrapper", 2, { css: { width: "0px"}, ease:Power4. easeOut }, "start" )
-					.from( ".logo", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut  }, "start-0.5"  )
+				tl.from( ".logo", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut  }, "start"  )
 					.from( ".day", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "day" )
 					.from( ".one", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "one" )
 					.from( ".lineOne", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "one" )
@@ -155,7 +155,8 @@
 					.from( ".four", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "three -=0.5"	)
 					.from( ".lineFour", 0.5, { css: { marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "three -=0.5", "four"  ) 
 					.from( ".links", 0.5, { css: { autoAlpha:1 }, ease: Power4. easeInOut }, "four -=0.5",  "end")
-					//reverse
+			
+		//reverse
 					.to( ".logo", 0.3, { css: { autoAlpha:0 } }, "end+=6" )
 					.to( ".day", 0.3, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "end+=6" )
 					.to( ".one", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
@@ -166,8 +167,8 @@
 					.to( ".lineThree", 0.3, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6" )
 					.to( ".four", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6"  )
 					.to( ".lineFour", 0.3, { css: {  autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6" )
-					.to( ".links", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "end+=6")
-					.to( ".wrapper", 1, { css: { width: "0px"},ease: Power4. easeInOut }, "end+=5.95" );
+					.to( ".links", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "end+=6");
+				
 				if( typeof webvfx !== "undefined" ) {
 					tl.pause();  // start paused
 					var producer = new Producer(tl);
@@ -189,24 +190,24 @@
 	<img class = "logo" src="../../res/images/rezzedLogo.png"> 
 	<div id="slate">
 		<h1 class = "slateText day"> FRIDAY: </h1>
-		<img class = "line lineOne" src="../../res/images/line2.svg"> 
+		<img class = "line lineOne" src="../../res/images/line2.png"> 
 		<div class = "session one">
 			<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
 			<h1 id="sessionName"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
 			<h2 id = "sessionInfo"> Mark Foster and David Fenn from Devolver Digital </h2>  	
 		</div>
-		<img class = "line lineTwo" src="../../res/images/line2.svg"> 
+		<img class = "line lineTwo" src="../../res/images/line2.png"> 
 		<div class = "session two">
 			<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
 			<h1 id="sessionName">  Total War </h1>
 			<h2 id = "sessionInfo">  15 years of battle animation in Total War with Developers from Creative Assembly </div> 
-			<img class = "line lineThree" src="../../res/images/line2.svg"> 
+			<img class = "line lineThree" src="../../res/images/line2.png"> 
 			<div class = "session three">
 				<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
 				<h1 id="sessionName"> The Swindle  </h1>
 				<h2 id = "sessionInfo"> Dan Marshall talks stealth game design decisions </h2>  	
 			</div>
-			<img class = "line lineFour" src="../../res/images/line2.svg"> 
+			<img class = "line lineFour" src="../../res/images/line2.png"> 
 			<div class = "session four">
 				<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
 				<h1 id="sessionName"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
