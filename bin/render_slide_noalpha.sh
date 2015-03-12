@@ -36,18 +36,26 @@ done
 
 shift $((OPTIND-1))
 
-echo "Using template $1"
-echo "Using output $2"
+template=$1
+output=$2
+echo "Using template $template"
+echo "Using output $output"
+
+# pop off everything but custom params
+shift $((2))
 
 LD_LIBRARY_PATH=/usr/local/lib/ \
 	melt \
-	webvfx:$1 \
+	-profile atsc_1080p_30 \
+	webvfx:$template \
 	length=$DURATION \
-	speaker="Mark Kennedy" \
-	company="Gamer Network Ltd" \
-	-consumer avformat:$2 \
+	"$@" \
+	-consumer avformat:$output \
+	vb=8000k \
+	preset=fast \
 	no_audio=1 \
 	frame_rate_num=30000 \
 	frame_rate_den=1001 \
 	width=1920 \
 	height=1080
+

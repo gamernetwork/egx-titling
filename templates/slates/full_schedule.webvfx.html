@@ -3,28 +3,30 @@
 		<style type="text/css">
 			body {
 				margin: 0px !important;  height: 1080px; width: 1920px;
-			 }
-			
-			.wrapper {
-				width: 100%;
-				margin-top: -50px;
-				background: url(../../res/images/background2.png) no-repeat fixed;
-				background-position: left bottom;
-				background-size: 1500px;
 				background-color: #3C1348;
-				padding-top: 150px;
+				padding: 0px;
+			 }
+			.wrapper {
+				background: url(../../res/images/background2.png) no-repeat bottom left;
+				background-size: 1200px;
+				margin: 0px !important;  height: 1080px; width: 1920px;
+				background-color: #3C1348;
 			}
 			#slate {
 				display:  block;
-				margin-left: 620px;
-				margin-top: -20px;	 
+				position: absolute;
+				left: 620px;
+				top: 80px;	 
 			}
 			h1, h2 {
 				font-family: Helvetica Neue;
 				color: white;
 				font-weight: 300;
-				width: 750px;
+				width: 1050px;
 				line-height: 1.1;
+				margin-top: 0.2em;
+				margin-bottom: 0px;
+				font-size: 1.3em;
 			}
 			h2 {
 				font-weight: 100;
@@ -34,92 +36,52 @@
 				color: #50e7e8;
 				text-transform: uppercase;			
 				font-family: "NB Grotesk";		
-				font-size: 50px;
+				font-size: 1.3em;
 			}
 			.hashtag {
 				color: #e55b9a;
-				font-size: 36px;
-			}
-			#time {
-				color: #e65d9b;
-				font-size: 50px;
-				font-family: "NB Grotesk";
-				Font-weight: normal;
-				margin-top: 50px;
-			}
-			#speaker {
-				margin-top: 120px;
+				font-size: 1.3em;
 			}
 			.session  {
 				color: white;
 				font-family: "NB Grotesk";
-				margin-top: 79px;
-				margin-left: 50px;
-			}
-			#sessionName h1 {
-				font-size: 44px;
-				display: block;
-				width: 100%;
-			}
-			.laterSchedule h2 {
-				font-size: 34px;
-				display: block;
-				width: 100%;
-			}	
-			.line {
-			
-				height: 195px;
-				display: inline-block;
-				float: left;
-				padding: 0px;
 				margin-top: 50px;
-				opacity: 1;
+				padding-left: 50px;
+				border-left: 1px solid white;
 			}
-			.lineTwo {
-				margin-top: 64px;
-				
-			}
-			.lineFour {
-				margin-top: 64px;
-				
+			.sessionName h1 {
+				font-size: 1.3em;
+				display: block;
+				width: 100%;
 			}
 			.logo {
 				width: 300px;
-				display: inline;
-				float: left;
-				margin-left: 127px;
+				display: block;
+				position: absolute;
+				top: 85px;
+				left: 120px;
 			}		
-			#sessionTime {
-				font-size: 40px;
+			.sessionTime {
+				font-family: "NB Grotesk";
+				font-size: 1.1em;
 				color: #e65d9b;
 			}
-			#sessionName {
-				font-size: 40px;
+			.sessionName {
 			}
-			#sessionInfo {
-				font-size: 30px;
+			.sessionInfo {
+				font-size: 1.1em;
 			}
 			.links  {
-				display: inline-block;
+				display: block;
 				color: white;
 				font-family: "NB Grotesk";
-				font-size: 30px;
-				position: relative;
-				left: -460px;
-				top: -170px;
+				font-size: 1.3em;
+				position: absolute;
+				left: 150px;
+				top: 835px;
 			}
 			.links p {
 				line-height: 0.1;
-			}
-			.trailer {
-				display: block;
-				height: 940px;
-				width: 1020px;
-				margin-top: -1125px;
-				margin-right: 209px;
-				float: right;
-				border: 3px solid white;
-				opacity: 1;
 			}
 		</style>
 		<script src="../../lib/jquery-2.1.3.min.js"></script>
@@ -140,33 +102,30 @@
 				handleFontSize();
 				if( typeof webvfx !== "undefined" ) {
 					// read parameters supplied by webvfx and update template values
-					$('#speaker').text(webvfx.getStringParameter("speaker"));
-					$('#company').text(webvfx.getStringParameter("company"));
+					for( i = 1; i <= 5; i ++ ) {
+						$('#t'+i).text(webvfx.getStringParameter("t"+i));
+						$('#s'+i).text(webvfx.getStringParameter("s"+i));
+						$('#d'+i).text(webvfx.getStringParameter("d"+i));
+					}
+					$('.slateText.day').text(webvfx.getStringParameter("day"));
 				}
 				var tl = new TimelineLite();
-				tl.from( ".logo", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut  }, "start"  )
+				tl
 					.from( ".day", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "day" )
 					.from( ".one", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "one" )
-					.from( ".lineOne", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "one" )
 					.from( ".two", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "one -=0.5","two" )
-					.from( ".lineTwo", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "one -=0.5"  )
 					.from( ".three", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "two -=0.5","three"	)
-					.from( ".lineThree", 0.5, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "two -=0.5" )
 					.from( ".four", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "three -=0.5"	)
-					.from( ".lineFour", 0.5, { css: { marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "three -=0.5", "four"  ) 
-					.from( ".links", 0.5, { css: { autoAlpha:1 }, ease: Power4. easeInOut }, "four -=0.5",  "end")
+					.from( ".five", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "four -=0.5"	)
+					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "five -=0.5",  "end")
 			
-		//reverse
-					.to( ".logo", 0.3, { css: { autoAlpha:0 } }, "end+=6" )
+					//reverse
 					.to( ".day", 0.3, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "end+=6" )
 					.to( ".one", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
-					.to( ".lineOne", 0.3, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6")
 					.to( ".two", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
-					.to( ".lineTwo", 0.3, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6")
 					.to( ".three", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "end+=6" )
-					.to( ".lineThree", 0.3, { css: {marginLeft: "-=30", autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6" )
 					.to( ".four", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6"  )
-					.to( ".lineFour", 0.3, { css: {  autoAlpha:0  },  ease: Power4. easeInOut }, "end+=6" )
+					.to( ".five", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6"  )
 					.to( ".links", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "end+=6");
 				
 				if( typeof webvfx !== "undefined" ) {
@@ -183,35 +142,37 @@
 			}
 			window.addEventListener("load", onLoad, false);
 		</script>
-		</script>
 	</head>
 	<body>
-<div class = "wrapper">
-	<img class = "logo" src="../../res/images/rezzedLogo.png"> 
-	<div id="slate">
-		<h1 class = "slateText day"> FRIDAY: </h1>
-		<img class = "line lineOne" src="../../res/images/line2.png"> 
-		<div class = "session one">
-			<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
-			<h1 id="sessionName"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
-			<h2 id = "sessionInfo"> Mark Foster and David Fenn from Devolver Digital </h2>  	
-		</div>
-		<img class = "line lineTwo" src="../../res/images/line2.png"> 
-		<div class = "session two">
-			<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
-			<h1 id="sessionName">  Total War </h1>
-			<h2 id = "sessionInfo">  15 years of battle animation in Total War with Developers from Creative Assembly </div> 
-			<img class = "line lineThree" src="../../res/images/line2.png"> 
-			<div class = "session three">
-				<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
-				<h1 id="sessionName"> The Swindle  </h1>
-				<h2 id = "sessionInfo"> Dan Marshall talks stealth game design decisions </h2>  	
-			</div>
-			<img class = "line lineFour" src="../../res/images/line2.png"> 
-			<div class = "session four">
-				<h1 id = "sessionTime"> 00:00 - 00:00 </h1>
-				<h1 id="sessionName"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
-				<h2 id = "sessionInfo"> Mark Foster and David Fenn from Devolver Digital  </h2>  	
+		<div class = "wrapper">
+			<img class = "logo" src="../../res/images/rezzedLogo.png"> 
+			<div id="slate">
+				<h1 class = "slateText day"> FRIDAY: </h1>
+				<div class = "session one">
+					<h1 class="sessionTime" id="t1"> 00:00 - 00:00 </h1>
+					<h1 class="sessionName" id="s1"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
+					<h2 class="sessionInfo" id="d1"> Mark Foster and David Fenn from Devolver Digital </h2>  	
+				</div>
+				<div class = "session two">
+					<h1 class="sessionTime" id="t2"> 00:00 - 00:00 </h1>
+					<h1 class="sessionName" id="s2"> Total War </h1>
+					<h2 class="sessionInfo" id="d2"> 15 years of battle animation in Total War with Developers from Creative Assembly </h2> 
+				</div>
+				<div class = "session three">
+					<h1 class="sessionTime" id="t3"> 00:00 - 00:00 </h1>
+					<h1 class="sessionName" id="s3"> The Swindle  </h1>
+					<h2 class="sessionInfo" id="d3"> Dan Marshall talks stealth game design decisions </h2>  	
+				</div>
+				<div class = "session four">
+					<h1 class="sessionTime" id="t4"> 00:00 - 00:00 </h1>
+					<h1 class="sessionName" id="s4"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
+					<h2 class="sessionInfo" id="d4"> Mark Foster and David Fenn from Devolver Digital  </h2>  	
+				</div>
+				<div class = "session five">
+					<h1 class="sessionTime" id="t5"> 00:00 - 00:00 </h1>
+					<h1 class="sessionName" id="s5"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
+					<h2 class="sessionInfo" id="d5"> Mark Foster and David Fenn from Devolver Digital  </h2>  	
+				</div>
 			</div>
 			<div class = "links">
 				<h1 class = "hashtag slateText"> #EGX </h1>

@@ -1,72 +1,90 @@
 <html>
 	<head>
 		<style type="text/css">
+			
 			body {
 				margin: 0px !important;  height: 1080px; width: 1920px;
+				background-color: #3C1348;
+				padding: 0px;
 			 }
 			.wrapper {
-				background-color: grey;
-				background: url(../../res/images/background) no-repeat  ;
-				background-position: right top;
-				background-size: 1500px;
-				background-color: #360c40;	   
-				line-height: 1.1;
-				height: 100%;
+				background: url(../../res/images/background2.png) no-repeat bottom left;
+				background-size: 1200px;
+				margin: 0px !important;  height: 1080px; width: 1920px;
+				background-color: #3C1348;
 			}
 			#slate {
-			display: inline-block;
-			margin-top: 390px;
-			margin-left: 415px;		 	
+				display:  block;
+				position: absolute;
+				left: 620px;
+				top: 80px;	 
 			}
 			h1, h2 {
-			font-family: Helvetica Neue;
-			color: white;
-			font-size: 90px;
-			font-weight: 300;
+				font-family: Helvetica Neue;
+				color: white;
+				font-weight: 300;
+				width: 1050px;
+				line-height: 1.1;
+				margin-top: 0.2em;
+				margin-bottom: 0px;
+				font-size: 3em;
 			}
 			h2 {
-			font-size: 70px;
-			font-weight: 100;
+				font-size: 2em;
+				font-weight: 100;
+				line-height: 1.1;
 			}
-			.slateText {
-			color: #50e7e8;
-			text-transform: uppercase;			
-			color: #50e7e8;
-			font-family: "NB Grotesk";		
-			font-size: 36px;
-			}
-			#sessionName {
-				margin-top: 120px;
+			.slateText, .hashtag {
+				color: #50e7e8;
+				text-transform: uppercase;			
+				font-family: "NB Grotesk";		
+				font-size: 1.3em;
 			}
 			.hashtag {
-			color: #e55b9a;
+				color: #e55b9a;
+				font-size: 1.3em;
+			}
+			.session  {
+				color: white;
+				font-family: "NB Grotesk";
+				margin-top: 50px;
+				padding-left: 50px;
+				border-left: 1px solid white;
+			}
+			.sessionName h1 {
+				font-size: 3em;
+				display: block;
+				width: 100%;
+			}
+			.logo {
+				width: 300px;
+				display: block;
+				position: absolute;
+				top: 85px;
+				left: 120px;
+			}		
+			.sessionTime {
+				font-family: "NB Grotesk";
+				font-size: 1.1em;
+				color: #e65d9b;
+			}
+			.sessionName {
+			}
+			.sessionInfo {
+				font-size: 1.1em;
 			}
 			.links  {
-			display: block;
-			color: white;
-			font-family: "NB Grotesk";
-			font-size: 25px;
-			display: block;
-			margin-top: 90px;
-			margin-left: -60px;
-			}
-			 .links img {
-				
-				
-				display: inline-block;
-				padding: 0px;
-				margin-left: -0px;	
-			}
-			.links h1 {
-			margin-top: -100px;
-			margin-left: 150px;		
+				display: block;
+				color: white;
+				font-family: "NB Grotesk";
+				font-size: 1.3em;
+				position: absolute;
+				left: 150px;
+				top: 835px;
 			}
 			.links p {
-			margin-left: 150px;	
-			line-height: 0.1;
-			margin-top:  -3px;
+				line-height: 0.1;
 			}
-			
 		</style>
 		<script src="../../lib/jquery-2.1.3.min.js"></script>
 		<script src="../../lib/TweenMax.min.js"></script>
@@ -92,17 +110,18 @@
 				}
 				var tl = new TimelineLite();
 				tl.from(".wrapper", 2, { }, "start" )
+					.from( ".session", 0.5, { css: { autoAlpha:0, height:0 },ease: Power4. easeInOut }, "start -=1.5", "day" )
 					.from( "#next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "start -=1.5", "day" )
 					.from( "#sessionName", 0.7, { css: { marginTop: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "start -=1.4", "one")			 
 					.from( "#sessionInfo", 0.7, { css: { marginTop: "-60", autoAlpha:0 },ease: Power4. easeInOut },  "start -=1.3", "two" )
 					.from( ".links", 0.2, { css: {marginLeft: "-10px", autoAlpha:0   }, ease: Power4. easeInout }, "two-=0.8", "end")
 					//adjust the number added to "end" label to increase the time the slate is on the screen.
 					
-.to( "#next", 0.3, { css: {  autoAlpha: 0},ease: Power4. easeInOut }, "end+=6" )
+					.to( "#next", 0.3, { css: {  autoAlpha: 0},ease: Power4. easeInOut }, "end+=6" )
 					.to( "#sessionName", 0.1, { css: { autoAlpha: 0},ease: Power4. easeInOut }, "end+=6"  )			 
 					.to( "#sessionInfo", 0.1, { css: { autoAlpha: 0 },ease: Power4. easeInOut }, "end+=6" )
-					.to( ".links", 0.1, { css: { autoAlpha: 0 }, ease: Power4. easeInout }, "end+=6"  )
-;
+					.to( ".session", 0.1, { css: { autoAlpha:0, height:0 },ease: Power4. easeInOut }, "end+=6" )
+					.to( ".links", 0.1, { css: { autoAlpha: 0 }, ease: Power4. easeInout }, "end+=6"  );
 					
 				if( typeof webvfx !== "undefined" ) {
 					tl.pause();  // start paused
@@ -121,19 +140,19 @@
 	</head>
 <body>
 <div class="wrapper">   
+			<img class = "logo" src="../../res/images/rezzedLogo.png"> 
 	<div id="slate">
 			<h1 class = "slateText" id="next"> next: </h1>
 			<div class="session">
 					<h1 id="sessionName"> Guild Wars 2: Heart of Thorns</h1>
 					<h2 id="sessionInfo"> Designers from ArenaNet </h2>
 			</div>		
+	</div>   
 			<div class = "links">
-				 <img src="../../res/images/line2.png">	   
 				   <h1 class = "hashtag slateText"> #EGX </h1>
 				   <p> www.twitch.tv/egx </p>
 				   <p> www.youtube.com/egxtv </p>	  
 			</div>
-	</div>   
 </div> 
 </body>
 </html>
