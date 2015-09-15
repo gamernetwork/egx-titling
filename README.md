@@ -5,11 +5,11 @@ Titling framework using HTML, GSAP, and WebVFX for MLT.
 # Installation dev/test tools
 
 ```
-sudo apt-get install libmlt-dev 
-sudo apt-get install libmlt++-dev 
-git clone git@github.com:mltframework/melted.git
+sudo apt-get install libmlt-dev libmlt++-dev qt4-dev-tools
 git clone git@github.com:mltframework/webvfx.git
 ```
+
+Then build WebVFX using instructions in the README for WebVFX.
 
 # Howto render lower thirds
  
