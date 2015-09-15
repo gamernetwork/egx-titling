@@ -37,14 +37,15 @@ Just edit the `render_*.sh` scripts, it's all in there - just check for quotes a
 
 The `<key>="<val>"` pairs are for template variable substitution. See templates and scripts for examples.
 
-Render a template to an Apple Animation Codec MOV file, which has transparency for use in Wirecast.
+Render a template to an Apple Animation Codec MOV file, which has transparency for use in Wirecast. Duration is seconds.
+
 ```
-bin/qtrle_render_slide.sh templates/<template>.html <output>.mov [<key>="<val>" ...]
+bin/qtrle_render_slide.sh -d <duration> templates/<template>.html <output>.mov [<key>="<val>" ...]
 ```
 
 Render an MP4 which can be used when no transparecny required.
 ```
-bin/render_slide_noalpha.sh templates/<template>.html <output>.mov [<key>="<val>" ...]
+bin/render_slide_noalpha.sh -d <duration> templates/<template>.html <output>.mov [<key>="<val>" ...]
 ```
 
 
