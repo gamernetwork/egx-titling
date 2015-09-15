@@ -11,7 +11,9 @@ git clone git@github.com:mltframework/webvfx.git
 
 Then build WebVFX using instructions in the README for WebVFX.
 
-# QUICK: Howto render lower thirds as static PNGs (quick hack because Wirecast dropped support for Animation Codec temporarily with Version 6)
+# QUICK: Howto render lower thirds as static PNGs
+
+(Quick hack because Wirecast dropped support for Animation Codec temporarily with Version 6)
  
 ```
 ./render_all_lt_next.sh
@@ -42,8 +44,9 @@ bin/qtrle_render_slide.sh templates/<template>.html <output>.mov [<key>="<val>" 
 
 Render an MP4 which can be used when no transparecny required.
 ```
-./bin/render_slide_noalpha.sh templates/<template>.html <output>.mov [<key>="<val>" ...]
+bin/render_slide_noalpha.sh templates/<template>.html <output>.mov [<key>="<val>" ...]
 ```
+
 
 
 
