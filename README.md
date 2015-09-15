@@ -2,7 +2,7 @@
 
 Titling framework using HTML, GSAP, and WebVFX for MLT.
 
-# Installation dev/test tools
+## Installation dev/test tools
 
 ```
 sudo apt-get install libmlt-dev libmlt++-dev qt4-dev-tools
@@ -11,7 +11,7 @@ git clone git@github.com:mltframework/webvfx.git
 
 Then build WebVFX using instructions in the README for WebVFX.
 
-# QUICK: Howto render lower thirds as static PNGs
+## QUICK: Howto render lower thirds as static PNGs
 
 (Quick hack because Wirecast dropped support for Animation Codec temporarily with Version 6)
  
@@ -21,7 +21,7 @@ Then build WebVFX using instructions in the README for WebVFX.
 
 Puts renders in ~/Videos/egx/*day/lowerthirds/
 
-# QUICK: Howto render animated slates for playout
+## QUICK: Howto render animated slates for playout
 
 ```
 ./render_all_slates.sh
@@ -29,11 +29,11 @@ Puts renders in ~/Videos/egx/*day/lowerthirds/
 
 Puts renders in ~/Videos/egx/*day/slates/
 
-# Howto update text
+## Howto update text
 
 Just edit the `render_*.sh` scripts, it's all in there - just check for quotes and bash special chars, etc (or rather, don't use 'em) ;-)
 
-# The scripts
+## The scripts
 
 The `<key>="<val>"` pairs are for template variable substitution. See templates and scripts for examples.
 
