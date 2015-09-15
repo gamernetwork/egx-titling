@@ -1,62 +1,62 @@
 <html>
 	<head>
 		<style type="text/css">
+		
+			* { box-sizing: border-box; }
 				
 			body {
-				margin: 0px !important;
-				padding: 0px !important;
+				margin: 0;
+				padding: 0;
 				height: 100%;
-			}
-		
-			.triangle {		
-				position: fixed;
-				bottom:  0;
-				width: 100%;
-				z-index: 0;
-				left: 0px;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				line-height: 1.1;
 			}
 		
 			.wrapper {
-				display: block;
-				height: 500px;
-				width: 890px;
 				position: fixed;
-				bottom: -90;
-				margin: 0px;
-				padding: 0px;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				display: block;
+				margin: 0;
+				padding: 0;
 				z-index: 15;
+				overflow: hidden;
 			}
 			
-			.lowerThirdText {
-				font-family: Helvetica Neue;	
+			#slate {
+				position: absolute;
+				background-color: #0b3865;
 				z-index: 5;
-				padding-left: 70px;
-				margin-top: 90px;
-				padding-bottom: 20px;
 				color: white;
+				width: 66.666%;
+				margin: 0;
+				padding: 30px;
 			}
 			
 			#now {
-				font-family: "NB Grotesk";	
 				text-transform: uppercase;			
-				color: #50e7e8;
+				color: #3dbb95;
 				font-weight: 300;		
-				font-size: 36px;
+				font-size: 32px;
 				z-index: 5;
-				position: relative;
-				margin-top:  -20px;		 
+				margin: 0;
+				padding: 0; 
 			}
 
 			#sessionName {
+				margin: 0;
+				padding: 0;
 				font-size: 60px;
-				font-weight: 300;
-				position: relative;		  
+				font-weight: 500;
 			}
 
 			#sessionInfo {		
-				font-size: 50px;
+				margin: 0;
+				padding: 0;
+				font-size: 36px;
 				font-weight: 100;
-				position: relative;
 			}
 		 
 		</style>
@@ -67,39 +67,36 @@
 			function Producer(tl) {
 				this.tl = tl;
 			}
+
 			Producer.prototype.sync = function(time) {
-
-				// Use em units which are proportional to font-size,
-				// which is being set to proportional to page render size.
-				// Vary x offset from -0.2 to 0.2.
-				//this.textStyle.textShadow = ((time * 0.4) - 0.2) + "em -0.2em 0.3em black";
-				console.log(time);
+				//console.log(time);
 				this.tl.progress(time);
-
 			}
+			
 			function onLoad() {
+
 				handleFontSize();
+				
+				// Populate
 				if( typeof webvfx !== "undefined" ) {
 					// read parameters supplied by webvfx and update template values
-					$('#sessionName').text(webvfx.getStringParameter("sessionName"));
-					$('#sessionInfo').text(webvfx.getStringParameter("sessionInfo"));
-					$('body').css({'background-color': webvfx.getStringParameter("bgcolor")});
+					$('#sessionName').text(webvfx.getStringParameter("name"));
+					$('#sessionInfo').text(webvfx.getStringParameter("info"));
+					$('#now').text(webvfx.getStringParameter("title"));
 				}
-
-				//  ANIMATION //
+				
+				// Animate
+				var slate = document.getElementById("slate");
+				var height = 560;
+				slate.style.bottom = "-" + height + "px";
 
 				var tl = new TimelineLite();
-				tl.from(".triangle", 1, { css: { width: "0px", left: "-900" }, ease:Power4. easeOut } , "entry") 
-					.from( ".slateText", 0.5, { css: {  autoAlpha:0 },ease: Power4. easeInOut }, "entry -=0.5", "now" )
-					.from( "#sessionName", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut }, "now -=0.45", "sessionName" )
-					.from( "#sessionInfo", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut }, "sessionName-=0.45", "end")
-					.to(".triangle", 1, { css: { width: "0px", left: "-900" }, ease:Power4. easeOut } , "end+=3")
-					.to( ".slateText", 0.2, { css: {  autoAlpha:0 },ease: Power4. easeInOut }, "end+=3")
-					.to("#sessionName", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut },  "end+=3")
-					.to("#sessionInfo", 0.5, { css: {   autoAlpha:0 },ease: Power4. easeInOut },  "end+=3"); 
+				tl.from("#slate", 0, { css: { bottom: "-" + height }, ease:Power4. easeOut })
+					.to("#slate", 2, { css: { bottom: "0" }, ease:Power4. easeOut })
+					.to("#slate", 2, { css: { bottom: "-" + height }, ease:Power4. easeOut }, "+=3")
 
-				//  END ANIMATION //
 
+				// Init
 				if( typeof webvfx !== "undefined" ) {
 					tl.pause(); // start paused
 					var producer = new Producer(tl);
@@ -121,17 +118,13 @@
 	
 <body>
 
-	<div class="wrapper">
-		
-		<img class="triangle" src="../../res/images/lower-third2.png"> 
-			<div class="lowerThirdText">
-				<h1 class = "slateText" id="now"> NOW: </h1>
-					<div class="session">
-					<h1 id="sessionName"> Name of Session of Session </h1>
-					<h2 id="sessionInfo"> Information about the session </h2>
-			</div>		
+	<div class="wrapper">		
+		<div id="slate">
+			<p id="now">Now</p>
+			<h1 id="sessionName">Name of Session of Session</h1>
+			<h2 id="sessionInfo">Information about the session</h2>
 		</div>  
-	</div>	  
-	</body>
+	</div>
+</body>
 
 </html>
