@@ -57,6 +57,6 @@ LD_LIBRARY_PATH=/usr/local/lib/ \
 	frame_rate_num=30000 \
 	frame_rate_den=1001 \
 	width=1920 \
-	height=1080 
+	height=1080 \
 	transparent=1 \
 	pix_fmt=argb
