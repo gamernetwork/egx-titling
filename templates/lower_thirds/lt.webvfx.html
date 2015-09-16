@@ -11,7 +11,6 @@
 				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 				line-height: 1.1;
 				background-color: black;
-				color: #0b3865;
 			}
 		
 			.wrapper {
@@ -29,35 +28,53 @@
 			
 			#slate {
 				position: absolute;
-				background-color: white;
+				background-color: #0b3865;
+				color: white;
 				z-index: 5;
-				width: 66.666%;
+				width: 100%;
 				margin: 0;
 				padding: 30px;
+				left: 0;
+				bottom: -100%;
+				padding-right: 180px;
+			}
+			
+			img
+			{
+				position: absolute;
+				bottom: 30px;
+				border-left: 1px solid white;
+				right: 0;
+				width: 150px;
+				padding: 0 30px;
 			}
 			
 			#now {
-				text-transform: uppercase;			
+				position: absolute;
+				top: -45px;
+				left: 0;
+				background-color: #0b3865;
+				padding: 15px 30px 0;
+				font-size: 30px;
 				color: #3dbb95;
-				font-weight: 300;		
-				font-size: 32px;
-				z-index: 5;
-				margin: 0;
-				padding: 0; 
+				line-height: 1;
+				text-transform: uppercase;
 			}
 
 			#sessionName {
 				margin: 0;
-				padding: 0;
-				font-size: 60px;
-				font-weight: 500;
+				padding: 0 0 8px;
+				font-size: 56px;
+				font-weight: bold;
+				font-family: "NB Grotesk";
+				text-transform: uppercase;
 			}
 
 			#sessionInfo {		
 				margin: 0;
 				padding: 0;
 				font-size: 36px;
-				font-weight: 100;
+				font-weight: normal;
 			}
 		 
 		</style>
@@ -88,12 +105,11 @@
 				
 				// Animate
 				var slate = document.getElementById("slate");
-				var height = 560;
-				slate.style.bottom = "-" + height + "px";
 
 				var tl = new TimelineLite();
-				tl.from("#slate", 0, { css: { bottom: "-" + height }, ease:Power4. easeOut })
+				tl.from("#slate", 0, { css: { bottom: "-100%" }, ease:Power4. easeOut })
 					.to("#slate", 2, { css: { bottom: "0" }, ease:Power4. easeOut })
+					.to("#slate", 6, { css: { bottom: "-100%" }, ease:Power4. easeOut }, "+=6")
 
 				// Init
 				if( typeof webvfx !== "undefined" ) {
@@ -119,9 +135,10 @@
 
 	<div class="wrapper">		
 		<div id="slate">
-			<p id="now">Now</p>
+			<span id="now">Now:</span>
+			<img src="../../images/egx-logo-white.png" />
 			<h1 id="sessionName">Name of Session of Session</h1>
-			<h2 id="sessionInfo">Information about the session</h2>
+			<h2 id="sessionInfo">Information about the session information about the session information about the session information about the session information about the session information about the session.</h2>
 		</div>  
 	</div>
 </body>
