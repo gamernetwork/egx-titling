@@ -5,20 +5,21 @@
 # - Next
 # Outputs .mov and .png files.
 
-OUTPUT_DIR=~/Videos/egx/2015
+OUTPUT_DIR=~/Videos/egx-2015
 mkdir -p $OUTPUT_DIR
 
 function render {
 
 	DAY=$1
-	TIME=$2
-	NAME=$3
-	INFO=$4
+	START=$2
+	FINISH=$3
+	NAME=$4
+	INFO=$5
 	
 	TEMPLATE=templates/lower-thirds.webvfx.html
 	
-	NOW="$OUTPUT_DIR/$DAY/lower-thirds-now-$TIME.mov"
-	NEXT="$OUTPUT_DIR/$DAY/lower-thirds-next-$TIME.mov"
+	NOW="$OUTPUT_DIR/$DAY/lower-thirds-now-$START.mov"
+	NEXT="$OUTPUT_DIR/$DAY/lower-thirds-next-$START.mov"
 
 	mkdir -p $OUTPUT_DIR/$DAY
 
@@ -43,13 +44,14 @@ function render {
 while read line; do
 
 	DAY=$(echo "$line" | cut -f 1)
-	TIME=$(echo "$line" | cut -f 2)
-	NAME=$(echo "$line" | cut -f 3)
-	INFO=$(echo "$line" | cut -f 4)
+	START=$(echo "$line" | cut -f 2)
+	FINISH=$(echo "$line" | cut -f 3)
+	NAME=$(echo "$line" | cut -f 4)
+	INFO=$(echo "$line" | cut -f 5)
 	
-	echo "Rendering $DAY, $TIME: $NAME"
+	echo "Rendering $DAY, $START-$FINISH: $NAME"
 	echo "-------------------------------------------"
-	render "$DAY" "$TIME" "$NAME" "$INFO"
+	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO"
 	echo
 
 done < sessions.txt

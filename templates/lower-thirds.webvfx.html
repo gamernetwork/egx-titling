@@ -32,19 +32,19 @@
 				color: white;
 				z-index: 5;
 				margin: 0;
-				padding: 2rem;
+				padding: 1.75rem 2rem 2rem;
 				left: 0;
-				right: 15%;
-				bottom: -50%;
+				width: 50%;
+				bottom: -75%;
 			}
 			
 			#now {
 				position: absolute;
-				top: -4rem;
+				top: -3.5rem;
 				left: 0;
 				background-color: #0b3865;
 				padding: 1.5rem 2rem 0;
-				font-size: 3rem;
+				font-size: 2.5rem;
 				color: #3dbb95;
 				line-height: 1;
 				text-transform: uppercase;
@@ -53,16 +53,17 @@
 			#sessionName {
 				margin: 0;
 				padding: 0 0 .5rem;
-				font-size: 5rem;
+				font-size: 4rem;
 				font-weight: bold;
 				font-family: "NB Grotesk";
 				text-transform: uppercase;
+				line-height: 1;
 			}
 
 			#sessionInfo {		
 				margin: 0;
 				padding: 0;
-				font-size: 3rem;
+				font-size: 2.5rem;
 				font-weight: normal;
 			}
 		 
@@ -97,7 +98,7 @@
 
 				var tl = new TimelineLite();
 				tl.to("#slate", 3, { css: { bottom: "0" }, ease: Power4.easeIn })
-				  .to("#slate", 3, { css: { bottom: "-50%" }, ease: Power4.easeOut }, "+=8")
+				  .to("#slate", 3, { css: { bottom: "-75%" }, ease: Power4.easeOut }, "+=8")
 
 				// Init
 				if( typeof webvfx !== "undefined" ) {
