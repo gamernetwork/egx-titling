@@ -37,9 +37,9 @@ shift $((OPTIND-1))
 
 template=$1
 output=$2
-echo "Using template $template"
-echo "Using output $output"
-echo "Rendering a $DURATION second clip"
+echo "- Using template $template"
+echo "- Using output $output"
+echo "- Rendering a $DURATION second clip"
 
 # pop off everything but custom params
 shift $((2))
