@@ -31,12 +31,12 @@
 				background-color: #0b3865;
 				color: white;
 				z-index: 5;
-				width: 100%;
 				margin: 0;
-				padding: 1.5rem 2rem 2rem;
+				padding: 2rem;
 				left: 0;
-				bottom: -100%;
-				padding-right: 11rem;
+				right: 15%;
+				bottom: -50%;
+				/*padding-right: 14rem;*/
 			}
 			
 			img
@@ -45,17 +45,17 @@
 				bottom: 2rem;
 				border-left: 1px solid white;
 				right: 0;
-				width: 9rem;
+				width: 12rem;
 				padding: 0 2rem;
 			}
 			
 			#now {
 				position: absolute;
-				top: -3.25rem;
+				top: -4rem;
 				left: 0;
 				background-color: #0b3865;
 				padding: 1.5rem 2rem 0;
-				font-size: 2rem;
+				font-size: 3rem;
 				color: #3dbb95;
 				line-height: 1;
 				text-transform: uppercase;
@@ -64,7 +64,7 @@
 			#sessionName {
 				margin: 0;
 				padding: 0 0 .5rem;
-				font-size: 4rem;
+				font-size: 5rem;
 				font-weight: bold;
 				font-family: "NB Grotesk";
 				text-transform: uppercase;
@@ -73,7 +73,7 @@
 			#sessionInfo {		
 				margin: 0;
 				padding: 0;
-				font-size: 2rem;
+				font-size: 3rem;
 				font-weight: normal;
 			}
 		 
@@ -107,9 +107,8 @@
 				var slate = document.getElementById("slate");
 
 				var tl = new TimelineLite();
-				tl.from("#slate", 0, { css: { bottom: "-100%" }, ease:Power4. easeOut })
-					.to("#slate", 1, { css: { bottom: "0" }, ease:Power4. easeOut }, "+=1")
-					//.to("#slate", 1, { css: { bottom: "-100%" }, ease:Power4. easeOut }, "+=6")
+				tl.to("#slate", 3, { css: { bottom: "0" }, ease: Power4.easeIn })
+				  .to("#slate", 3, { css: { bottom: "-50%" }, ease: Power4.easeOut }, "+=8")
 
 				// Init
 				if( typeof webvfx !== "undefined" ) {
@@ -136,7 +135,7 @@
 	<div class="wrapper">		
 		<div id="slate">
 			<span id="now">Now:</span>
-			<img src="../../images/egx-logo-white.png" />
+			<!--img src="../../images/egx-logo-white.png" /-->
 			<h1 id="sessionName">Name of Session of Session</h1>
 			<h2 id="sessionInfo">Information about the session information about the session information about the session information about the session information about the session information about the session.</h2>
 		</div>  

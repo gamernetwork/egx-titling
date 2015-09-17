@@ -1,7 +1,6 @@
 #!/bin/bash
 
-DURATION=150
-#FILENAME=EGX`date +%Y`_`date +%a_%T`_$SHOT.ts
+DURATION=240
 
 usage()
 {
@@ -25,7 +24,6 @@ do
              ;;
          d)
              DURATION=$OPTARG
-		 	 echo "Rendering a $DURATION second clip\n"
              ;;
          ?)
              usage
@@ -39,8 +37,9 @@ shift $((OPTIND-1))
 template=$1
 output=$2
 
-echo "Using template $1"
-echo "Using output $2"
+echo "- Using template $1"
+echo "- Using output $2"
+echo "- Rendering a $DURATION second clip"
 
 shift $((2))
 
