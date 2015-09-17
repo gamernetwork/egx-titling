@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Renders lower thirds for
+# - Now
+# - Next
+# Outputs .mov and .png files.
+
 OUTPUT_DIR=~/Videos/egx/2015
 mkdir -p $OUTPUT_DIR
 
@@ -10,7 +15,7 @@ function render {
 	NAME=$3
 	INFO=$4
 	
-	TEMPLATE="templates/lower-thirds.webvfx.html"
+	TEMPLATE=templates/lower-thirds.webvfx.html
 	
 	NOW="$OUTPUT_DIR/$DAY/lower-thirds-now-$TIME.mov"
 	NEXT="$OUTPUT_DIR/$DAY/lower-thirds-next-$TIME.mov"
@@ -30,8 +35,8 @@ function render {
 		info="$INFO"
 
 	# Convert to PNG
-	avconv -ss 3 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
-	avconv -ss 3 -r 1 -i $NEXT frames 1 ${NEXT/.mov/.png}
+	avconv -ss 00:00:03 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
+	avconv -ss 00:00:03 -r 1 -i $NEXT -frames 1 ${NEXT/.mov/.png}
 }
 
 # Read from sesssions.txt and build the lower thirds
@@ -44,9 +49,7 @@ while read line; do
 	
 	echo "Rendering $DAY, $TIME: $NAME"
 	echo "-------------------------------------------"
-	render $DAY $TIME $NAME $INFO
+	render "$DAY" "$TIME" "$NAME" "$INFO"
 	echo
 
 done < sessions.txt
-
-#avplay $OUTPUT_DIR/thursday/lowerthirds/now-1300.mov -x 640 -y 360

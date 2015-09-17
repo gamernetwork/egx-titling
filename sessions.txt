@@ -1,23 +1,20 @@
-thursday	1300	Lords of War!	Creative Assembly host live gameplay of Total War: WARHAMMER.
-thursday	1400	Hellblade	A behind the scenes look at the creation of Ninja Theory's new title.
-thursday	1500	Valve: The Year Ahead in VR	Valve developer Chet Faliszek looks ahead to the year in VR.
-thursday	1600	Creating Real Games in Virtual Reality	nDreams founder Patrick O'Luanaigh gives a candid view on developing games for VR.
-thursday	1700	TBA	TBA.
-
-friday	1300	The Journey of VR - Project Morpheus	Developers from PlayStation give attendees a little insight into Sony's latest innovations.
-friday	1400	TBA	TBA.
-friday	1500	Homefront: The Revolution	Devs from Dambuster Studios walk gamers through the process of rebooting Homefront.
-friday	1600	Elite Dangerous	David Braben and Frontier developers discuss the past, present, and future of Elite Dangerous.
-friday	1700	Total War: ARENA - The Journey to Closed Beta	Creative Assembly explore the journey taken by the Total War: ARENA developers in creating this epic game.
-
-saturday	1300	20 Years of Play - a Q&A with Shuhei Yoshida	Shuhei Yoshida, President of Worldwide Studios SCE, looks back at the last 20 years of PlayStation.
-saturday	1400	Prison Architect	Producer Mark and Director Chris will present a live update video showing the secret features that they've been developing.
-saturday	1500	TBA	TBA.
-saturday	1600	An Uncharted Retrospective - Greatness from Small Beginnings	Naught Dog's Arne Meyer shares anecdotes from a decade of development of the Uncharted series.
-saturday	1700	TBA	TBA.
-
-sunday	1300	Mike Bithell	Mike Bithell talks about his games, how he got to making them, and answers your questions.
-sunday	1400	Eitr	Eitr - How it started and where it's going.
-sunday	1500	Eurogamer Live Let's Play	The Eurogamer team show off their Merio Maker skills and get members of the audience to test their mettle.
-sunday	1600	TBA	TBA.
-sunday	1700	TBA	TBA.
+thursday	13:00	Lords of War!	Creative Assembly host live gameplay of Total War: WARHAMMER.
+thursday	14:00	Hellblade	A behind the scenes look at the creation of Ninja Theory's new title.
+thursday	15:00	Valve: The Year Ahead in VR	Valve developer Chet Faliszek looks ahead to the year in VR.
+thursday	16:00	Creating Real Games in Virtual Reality	nDreams founder Patrick O'Luanaigh gives a candid view on developing games for VR.
+thursday	17:00	TBA	TBA.
+friday	13:00	The Journey of VR - Project Morpheus	Developers from PlayStation give attendees a little insight into Sony's latest innovations.
+friday	14:00	TBA	TBA.
+friday	15:00	Homefront: The Revolution	Devs from Dambuster Studios walk gamers through the process of rebooting Homefront.
+friday	16:00	Elite Dangerous	David Braben and Frontier developers discuss the past, present, and future of Elite Dangerous.
+friday	17:00	Total War: ARENA - The Journey to Closed Beta	Creative Assembly explore the journey taken by the Total War: ARENA developers in creating this epic game.
+saturday	13:00	20 Years of Play - a Q&A with Shuhei Yoshida	Shuhei Yoshida, President of Worldwide Studios SCE, looks back at the last 20 years of PlayStation.
+saturday	14:00	Prison Architect	Producer Mark and Director Chris will present a live update video showing the secret features that they've been developing.
+saturday	15:00	TBA	TBA.
+saturday	16:00	An Uncharted Retrospective - Greatness from Small Beginnings	Naught Dog's Arne Meyer shares anecdotes from a decade of development of the Uncharted series.
+saturday	17:00	TBA	TBA.
+sunday	13:00	Mike Bithell	Mike Bithell talks about his games, how he got to making them, and answers your questions.
+sunday	14:00	Eitr	Eitr - How it started and where it's going.
+sunday	15:00	Eurogamer Live Let's Play	The Eurogamer team show off their Merio Maker skills and get members of the audience to test their mettle.
+sunday	16:00	TBA	TBA.
+sunday	17:00	TBA	TBA.
