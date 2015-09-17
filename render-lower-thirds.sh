@@ -12,8 +12,8 @@ function render {
 	
 	TEMPLATE="templates/lower-thirds.webvfx.html"
 	
-	NOW="$OUTPUT_DIR/$DAY/now-$TIME.mov"
-	NEXT="$OUTPUT_DIR/$DAY/next-$TIME.mov"
+	NOW="$OUTPUT_DIR/$DAY/lower-thirds-now-$TIME.mov"
+	NEXT="$OUTPUT_DIR/$DAY/lower-thirds-next-$TIME.mov"
 
 	mkdir -p $OUTPUT_DIR/$DAY
 

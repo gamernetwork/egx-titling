@@ -112,9 +112,9 @@
 				handleFontSize();
 				if( typeof webvfx !== "undefined" ) {
 					// read parameters supplied by webvfx and update template values
-					$('#t1').text(webvfx.getStringParameter("t"+i));
-					$('#s1').text(webvfx.getStringParameter("s"+i));
-					$('#d1').text(webvfx.getStringParameter("d"+i));
+					$('#t1').text(webvfx.getStringParameter("time"));
+					$('#s1').text(webvfx.getStringParameter("name"));
+					$('#d1').text(webvfx.getStringParameter("info"));
 				}
 				var tl=new TimelineLite();
 				tl
