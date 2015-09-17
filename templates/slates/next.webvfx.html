@@ -112,12 +112,9 @@
 				handleFontSize();
 				if( typeof webvfx !== "undefined" ) {
 					// read parameters supplied by webvfx and update template values
-					for( i=1; i <= 5; i ++ ) {
-						$('#t'+i).text(webvfx.getStringParameter("t"+i));
-						$('#s'+i).text(webvfx.getStringParameter("s"+i));
-						$('#d'+i).text(webvfx.getStringParameter("d"+i));
-					}
-					$('.day').text(webvfx.getStringParameter("day"));
+					$('#t1').text(webvfx.getStringParameter("t"+i));
+					$('#s1').text(webvfx.getStringParameter("s"+i));
+					$('#d1').text(webvfx.getStringParameter("d"+i));
 				}
 				var tl=new TimelineLite();
 				tl
