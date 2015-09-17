@@ -47,4 +47,11 @@ while read line; do
 
 done < sessions.txt
 
+# Do general slates
+for file in "technical_difficulties" "join_us_for_egx"; do
+	OUT=$OUTPUT_DIR/$file.mov
+	./bin/render_slide_noalpha.sh templates/$file.webvfx.html $OUT
+	avconv -ss 3 -r 1 -i $OUT -frames 1 ${OUT/.mov/.png}
+done
+
 #avplay $OUTPUT_DIR/thursday/lowerthirds/now-1300.mov -x 640 -y 360
