@@ -35,7 +35,7 @@
 				padding: 1.75rem 2rem 2rem;
 				left: 0;
 				width: 50%;
-				bottom: -75%;
+				bottom: -80%;
 			}
 			
 			#now {
@@ -44,7 +44,7 @@
 				left: 0;
 				background-color: #0b3865;
 				padding: 1.5rem 2rem 0;
-				font-size: 2.5rem;
+				font-size: 2.75rem;
 				color: #3dbb95;
 				line-height: 1;
 				text-transform: uppercase;
@@ -53,7 +53,7 @@
 			#sessionName {
 				margin: 0;
 				padding: 0 0 .5rem;
-				font-size: 4rem;
+				font-size: 4.25rem;
 				font-weight: bold;
 				font-family: "NB Grotesk";
 				text-transform: uppercase;
@@ -63,8 +63,9 @@
 			#sessionInfo {		
 				margin: 0;
 				padding: 0;
-				font-size: 2.5rem;
+				font-size: 2.75rem;
 				font-weight: normal;
+				line-height: 1.2;
 			}
 		 
 		</style>
@@ -98,7 +99,7 @@
 
 				var tl = new TimelineLite();
 				tl.to("#slate", 3, { css: { bottom: "0" }, ease: Power4.easeIn })
-				  .to("#slate", 3, { css: { bottom: "-75%" }, ease: Power4.easeOut }, "+=8")
+				  .to("#slate", 3, { css: { bottom: "-80%" }, ease: Power4.easeOut }, "+=8")
 
 				// Init
 				if( typeof webvfx !== "undefined" ) {
