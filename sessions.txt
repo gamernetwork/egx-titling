@@ -2,7 +2,7 @@ thursday	13:00	13:40	Lords of War!	Creative Assembly host live gameplay of Total
 thursday	14:00	14:40	Hellblade	A behind the scenes look at the creation of Ninja Theory's new title.
 thursday	15:00	15:40	Valve: The Year Ahead in VR	Valve developer Chet Faliszek looks ahead to the year in VR.
 thursday	16:00	16:40	Creating Real Games in Virtual Reality	nDreams founder Patrick O'Luanaigh gives a candid view on developing games for VR.
-friday	13:00	13:40	The Journey of VR - Project Morpheus	Developers from PlayStation give attendees a little insight into Sony's latest innovations.
+friday	13:00	13:40	The Journey of VR - Playstation VR	Developers from PlayStation give attendees a little insight into Sony's latest innovations.
 friday	14:00	14:40	Star Wars Battlefront	Niklas Fegraeus, Design Director on Star Wars Battlefront, discusses why there's never been a better time to be a Star Wars fan.
 friday	15:00	15:40	Homefront: The Revolution	Devs from Dambuster Studios walk gamers through the process of rebooting Homefront.
 friday	16:00	16:40	Elite Dangerous	David Braben and Frontier developers discuss the past, present, and future of Elite Dangerous.
