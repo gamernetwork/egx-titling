@@ -2,5 +2,5 @@
 
 # Convenience script to render everything in one go.
 
-./render-lower-thirds.sh
+./render-lower-thirds-prores.sh
 ./render-slates.sh

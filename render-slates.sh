@@ -7,7 +7,7 @@
 # - "Join us next year"
 # Outputs .mov and .png files.
 
-OUTPUT_DIR=~/Videos/egx-2015
+OUTPUT_DIR=~/Videos/egx-rezzed-2015
 mkdir -p $OUTPUT_DIR
 mkdir -p $OUTPUT_DIR/idents
 
@@ -25,13 +25,13 @@ function render {
 	mkdir -p $OUTPUT_DIR/$DAY
 
 	# Now
-	./bin/qtrle_render_slide.sh templates/now.webvfx.html $NOW \
+	./bin/render_slide.sh templates/now.webvfx.html $NOW \
 		time="$START - $FINISH" \
 		name="$NAME" \
 		info="$INFO"
 
 	# Next
-	./bin/qtrle_render_slide.sh templates/next.webvfx.html $NEXT \
+	./bin/render_slide.sh templates/next.webvfx.html $NEXT \
 		time="$START - $FINISH" \
 		name="$NAME" \
 		info="$INFO"
@@ -61,11 +61,11 @@ while read line; do
 	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO"
 	echo
 
-done < sessions.txt
+done < schedule/sessions.txt
 
 # Do general slates
 for file in "technical_difficulties" "join_us_for_egx"; do
 	OUT="$OUTPUT_DIR/$file.mov"
-	./bin/render_slide_noalpha.sh templates/$file.webvfx.html $OUT
+	./bin/render_slide.sh templates/$file.webvfx.html $OUT
 	avconv -r 1 -i $OUT -frames 1 ${OUT/.mov/.png}
 done

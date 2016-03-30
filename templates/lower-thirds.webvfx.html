@@ -28,7 +28,7 @@
 			
 			#slate {
 				position: absolute;
-				background-color: #0b3865;
+				background-color: #360c4e;
 				color: white;
 				z-index: 5;
 				margin: 0;
@@ -42,10 +42,10 @@
 				position: absolute;
 				top: -3.5rem;
 				left: 0;
-				background-color: #0b3865;
+				background-color: #360c4e;
 				padding: 1.5rem 2rem 0;
 				font-size: 2.75rem;
-				color: #3dbb95;
+				color: #ff57c0;
 				line-height: 1;
 				text-transform: uppercase;
 			}
@@ -98,8 +98,8 @@
 				var slate = document.getElementById("slate");
 
 				var tl = new TimelineLite();
-				tl.to("#slate", 3, { css: { bottom: "0" }, ease: Power4.easeIn })
-				  .to("#slate", 3, { css: { bottom: "-80%" }, ease: Power4.easeOut }, "+=8")
+				tl.to("#slate", 1, { css: { bottom: "0" }, ease: Power1.easeOut })
+				  .to("#slate", 1, { css: { bottom: "-80%" }, ease: Power1.easeIn }, "+=8")
 
 				// Init
 				if( typeof webvfx !== "undefined" ) {

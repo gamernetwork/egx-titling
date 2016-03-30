@@ -24,13 +24,13 @@ function render {
 	mkdir -p $OUTPUT_DIR/$DAY
 
 	# Now
-	./bin/qtrle_render_slide.sh $TEMPLATE $NOW \
+	./bin/render_slide.sh $TEMPLATE $NOW \
 		title="NOW" \
 		name="$NAME" \
 		info="$INFO"
 
 	# Next
-	./bin/qtrle_render_slide.sh $TEMPLATE $NEXT \
+	./bin/render_slide.sh $TEMPLATE $NEXT \
 		title="NEXT" \
 		name="$NAME" \
 		info="$INFO"
