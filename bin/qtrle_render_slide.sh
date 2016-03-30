@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DURATION=240
-#FILENAME=EGX`date +%Y`_`date +%a_%T`_$SHOT.ts
 
 usage()
 {
@@ -41,7 +40,6 @@ echo "- Using template $template"
 echo "- Using output $output"
 echo "- Rendering a $DURATION second clip"
 
-# pop off everything but custom params
 shift $((2))
 
 LD_LIBRARY_PATH=/usr/local/lib/ \

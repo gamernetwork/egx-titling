@@ -36,8 +36,8 @@ function render {
 		info="$INFO"
 
 	# Convert to PNG
-	avconv -ss 00:00:03 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
-	avconv -ss 00:00:03 -r 1 -i $NEXT -frames 1 ${NEXT/.mov/.png}
+	LD_LIBRARY_PATH=/usr/local/lib/ avconv -ss 00:00:03 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
+	LD_LIBRARY_PATH=/usr/local/lib/ avconv -ss 00:00:03 -r 1 -i $NEXT -frames 1 ${NEXT/.mov/.png}
 }
 
 # Read from sesssions.txt and build the lower thirds
