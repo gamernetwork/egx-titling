@@ -59,5 +59,6 @@ LD_LIBRARY_PATH=/usr/local/lib/ \
 	transparent=1 \
 	alpha_bits=8 \
 	pix_fmt=yuva444p10le \
+	qscale=4 \
 	profile=4444
 

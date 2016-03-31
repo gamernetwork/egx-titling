@@ -1,17 +1,12 @@
-thursday	13:00	13:40	Lords of War!	Creative Assembly host live gameplay of Total War: WARHAMMER.
-thursday	14:00	14:40	Hellblade	A behind the scenes look at the creation of Ninja Theory's new title.
-thursday	15:00	15:40	Valve: The Year Ahead in VR	Valve developer Chet Faliszek looks ahead to the year in VR.
-thursday	16:00	16:40	Creating Real Games in Virtual Reality	nDreams founder Patrick O'Luanaigh gives a candid view on developing games for VR.
-friday	13:00	13:40	The Journey of VR - Playstation VR	Developers from PlayStation give attendees a little insight into Sony's latest innovations.
-friday	14:00	14:40	Star Wars Battlefront	Niklas Fegraeus, Design Director on Star Wars Battlefront, discusses why there's never been a better time to be a Star Wars fan.
-friday	15:00	15:40	Homefront: The Revolution	Devs from Dambuster Studios walk gamers through the process of rebooting Homefront.
-friday	16:00	16:40	Elite Dangerous	David Braben and Frontier developers discuss the past, present, and future of Elite Dangerous.
-friday	17:00	17:40	Total War: ARENA - The Journey to Closed Beta	Creative Assembly explore the journey taken by the Total War: ARENA developers in creating this epic game.
-saturday	13:00	13:40	20 Years of Play - a Q&A with Shuhei Yoshida	Shuhei Yoshida, President of SCE Worldwide Studios, looks back at the last 20 years of PlayStation.
-saturday	14:00	14:40	Prison Architect	Producer Mark and Director Chris will present a live update video showing the secret features that they've been developing.
-saturday	15:00	15:47	47 Minutes with Hitman	Io-Interactive share a unique and alternate play-through of Hitman's Show Stopper mission.
-saturday	16:00	16:40	An Uncharted Retrospective - Greatness from Small Beginnings	Naught Dog's Arne Meyer shares anecdotes from a decade of development of the Uncharted series.
-sunday	13:00	13:40	Mike Bithell	Mike Bithell talks about his games, how he got to making them, and answers your questions.
-sunday	14:00	14:40	Eitr	Eitr - How it started and where it's going.
-sunday	15:00	15:40	Eurogamer Live Let's Play	The Eurogamer team show off their Mario Maker skills and get members of the audience to test their mettle.
-sunday	16:00	16:40	Eurogamer Podcast	A special edition of the Eurogamer.net podcast!
+Friday	12:00:00	Mirror’s Edge Catalyst: Inspirations	Join Erik Odeldahl (Design Director) to hear about the upcoming Mirror’s Edge Catalyst. Discover Faith’s origin story.
+Friday	13:00:00	Dying Light	Pawel Rohleder, Director of Research & Technology Development at Techland, discusses how technology can affect the experience of gamers
+Friday	14:00:00	Rock, Paper, Shotgun presents: Evolving CRPGs - Divinity: Original Sin 2. 	Swen Vincke, Creative Director & Founder of Larian Studios explains how to overcome the challenges of pen-&-paper like freedom in a story-driven RPG.
+Friday	15:00:00	Rock, Paper, Shotgun presents: The Art of Firewatch	Artist Olly Moss and animator James Benson of Campo Santo explain how they recreated the great American landscape of the Wyoming wilderness in Firewatch.
+Friday	16:00:00	Panel session: What Will VR Games Be Like?	Panellists from Triangular Pixels, nDreams and Rebellion discuss what they believe gamers can expect from upcoming VR games.
+Friday	17:00:00	The Eurogamer Podcast	Join host Chris Bratt, Rock, Paper, Shotgun's Philippa Warr, Eurogamer Editor Oli Welsh and guests for a live edition of the Eurogamer.net podcast!
+Saturday	12:00:00	Storming the Castle! Total War: WARHAMMER.	Join us as Andre Arsenault, Lead Battle AI Programmer on Total War: WARHAMMER, explores the latest advancements in Total War siege battle AI.
+Saturday	13:00:00	Rock, Paper, Shotgun presents: Sunless Sea Retrospective	Developer Liam McDonald and producerLottie Bevan talk about 2015's Sunless Sea and present the latest version of upcoming expansion Zubmariner.
+Saturday	14:00:00	Warhammer: End Times - Vermintide	In this presentation Liam O'Neill (Associate Producer) will talk you through the development and release of Vermintide sharing insight into the future of the game.
+Saturday	15:00:00	A Bullfrog and Lionhead retrospective	Eurogamer editor Oli Welsh is joined by a panel of Bullfrog and Lionhead alumni to celebrate the studios' unique achievements, from Dungeon Keeper to Fable.
+Saturday	16:00:00	Panel: The Present & Future of Narrative in Games	Rock, Paper, Shotgun's John Walker hosts a discussion on story in games with Inkle founder Jon Ingold and Chris Gardiner, Head Writer at Failbetter Games.
+Saturday	17:00:00	The Creative Assembly GameJam	Join us as our hardworking teams present their final games. Who will impress our panel of expert judges and come out on top?

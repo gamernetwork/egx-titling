@@ -5,7 +5,7 @@
 # - Next
 # Outputs .mov and .png files.
 
-OUTPUT_DIR=~/Videos/egx-rezzed-2015
+OUTPUT_DIR=~/Videos/egx-rezzed-2016
 mkdir -p $OUTPUT_DIR
 
 function render {

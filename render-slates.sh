@@ -7,7 +7,7 @@
 # - "Join us next year"
 # Outputs .mov and .png files.
 
-OUTPUT_DIR=~/Videos/egx-rezzed-2015
+OUTPUT_DIR=~/Videos/egx-rezzed-2016
 mkdir -p $OUTPUT_DIR
 mkdir -p $OUTPUT_DIR/idents
 
@@ -66,6 +66,6 @@ done < schedule/sessions.txt
 # Do general slates
 for file in "technical_difficulties" "join_us_for_egx"; do
 	OUT="$OUTPUT_DIR/$file.mov"
-	./bin/render_slide.sh templates/$file.webvfx.html $OUT
+	./bin/render_slide.sh -d 2 templates/$file.webvfx.html $OUT
 	avconv -r 1 -i $OUT -frames 1 ${OUT/.mov/.png}
 done
