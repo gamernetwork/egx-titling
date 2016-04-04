@@ -132,20 +132,22 @@
 				var tl=new TimelineLite();
 				tl
 					.from( ".day", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "day" )
-					.from( ".one", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut }, "one" )
+					.staggerFrom(".session",0.7,{ css: { marginLeft: "-=30", autoAlpha:0 },ease: Back. easeInOut}, 0.2, "day -=0.2", "five")
+					/*.from( ".one", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut }, "one" )
 					.from( ".two", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut }, "one -=0.5","two" )
 					.from( ".three", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut},  "two -=0.5","three"	)
 					.from( ".four", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut },  "three -=0.5", "four"	)
-					.from( ".five", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut},  "four -=0.5", "five"	)
+					.from( ".five", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut},  "four -=0.5", "five"	)*/
 					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "five -=0.5",  "end")
 			
 					//reverse
                     .to( ".day", 0.3, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "end+=6" )
-					.to( ".one", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
+                    .staggerTo(".session", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, 0,"end+=6")
+					/*.to( ".one", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
 					.to( ".two", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
 					.to( ".three", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "end+=6" )
 					.to( ".four", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6"  )
-					.to( ".five", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6"  )
+					.to( ".five", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6"  )*/
 					.to( ".links", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "end+=6");
 				
 				if( typeof webvfx !== "undefined" ) {

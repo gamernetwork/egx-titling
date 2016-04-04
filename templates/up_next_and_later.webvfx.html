@@ -132,13 +132,14 @@
 					.from( ".session.next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: SlowMo. easeInOut  }, "+=0.2")
 					.from( ".day.later", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "+=0.2")
 					.from( ".session.later", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: SlowMo. easeInOut  }, "+=0.2")
-					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "+=0.2")
+					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "+=0.2", "end")
 			
 					//reverse
-					.to( ".day.next", 0.3, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "end+=6" )
+					/*.to( ".day.next", 0.3, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "end+=6" )
 					.to( ".session.next", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
 					.to( ".day.later", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "end+=6")
-					.to( ".session.later", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "end+=6" )
+					.to( ".session.later", 0.3, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "end+=6" )*/
+					.staggerTo(".timetable", 0.3,{ css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },0, "end+=6" )
 					.to( ".links", 0.3, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "end+=6");
 				
 				if( typeof webvfx !== "undefined" ) {
