@@ -5,8 +5,9 @@
 				margin: 0;
 				padding: 0;
 				background-color: #360c4e;
-				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-family: "NB Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
 				-webkit-font-smoothing: antialiased;
+				color: white;
 			 }
 
 			.wrapper {
@@ -14,75 +15,68 @@
 				width: 1920px;
 				height: 1080px;
 			}
-
-			#slate {
-				position: absolute;
-				left: 620px;
-				right: 50px;
-				top: 100px;	 
+			
+			.slate {
+    			margin-top:100px;
+    			margin-left:100px;
+			}
+			
+			.goodbye, .hello {
+    			float:left;
+    			position:relative;
+    			width: 50%;
+			}
+			
+			.hello {
+    			padding-left:50px;
+    			width:40%;
+    			border-left:1px solid white;
+			}
+			
+			.logo#egx {
+    			float:right;
 			}
 
-			h1, h2 {
-				color: white;
-				width: 1050px;
-				line-height: 1.1;
-				margin-top: .2rem;
-				margin-bottom: 0px;
-				font-size: 1.3rem;
-			}
-
-			.logo {
+			.logo#rezzed{
 				width: 800px;
 				display: block;
-				position: absolute;
-				top: 100px;
-				left: 100px;
 			}		
 
-			.day {
-				position: absolute;
+			.end-text {
+				/*position: absolute;
 				top: 400px;
-				left: 100px;
+				left: 100px;*/
 				color: #ff57c0;
 				text-transform: uppercase;
 				margin: 0;
 				padding: 0;
-				font-size: 3rem;
-				font-family: "NB Grotesk";
-			}
-			.fb {
-				position: absolute;
-				top: 500px;
-				left: 100px;
-				color: #ff57c0;
-				text-transform: uppercase;
-				margin: 0;
-				padding: 0;
-				font-size: 3rem;
-				font-family: "NB Grotesk";
+				font-size: 2rem;
+				/*font-family: "NB Grotesk";*/
 			}
 
 			.links  {
 				display: block;
-				color: white;
 				font-size: 2.5rem;
-				position: absolute;
+				/*position: absolute;
 				left: 100px;
-				bottom: 100px;
+				bottom: 100px;*/
 			}
 			
-			.links .hashtag {
-				color: #ff57c0;
-				text-transform: uppercase;
-				font-family: "NB Grotesk";
-				font-size: 3.5rem;
+			.links p:first-child{
+    			color: #ff57c0;
 			}
 			
 			.links p {
 				line-height: 1;
 				margin: 0;
 				padding: 10px 0 0;
+				color: white;
 			}
+			
+			.egx {
+    			font-size: 2.5rem;
+			}
+			
 		</style>
 		<script src="../lib/jquery-2.1.3.min.js"></script>
 		<script src="../lib/TweenMax.min.js"></script>
@@ -101,10 +95,20 @@
 			function onLoad() {
 				handleFontSize();
 				var tl=new TimelineLite();
-				tl.pause();  // start paused
-				var producer=new Producer(tl);
-				webvfx.renderRequested.connect(producer, Producer.prototype.sync);
-				webvfx.readyRender(true);
+				tl .from( ".end-text", 1, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
+				    .from( ".links", 1, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
+				    .from(".hello", 0.5, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
+				    .from(".egx > p:first-child", 0.5, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
+				    .from(".egx > p:last-child", 0.5, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
+				
+				
+				if( typeof webvfx !== "undefined" ) {
+    				tl.pause();  // start paused
+    				var producer=new Producer(tl);
+    				webvfx.renderRequested.connect(producer, Producer.prototype.sync);
+    				webvfx.readyRender(true);
+                };
+			
 			}
 			function handleFontSize() {
 				// Set base font size to 2.4% of window height (as recommended by OFCOM)
@@ -116,14 +120,29 @@
 	</head>
 	<body>
 		<div class="wrapper">
-			<img class="logo" src="../images/rezzed-2015-white.png" />
-			<p class="day">And that's a wrap :'(</p>
-			<p class="fb">See what you missed facebook.com/egx</p>
-				
-			<div class="links">
-				<p class="hashtag">#EGX</p>
-				<p>www.youtube.com/egx</p>
-			</div>
+    		<div class="slate">
+        		<div class="goodbye">
+        			<img class="logo" id="rezzed" src="../images/rezzed-2015-white.png" />
+        			<div class="end-text">
+            			<h1>And that's a wrap :'(</h1>
+                    </div>
+        				
+        			<div class="links">
+            			<p>Check out what you missed here... </p>
+        				<p>egx.net/rezzed</p>
+        				<p>youtube.com/egx</p>
+        				<p>facebook.com/egx</p>
+        				<p>@EGX</p>
+        			</div>
+        		</div>
+        		<div class="hello">
+    			    <img class="logo" id="egx" src="../images/egx-logo-white.png" />
+        			<div class="egx">
+            			<p>Join us in September for EGX at the NEC in Birmingham!</p> 	
+            			<p>Get your tickets now!</p> 		
+        			</div>
+        		</div>
+    		</div>
 		</div>
 	</body>
 </html>
