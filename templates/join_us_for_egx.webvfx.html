@@ -97,8 +97,8 @@
 				handleFontSize();
 				var tl=new TimelineLite();
 				tl .from( ".end-text", 0.7, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
-				    .from( ".links", 0.7, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
-				    .from(".hello", 0.7, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
+				    .from( ".links", 0.7, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "-=0.2")
+				    .from(".hello", 0.7, { css: { marginLeft: "-=30", autoAlpha:0  },ease: SlowMo. easeInOut })
 				    //.from(".egx > p:first-child", 0.5, { css: { autoAlpha:0  },ease: Power4. easeInOut })
 				    //.from(".egx > p:last-child", 0.5, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut })
 				
@@ -140,7 +140,7 @@
     			    <img class="logo" id="egx" src="../images/egx-logo-white.png" />
         			<div class="egx">
             			<p>Join us in September for EGX at the NEC in Birmingham!</p> 	
-            			<p style="color: #ff57c0;">Get your tickets now!</p> 	
+            			<p>Get your tickets now!</p> 	
         			</div>
         		</div>
     		</div>

@@ -17,6 +17,8 @@ function render {
 	INFO=$5
 	
 	TEMPLATE=templates/lower-thirds.webvfx.html
+	TEMPLATE_NOW=templates/lower-left-thirds.webvfx.html
+	TEMPLATE_NEXT=templates/lower-right-thirds.webvfx.html
 	
 	NOW="$OUTPUT_DIR/$DAY/lower-thirds-now-$START.mov"
 	NEXT="$OUTPUT_DIR/$DAY/lower-thirds-next-$START.mov"
@@ -24,13 +26,13 @@ function render {
 	mkdir -p $OUTPUT_DIR/$DAY
 
 	# Now
-	./bin/qtrle_render_slide.sh $TEMPLATE $NOW \
+	./bin/qtrle_render_slide.sh $TEMPLATE_NOW $NOW \
 		title="NOW" \
 		name="$NAME" \
 		info="$INFO"
 
 	# Next
-	./bin/qtrle_render_slide.sh $TEMPLATE $NEXT \
+	./bin/qtrle_render_slide.sh $TEMPLATE_NEXT $NEXT \
 		title="NEXT" \
 		name="$NAME" \
 		info="$INFO"

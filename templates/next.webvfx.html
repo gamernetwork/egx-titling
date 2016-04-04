@@ -130,8 +130,8 @@
 				var tl=new TimelineLite();
 				tl
 					.from( ".day", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "day" )
-					.from( ".session", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "one" )
-					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "five -=0.5",  "end")
+					.from( ".session", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: SlowMo. easeInOut  }, "one" )
+					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut },  "end")
 			
 					//reverse
 					.to( ".day", 0.3, { css: { marginLeft: "-=30", autoAlpha:0  },ease: Power4. easeInOut }, "end+=6" )

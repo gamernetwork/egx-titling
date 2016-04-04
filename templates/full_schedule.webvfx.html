@@ -133,11 +133,11 @@
 				var tl=new TimelineLite();
 				tl
 					.from( ".day", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut }, "day" )
-					.from( ".one", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "one" )
-					.from( ".two", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "one -=0.5","two" )
-					.from( ".three", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "two -=0.5","three"	)
-					.from( ".four", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "three -=0.5", "four"	)
-					.from( ".five", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  },  "four -=0.5", "five"	)
+					.from( ".one", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut  }, "one" )
+					.from( ".two", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut  }, "one -=0.5","two" )
+					.from( ".three", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut  },  "two -=0.5","three"	)
+					.from( ".four", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut  },  "three -=0.5", "four"	)
+					.from( ".five", 0.7, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Back. easeInOut  },  "four -=0.5", "five"	)
 					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "five -=0.5",  "end")
 			
 					//reverse

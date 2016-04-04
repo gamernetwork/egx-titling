@@ -41,7 +41,7 @@
 			.links  {
 				display: block;
 				font-size: 2rem;
-				padding-top:30px;
+				padding-top:58px;
 				font-family: Helvetica;
 			}
 			
@@ -79,7 +79,7 @@
 			}
 			
 			.session  {
-				margin-top: 25px;
+				margin-top: 50px;
 				padding-left: 50px;
 				border-left: 1px solid white;
 			}
@@ -129,9 +129,9 @@
 				var tl=new TimelineLite();
 				tl
 					.from( ".day.next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 },ease: Power4. easeInOut })
-					.from( ".session.next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "+=0.2")
+					.from( ".session.next", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: SlowMo. easeInOut  }, "+=0.2")
 					.from( ".day.later", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "+=0.2")
-					.from( ".session.later", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: Power4. easeInOut  }, "+=0.2")
+					.from( ".session.later", 0.5, { css: { marginLeft: "-=30", autoAlpha:0 }, ease: SlowMo. easeInOut  }, "+=0.2")
 					.from( ".links", 0.5, { css: { autoAlpha:0 }, ease: Power4. easeInOut }, "+=0.2")
 			
 					//reverse
