@@ -56,4 +56,4 @@ while read line; do
 	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO"
 	echo
 
-done < schedule/sessions.txt
+done < $1

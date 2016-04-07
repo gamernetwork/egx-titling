@@ -28,12 +28,14 @@ function render {
 	# Now
 	./bin/render_slide.sh $TEMPLATE_NOW $NOW \
 		title="NOW" \
+		start="$START" \
 		name="$NAME" \
 		info="$INFO"
 
 	# Next
 	./bin/render_slide.sh $TEMPLATE_NEXT $NEXT \
 		title="NEXT" \
+		start="$START" \
 		name="$NAME" \
 		info="$INFO"
 
@@ -56,4 +58,4 @@ while read line; do
 	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO"
 	echo
 
-done < schedule/sessions.txt
+done < $1

@@ -8,6 +8,7 @@
 				margin: 0;
 				padding: 0;
 				height: 100%;
+				font-size: 12px;
 				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 				line-height: 1.1;
 				-webkit-font-smoothing: antialiased;
@@ -44,7 +45,8 @@
 				right: 0;
 				background-color: #360c4e;
 				padding: 1.5rem 2rem 0;
-				/*font-size: 2.75rem;*/
+				font-family: "NB Grotesk";
+				font-size: 18px;
 				color: #ff57c0;
 				line-height: 1;
 				text-transform: uppercase;
@@ -52,23 +54,26 @@
 			}
 			#now > h1 {
     			margin: 0;
-    			font-weight:normal;
+				font-weight: normal;
 			}
 
-			#sessionName {
+			.info > h1 {
 				margin: 0;
 				padding: 0 0 .5rem;
-				font-size: 3.5rem;
+				font-size: 43px;
 				font-weight: bold;
 				font-family: "NB Grotesk";
 				text-transform: uppercase;
 				line-height: 1;
 			}
+			.info > h1 > #sessionTime {
+				font-weight: normal;
+			}
 
 			#sessionInfo {		
 				margin: 0;
 				padding: 0;
-				font-size: 2rem;
+				font-size: 27px;
 				font-weight: normal;
 				line-height: 1.2;
 			}
@@ -95,8 +100,7 @@
 				if( typeof webvfx !== "undefined" ) {
 					// read parameters supplied by webvfx and update template values
 					$('#sessionName').text(webvfx.getStringParameter("name"));
-					$('#sessionInfo').text(webvfx.getStringParameter("info"));
-					$('#now').text(webvfx.getStringParameter("title"));
+					$('#sessionTime').text(webvfx.getStringParameter("start"));
 				}
 				
 				// Animate
@@ -127,11 +131,10 @@
 	<div class="wrapper">		
 		<div id="slate">
 			<div id="now">
-    			<h1>Next:</h1>
+    			<h1>Up next...</h1>
             </div>
             <div class="info">
-    			<h1 id="sessionName">Name of Session of Session</h1>
-    			<h2 id="sessionInfo">Information about the session information about the session information about the session information about the session information about the session information about the session.</h2>
+    			<h1><span id="sessionTime">12:00</span> <span id='sessionName'>Name of Session of Session</span></h1>
             </div>
 		</div>  
 	</div>

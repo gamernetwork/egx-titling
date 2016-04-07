@@ -6,14 +6,13 @@
 				padding: 0;
 				background-color: rgba(54,12,78,0.7);
 				font-family: "NB Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
-				-webkit-font-smoothing: antialiased;
 				color:white;
 			 }
 
 			.wrapper {
 				position: relative;
 				width: 1920px;
-				height: 1080px;
+				height: 900px;
 			}
 
 			#slate {
@@ -41,7 +40,6 @@
 				display: block;
 				font-size: 2rem;
 				padding-top:30px;
-				font-family: Helvetica;
 			}
 			
 			.links .hashtag {
@@ -73,9 +71,8 @@
 				
 			}
 			
-			.session  {
-                padding-top: 25px;
-
+			.session {
+                		padding-top: 25px;
 				clear:both;
 			}
 
@@ -95,12 +92,12 @@
 
 			.sessionName {
 				text-transform: uppercase;
-				font-size: 2.5rem;
+				font-size: 34px;
 				font-weight: bold;
 			}
 			
 			.sessionInfo {
-				font-size: 2.0rem;
+				font-size: 24px;
 				font-weight: normal;
 			}
 
@@ -123,7 +120,7 @@
 				handleFontSize();
 				if( typeof webvfx !== "undefined" ) {
 					// read parameters supplied by webvfx and update template values
-					for( i=1; i <= 5; i ++ ) {
+					for( i=1; i <= 6; i ++ ) {
 						$('#t'+i).text(webvfx.getStringParameter("t"+i));
 						$('#s'+i).text(webvfx.getStringParameter("s"+i));
 						$('#d'+i).text(webvfx.getStringParameter("d"+i));
@@ -221,6 +218,13 @@
         					<h2 class="sessionInfo" id="d5"> Mark Foster and David Fenn from Devolver Digital  </h2> 
     					</div> 	
     				</div>
+
+    				<div class="session six">
+    					<h1 class="sessionTime" id="t6"> 00:00 </h1>
+    					<div class="info">
+        					<h1 class="sessionName" id="s6"> The origins of AcidNerve and the design philosophy of Titan Souls </h1>
+        					<h2 class="sessionInfo" id="d6"> Mark Foster and David Fenn from Devolver Digital  </h2> 
+    					</div> 	
     			</div>
 			</div>
 		</div>
