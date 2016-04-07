@@ -37,14 +37,14 @@ function render {
 		info="$INFO"
 
 	# Convert to PNG
-	avconv -ss 00:00:03 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
-	avconv -ss 00:00:03 -r 1 -i $NEXT -frames 1 ${NEXT/.mov/.png}
+	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -ss 00:00:03 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
+	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -ss 00:00:03 -r 1 -i $NEXT -frames 1 ${NEXT/.mov/.png}
 }
 
 # Ident
 for file in idents/*.mov; do
 	cp $file "$OUTPUT_DIR/${file}"
-	avconv -ss 00:00:05 -r 1 -i $file -frames 1 "$OUTPUT_DIR/${file/.mov/.png}"
+	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -ss 00:00:05 -r 1 -i $file -frames 1 "$OUTPUT_DIR/${file/.mov/.png}"
 done
 
 # Read from sesssions.txt and build the lower thirds
@@ -81,7 +81,7 @@ done < $1
 for file in "technical_difficulties" "join_us_for_egx"; do
 	OUT="$OUTPUT_DIR/$file.mov"
 	./bin/render_slide.sh -d 10 templates/$file.webvfx.html $OUT
-	avconv -r 1 -i $OUT -frames 1 ${OUT/.mov/.png}
+	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -r 1 -i $OUT -frames 1 ${OUT/.mov/.png}
 done
 
 ## this is all broken :(
