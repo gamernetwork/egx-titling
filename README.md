@@ -1,3 +1,5 @@
+Want to work for Gamer Network? [We are hiring!](http://www.gamesindustry.biz/jobs/gamer-network)
+
 # EGX Rezzed titling templates
 
 Titling framework using HTML, GSAP, and WebVFX for MLT.
