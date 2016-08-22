@@ -4,7 +4,15 @@ Want to work for Gamer Network? [We are hiring!](http://www.gamesindustry.biz/jo
 
 Titling framework using HTML, GSAP, and WebVFX for MLT.
 
-## Installation dev/test tools
+## Hacking templates
+
+Templates should just work when opened in a browser - they have some default values set and will play back at real time!
+
+## Rendering for use on production
+
+### Installation
+
+Get dev libs and tools
 
 ```
 sudo apt-get install libmlt-dev libmlt++-dev qt4-dev-tools
@@ -13,7 +21,7 @@ git clone git@github.com:mltframework/webvfx.git
 
 Then build WebVFX using instructions in the README for WebVFX.
 
-## QUICK: Howto render lower thirds as static PNGs
+### QUICK: Howto render lower thirds as static PNGs
 
 (Quick hack because Wirecast dropped support for Animation Codec temporarily with Version 6)
  
