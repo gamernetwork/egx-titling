@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>EGX Next</title>
+		<style type="text/css">
+
+			* { box-sizing: border-box; }
+			
+			body {
+				margin: 0;
+				padding: 0;
+				-webkit-font-smoothing: antialiased;
+				font-size: 20px;
+				color: white;
+			}
+
+			#container {
+				width: 1920px;
+				height: 1080px;
+				overflow: hidden;
+				background-color: #0B3865;
+				position: absolute;
+			}
+
+			h1 {
+				margin: 0;
+				padding: 0;
+				font-size: 1.75em;
+				font-weight: bold;
+				letter-spacing: -0.05em;
+				font-family: "NB Grotesk";
+				text-transform: uppercase;
+				line-height: 0.9em;
+			}
+
+			h2 {		
+				margin: 0;
+				padding: 0;
+				font-family: "Helvetica", Helvetica, sans-serif;
+				font-size: 1.25em;
+				line-height: 1.1em;
+				letter-spacing: -0.01em
+				font-weight: lighter;
+			}
+
+			.green {
+				color: #47BB96;
+			}
+
+			.blue {
+				color: #35BEED;
+			}
+
+			#branding {
+				position: relative;
+				z-index: 10;
+			}
+
+			#branding-logo {
+				position: absolute;
+				top: 100px;
+				left: 100px;
+				width: 125px;
+				z-index: 1000;
+			}
+
+			#branding-text {
+				position: absolute;
+				top: 100px;
+				left: 250px;
+			}
+
+			#branding-text h1 {
+				margin-top: 20px;
+			}
+
+			.corner {
+				position: absolute;
+				z-index: 5;
+				top: 0;
+				left: 0;
+				width: 1474px;
+				height: 995px;
+				background: url('overlay-large.png');
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			#corner-overlay {
+				left: -1470px;
+				top: -1470px;
+			}
+
+			#corner-wipe {
+				left: -1470px;
+				top: -1470px;
+				z-index: 4;
+			}
+
+			#schedule {
+				width: 99999999999999999999%;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				position: relative;
+			}
+
+			#schedule h1 {
+				font-size: 1.4em;
+				padding-bottom: 10px;
+			}
+
+			#schedule h2 {
+				font-size: 1em;
+			}
+
+			.schedule-box {
+				position: absolute;
+				width: 400px;
+				top: 394px;
+				vertical-align: top;
+				left: 1319px;
+				transform: scale(1.5);
+				transform-origin: 50% 259px;
+			}
+
+			.schedule-img {
+				width: 400px;
+				display: block;
+				border: none;
+			}
+
+			.schedule-img-container {
+				height: 225px;
+    			overflow: hidden;
+			}
+
+			.schedule-text {
+				background-color: rgba(71, 187, 150, 1);
+			}
+
+			.schedule-text-wrapper {
+				transform: scale(0.91);
+				padding: 16px 0;
+			}
+
+			#coming-up {
+				position: absolute;
+				top: 250px;
+				left: 100px;
+				width: 500px;
+				font-size: 2.4em;
+				z-index: 1000;
+			}
+
+			#times {
+				position: absolute;
+				top: 250px;
+				left: 250px;
+				display: none;
+			}
+
+		</style>
+		<script src="../../lib/jquery-2.1.3.min.js"></script>
+		<script src="../../lib/TweenMax.min.js"></script>
+		<script src="webvfx-setup.js"></script>
+		<script src="schedule1.js"></script>
+		<script type="text/javascript">
+
+			function doAnimation() {
+
+				var slate = document.getElementById("slate");
+
+				var box = {
+					heading: "THE ORIGINS OF ACIDNERVE AND THE DESIGN PHILOSOPHY OF TITAN SOULS",
+					subHeading: "Mark Foster and David Fenn from Devolver Digital",
+					timeStart: "10:30",
+					timeEnd: "11:00",
+					image: "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581"
+				}
+
+				//addBox(box.heading, box.subHeading, box.timeStart, box.timeEnd, box.image);
+
+				tl
+					.timeScale(1)
+					.add("start", 0)
+
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn } )
+					.to("#corner-overlay", .5, { css: { left : 0, top : 0 }, ease:Power1.easeOut }, "-=.5" )
+					.from("#schedule", 0.0000001, { css: { left : 3000 } } )
+					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn } )
+
+			}
+
+			function addBox(heading, subHeading, timeStart, timeEnd, image) {
+
+				var element = document.createElement("li");
+				element.className = 'schedule-box';
+				element.innerHTML = '<h1>' + timeStart + ' &mdash; ' + timeEnd + ' <span class="green">GMT+1</span></h1><div class="schedule-img-container"><img class="schedule-img" src="' + image + '" /></div><div class="schedule-text"><div class="schedule-text-wrapper"><h1>' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
+				document.getElementById("schedule").appendChild(element);
+
+			}
+
+		</script>
+	</head>
+	<body>
+
+	<div id="container">
+
+		<div id="corner-overlay" class="corner">
+			<div id="branding">
+				<img id="branding-logo" src="logo.png" onclick="doPause()"/>
+				<div id="branding-text" class="blue">
+					<h2>facebook.com/egx</h2>
+					<h2>youtube.com/egx</h2>
+					<h2>egx.net/egx</h2>
+					<h1 class="blue">#EGX @EGX</h1>
+				</div>
+				<div id="coming-up" class="green"><h1>UP NEXT</h1></div>
+			</div>
+		</div>
+
+		<div id="corner-wipe" class="corner"></div>
+		<div id="box-large"><img class="schedule-img-large" /><h1>TEST HEADING</h1><h2>Test subheading</h2></div>
+		<!--<ul id="schedule"></ul>-->
+	</div>
+
+	</body>
+</html>
