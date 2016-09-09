@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>EGX Overlay</title>
+		<style type="text/css">
+
+			* { box-sizing: border-box; }
+			
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				-webkit-font-smoothing: antialiased;
+				width: 1920px;
+				height: 1080px;
+				font-size: 20px;
+			}
+
+			.wrapper {
+				position: absolute;
+				width: 1920px;
+				height: 1080px;
+				overflow: hidden;
+				top: 0;
+				left: 0;
+				/*background: url('http://www.eventindustrynews.co.uk/wp-content/uploads/2014/09/PLAYSTATION_EGX_EVENT_2014_085.jpg');
+				background-size: cover;*/
+			}
+
+			#sessionName {
+				margin: 0;
+				padding: 0;
+				font-size: 2.4em;
+				font-weight: bold;
+				letter-spacing: -0.05em;
+				font-family: "NB Grotesk";
+				text-transform: uppercase;
+				line-height: 0.9em;
+				padding-bottom: 15px;
+			}
+
+			#sessionInfo {		
+				margin: 0;
+				padding: 0;
+				font-family: "Helvetica", Helvetica, sans-serif;
+				font-size: 30px;
+				line-height: 1.1em;
+				letter-spacing: -0.01em;
+				font-weight: 400;
+			}
+
+			.corner {
+				background-color: rgba(53, 190, 237, 1);
+				background-color: rgba(11, 56, 101, 1);
+				background: url('corner.png');
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				width: 160px;
+				height: 160px;
+				position: absolute;
+				z-index: 10;
+			}
+
+			#bottom-left {
+				/*-webkit-clip-path: polygon(0 0, 0% 100%, 100% 100%);
+				clip-path: polygon(0 0, 0% 100%, 100% 100%);*/
+				bottom: 0;
+				left: 0;
+				background: url('corner.png');
+				background-size: 100% 100%;
+				transform: scaleX(-1) scaleY(-1);
+			}
+
+			#top-right {
+				/*-webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
+				clip-path: polygon(0 0, 100% 100%, 100% 0);*/
+				top: 0;
+				right: 0;
+			}
+
+			#slate {
+				position: absolute;
+				background-color: rgba(53, 190, 237, .85);
+				background-color: rgba(71, 187, 150, 1);
+				color: white;
+				margin: 0;
+				padding: 50px;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				overflow: hidden;
+			}
+
+			#container {
+				width: 960px;
+				height: 960px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				-webkit-clip-path: polygon(0 100%, 0 100%, 0 100%);
+				clip-path: polygon(0 100%, 0 100%, 0 100%);
+			}
+
+			.textWrapper {
+				padding: 50px;
+				/*background-color: rgba(0,0,0,0.1);*/
+			}
+
+		</style>
+		<script src="../../lib/jquery-2.1.3.min.js"></script>
+		<script src="../../lib/TweenMax.min.js"></script>
+		<script src="webvfx-setup.js"></script>
+		<script type="text/javascript">
+
+			function doAnimation() {
+
+				var delay = 5;
+
+				var slate = document.getElementById("slate");
+				var corner = document.getElementById("corner");
+
+				//splitText(document.getElementById("sessionName"));
+
+				var arr1 = [0, 100, 0, 100, 0, 100];
+				var arr2 = [0, (0 - 300), 0, 100, (100 + 300), 100];
+				arr2.onUpdate = function() {
+					TweenMax.set("#container", {webkitClipPath:'polygon('+arr1[0]+'%'+arr1[1]+'%,'+arr1[2]+'%'+arr1[3]+'%,'+arr1[4]+'%'+arr1[5]+'%)'});
+				};
+
+				var arr3 = [0, (0 - 300), 0, 100, (100 + 300), 100];
+				var arr4 = [0, 100, 0, 100, 0, 100];
+				arr4.onUpdate = function() {
+					TweenMax.set("#container", {webkitClipPath:'polygon('+arr3[0]+'%'+arr3[1]+'%,'+arr3[2]+'%'+arr3[3]+'%,'+arr3[4]+'%'+arr3[5]+'%)'});
+				};
+
+				tl
+					.timeScale(1)
+					.add("start", 0)
+
+					// in
+					.to(arr1, 1.35, arr2, "start")
+					.from("#bottom-left", .25, { css: { "width" : "1920px", "height" : "1920px" }, ease:Power1.easeInOut }, "start+=.15" )
+					.from("#top-right", 0.15, { css: { "width" : "0", "height" : "0" }, ease:Power1.easeInOut }, "start+=.25" )
+					//.staggerFrom(".split-char", 0.5, { opacity: 0, ease:Power1.easeOut }, 0.015, "-=0.5" )
+					
+					// out
+					.to("#bottom-left", 0.25, { css: { "width" : "0", "height" : "0" }, ease:Power2.easeIn }, "start+=" + delay )
+					.to(arr3, 1, arr4, "start+=" + (delay + .1) )
+					.to("#top-right", 0.25, { css: { "width" : "1920px", "height" : "1920px" }, ease:Power2.easeIn }, "start+=" + (delay + .2) )
+
+			}
+
+			function splitText(elementId) {
+		
+				var words = elementId.innerText.split(' ');
+				var output = '';
+				for (var i = 0; i < words.length; i++) {
+					output += '<div class="split-word"  style="position:relative; display:inline-block;">';
+					var chars = words[i].split('');
+					if (i != words.length - 1) chars.push('&nbsp;');
+					
+					for (var j = 0; j < chars.length; j++) {
+						output += '<div class="split-char" style="position:relative; display:inline-block;">' + chars[j] + '</div>';
+					}
+
+					output += '</div>';
+				}
+				elementId.innerHTML = output;
+
+			}
+
+		</script>
+	</head>
+	<body>
+
+		<div class="wrapper">
+			<div id="container">
+				<div id="slate">
+					<div id="top-right" class="corner"></div>
+					<div id="bottom-left" class="corner"></div>
+	    			<div class="textWrapper">
+		    			<h1 id="sessionName">Name of the Session of the Session of the Session</h1>
+		    			<p id="sessionInfo">Information about the session information and some more information about the session with information about the session.</p>
+	    			</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

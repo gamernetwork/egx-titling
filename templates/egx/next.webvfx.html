@@ -39,8 +39,8 @@
 				font-family: "Helvetica", Helvetica, sans-serif;
 				font-size: 1.25em;
 				line-height: 1.1em;
-				letter-spacing: -0.01em
-				font-weight: lighter;
+				letter-spacing: -0.01em;
+				font-weight: 400;
 			}
 
 			.green {
@@ -87,64 +87,43 @@
 			}
 
 			#corner-overlay {
-				left: -1470px;
-				top: -1470px;
+				left: 0;
+				top: 0;
 			}
 
 			#corner-wipe {
-				left: -1470px;
-				top: -1470px;
+				left: -1474px;
+				top: -1474px;
 				z-index: 4;
 			}
 
-			#schedule {
-				width: 99999999999999999999%;
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				position: relative;
-			}
-
-			#schedule h1 {
-				font-size: 1.4em;
-				padding-bottom: 10px;
-			}
-
-			#schedule h2 {
-				font-size: 1em;
-			}
-
-			.schedule-box {
+			.box-large {
 				position: absolute;
-				width: 400px;
-				top: 394px;
-				vertical-align: top;
-				left: 1319px;
-				transform: scale(1.5);
-				transform-origin: 50% 259px;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background-color: rgba(11, 56, 101, .66);
 			}
 
-			.schedule-img {
-				width: 400px;
+			.box-large h1 {
+				padding-bottom: 15px;
+			}
+
+			#box-img {
+				width: 1641px;
 				display: block;
 				border: none;
 			}
 
-			.schedule-img-container {
-				height: 225px;
+			#box-img-container {
+				height: 713px;
     			overflow: hidden;
+    			position: absolute;
+    			right: 0;
 			}
 
-			.schedule-text {
-				background-color: rgba(71, 187, 150, 1);
-			}
-
-			.schedule-text-wrapper {
-				transform: scale(0.91);
-				padding: 16px 0;
-			}
-
-			#coming-up {
+			#heading {
 				position: absolute;
 				top: 250px;
 				left: 100px;
@@ -153,11 +132,23 @@
 				z-index: 1000;
 			}
 
-			#times {
+			#box-text {
+				background-color: rgba(71, 187, 150, 1);
+				padding-left: 411px;
 				position: absolute;
-				top: 250px;
-				left: 250px;
-				display: none;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 66%;
+				font-size: 1.5em;
+			}
+
+			.align-middle {
+				position: absolute;
+				top: 50%;
+				padding-right: 100px;
+				padding-left: 0;
+				transform: translateY(-50%);
 			}
 
 		</style>
@@ -172,32 +163,60 @@
 				var slate = document.getElementById("slate");
 
 				var box = {
-					heading: "THE ORIGINS OF ACIDNERVE AND THE DESIGN PHILOSOPHY OF TITAN SOULS",
+					heading: "THE ORIGINS OF ACIDNERVE AND <br/>THE DESIGN PHILOSOPHY OF TITAN SOULS",
 					subHeading: "Mark Foster and David Fenn from Devolver Digital",
-					timeStart: "10:30",
-					timeEnd: "11:00",
 					image: "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581"
 				}
 
-				//addBox(box.heading, box.subHeading, box.timeStart, box.timeEnd, box.image);
+				addBox(box.heading, box.subHeading, box.image);
 
 				tl
 					.timeScale(1)
-					.add("start", 0)
+					.add("pos0", 1)
+					.add("pos1", 1)
+					.add("pos2", 1);
 
-					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn } )
-					.to("#corner-overlay", .5, { css: { left : 0, top : 0 }, ease:Power1.easeOut }, "-=.5" )
-					.from("#schedule", 0.0000001, { css: { left : 3000 } } )
+				cutIn();
+				//fadeToOverlay();
+				//cutOut();
+
+			}
+
+			function cutIn() {
+
+				tl
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "pos0" )
+					.from("#corner-overlay", .5, { css: { left : -1474, top : -1474 }, ease:Power1.easeOut }, "-=.5" )
+					.from(".box-large", 0.0000001, { css: { left : 3000 } } )
 					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn } )
 
 			}
 
-			function addBox(heading, subHeading, timeStart, timeEnd, image) {
+			function fadeToOverlay() {
 
-				var element = document.createElement("li");
-				element.className = 'schedule-box';
-				element.innerHTML = '<h1>' + timeStart + ' &mdash; ' + timeEnd + ' <span class="green">GMT+1</span></h1><div class="schedule-img-container"><img class="schedule-img" src="' + image + '" /></div><div class="schedule-text"><div class="schedule-text-wrapper"><h1>' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
-				document.getElementById("schedule").appendChild(element);
+				tl
+					.to("#container", 0.0000001, { css: { backgroundColor : "rgba(0,0,0,0)" } }, "pos1" )
+					.to("#box-img", 2, { css: { opacity: 0 }, ease:Power0.easeIn }, "pos1+=1")
+
+			}
+
+			function cutOut() {
+
+				tl
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "pos2+=1")
+					.to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "pos2+=1.85")
+					.to(".box-large", 0.0000001, { css: { display : "none" } }, "pos2+=1.75")
+					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn }, "pos2+=1.75")
+
+			}
+
+			function addBox(heading, subHeading, image) {
+
+				var element = document.createElement("div");
+				element.className = 'box-large';
+				element.innerHTML = '<div id="box-img-container"><img id="box-img" src="' + image + '" /></div><div id="box-text"><div class="align-middle"><h1>' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
+				
+				document.getElementById("container").appendChild(element);
 
 			}
 
@@ -216,13 +235,12 @@
 					<h2>egx.net/egx</h2>
 					<h1 class="blue">#EGX @EGX</h1>
 				</div>
-				<div id="coming-up" class="green"><h1>UP NEXT</h1></div>
+				<div id="heading" class="green"><h1>UP NEXT</h1></div>
 			</div>
 		</div>
 
 		<div id="corner-wipe" class="corner"></div>
-		<div id="box-large"><img class="schedule-img-large" /><h1>TEST HEADING</h1><h2>Test subheading</h2></div>
-		<!--<ul id="schedule"></ul>-->
+		
 	</div>
 
 	</body>
