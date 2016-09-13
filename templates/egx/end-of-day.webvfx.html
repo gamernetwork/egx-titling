@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>EGX End of Day</title>
+		<style type="text/css">
+
+			* { box-sizing: border-box; }
+			
+			body {
+				margin: 0;
+				padding: 0;
+				-webkit-font-smoothing: antialiased;
+				font-size: 20px;
+				color: white;
+			}
+
+			#container {
+				width: 1920px;
+				height: 1080px;
+				overflow: hidden;
+				background-color: #47BB96;
+				position: absolute;
+			}
+
+			h1 {
+				margin: 0;
+				padding: 0;
+				font-size: 1.75em;
+				font-weight: bold;
+				letter-spacing: -0.05em;
+				font-family: "NB Grotesk";
+				text-transform: uppercase;
+				line-height: 0.9em;
+			}
+
+			h2 {		
+				margin: 0;
+				padding: 0;
+				font-family: "Helvetica", Helvetica, sans-serif;
+				font-size: 1.25em;
+				line-height: 1.1em;
+				letter-spacing: -0.01em;
+				font-weight: 400;
+			}
+
+			.green {
+				color: #47BB96;
+			}
+
+			.blue {
+				color: #35BEED;
+			}
+
+			.dark-blue {
+				color: #0B3865;
+			}
+
+			.white {
+				color: white;
+			}
+
+			#branding {
+				position: relative;
+				z-index: 10;
+			}
+
+			#branding-logo {
+				position: absolute;
+				top: 100px;
+				left: 100px;
+				width: 125px;
+				z-index: 1000;
+			}
+
+			#branding-text {
+				position: absolute;
+				top: 100px;
+				left: 250px;
+			}
+
+			#branding-text h1 {
+				margin-top: 20px;
+			}
+
+			.corner {
+				position: absolute;
+				z-index: 5;
+				top: 0;
+				left: 0;
+				width: 1474px;
+				height: 995px;
+				background: url('overlay-green.png');
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			#corner-overlay {
+				left: 0;
+				top: 0;
+			}
+
+			#corner-wipe {
+				left: -1474px;
+				top: -1474px;
+				z-index: 4;
+			}
+
+			#heading {
+				position: absolute;
+				top: 250px;
+				left: 100px;
+				width: 500px;
+				font-size: 2.4em;
+				z-index: 1000;
+			}
+
+			.align-middle {
+				position: absolute;
+				top: 50%;
+				padding-right: 100px;
+				padding-left: 0;
+				transform: translateY(-50%);
+			}
+
+			#join-us {
+				display: block;
+				width: 100%;
+				height: 100%;
+				font-size: 1.5em;
+				text-align: center;
+				display: table-cell;
+    			vertical-align: middle;
+			}
+
+			#join-us-wrapper {
+				display: table;
+			    width: 100%;
+			    height: 100%;
+			}
+
+			#join-us h2 {
+				margin-bottom: 10px;
+			}
+
+		</style>
+		<script src="../../lib/jquery-2.1.3.min.js"></script>
+		<script src="../../lib/TweenMax.min.js"></script>
+		<script src="webvfx-setup.js"></script>
+		<script src="schedule1.js"></script>
+		<script type="text/javascript">
+
+			function doAnimation() {
+
+				var slate = document.getElementById("slate");
+
+				tl
+					.timeScale(1)
+					.add("start", 0)
+
+				cutIn();
+				//cutOut();
+
+			}
+
+			function cutIn() {
+
+				tl
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "start" )
+					.from("#corner-overlay", .5, { css: { left : -1474, top : -1474 }, ease:Power1.easeOut }, "-=.5" )
+					.from("#join-us-wrapper", .0000001, { css: { opacity: 0 } } )
+					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn } )
+					.to("#box-text", .5, { css: { left: 0 }, ease:Power0.easeIn }, "start+=.76" )
+
+			}
+
+			function cutOut() {
+
+				tl
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "start+=1")
+					.to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "start+=1.85")
+					.to("#join-us-wrapper", 0.0000001, { css: { display : "none" } }, "start+=1.75")
+					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn }, "start+=1.75")
+
+			}
+
+		</script>
+	</head>
+	<body>
+
+	<div id="container">
+
+		<div id="corner-overlay" class="corner">
+			<div id="branding">
+				<img id="branding-logo" src="logo.png" onclick="doPause()"/>
+				<div id="branding-text" class="dark-blue">
+					<h2>facebook.com/egx</h2>
+					<h2>youtube.com/egx</h2>
+					<h2>egx.net/egx</h2>
+					<h1 class="dark-blue">#EGX @EGX</h1>
+				</div>
+				<div id="heading" class="white"><h1></h1></div>
+			</div>
+		</div>
+
+		<div id="corner-wipe" class="corner"></div>
+
+		<div id="join-us-wrapper">
+			<div id="join-us">
+				<h2>We're done for the day...</h2>
+				<h1>Come back tomorrow!</h1>
+			</div>
+		</div>
+
+	</div>
+
+	</body>
+</html>
