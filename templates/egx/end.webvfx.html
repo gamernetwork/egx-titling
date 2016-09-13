@@ -155,19 +155,9 @@
 
 				var slate = document.getElementById("slate");
 
-				var box = {
-					heading: "THE ORIGINS OF ACIDNERVE AND <br/>THE DESIGN PHILOSOPHY OF TITAN SOULS",
-					subHeading: "Mark Foster and David Fenn from Devolver Digital",
-					image: "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581"
-				}
-
-				//addBox(box.heading, box.subHeading, box.image);
-
 				tl
 					.timeScale(1)
-					.add("pos0", 0)
-					.add("pos1", 0)
-					.add("pos2", 0);
+					.add("start", 0);
 
 				cutIn();
 				//cutOut();
@@ -177,32 +167,22 @@
 			function cutIn() {
 
 				tl
-					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "pos0" )
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "start" )
 					.from("#corner-overlay", .5, { css: { left : -1474, top : -1474 }, ease:Power1.easeOut }, "-=.5" )
 					.from("#join-us-wrapper", .0000001, { css: { opacity: 0 } } )
 					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn } )
-					.to("#box-text", .5, { css: { left: 0 }, ease:Power0.easeIn }, "pos0+=.76" )
+					.to("#box-text", .5, { css: { left: 0 }, ease:Power0.easeIn }, "start+=.76" )
 
 			}
 
 			function cutOut() {
 
 				tl
-					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "pos2+=1")
-					.to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "pos2+=1.85")
-					.to(".box-large", 0.0000001, { css: { display : "none" } }, "pos2+=1.75")
-					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn }, "pos2+=1.75")
-
-			}
-
-			function addBox(heading, subHeading, image) {
-
-				var element = document.createElement("div");
-				element.className = 'box-large';
-				element.innerHTML = '<div id="box-img-container"><img id="box-img" src="' + image + '" /></div><div id="box-text"><div class="align-middle"><h1>' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
-				
-				document.getElementById("container").appendChild(element);
-
+					.to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "start+=1")
+					.to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "start+=1.85")
+					.to("#join-us-wrapper", 0.0000001, { css: { display : "none" } }, "start+=1.75")
+					.to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn }, "start+=1.75")
+					
 			}
 
 		</script>
