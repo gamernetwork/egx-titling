@@ -20,34 +20,26 @@ function render {
 	NAME=$4
 	INFO=$5
 
-	#NOW="$OUTPUT_DIR/$DAY/now-$START.mov"
 	NEXT_IN="$OUTPUT_DIR/$DAY/next-in-$START.mov"
 	NEXT_OUT="$OUTPUT_DIR/$DAY/next-out-$START.mov"
 
 	mkdir -p $OUTPUT_DIR/$DAY
 
-	# Now
-	#./bin/qtrle_render_slide.sh templates/now.webvfx.html $NOW \
-	#	time="$START - $FINISH" \
-	#	name="$NAME" \
-	#	info="$INFO"
-
-	# Next
-	#./bin/qtrle_render_slide.sh -d 120 templates/egx/next.webvfx.html $NEXT_IN \
-	#	time="$START - $FINISH" \
-	#	name="$NAME" \
-	#	build="in" \
-	#	info="$INFO"
-
-	echo ./bin/qtrle_render_slide.sh templates/egx/next.webvfx.html $NEXT_OUT \
+	./bin/qtrle_render_slide.sh -d 600 templates/egx/next.webvfx.html $NEXT_IN \
 		time="$START - $FINISH" \
 		name="$NAME" \
-		build="out" \
+		build="in" \
 		info="$INFO"
 
+	#./bin/qtrle_render_slide.sh -d 120 templates/egx/next.webvfx.html $NEXT_OUT \
+	#	time="$START - $FINISH" \
+	#	name="$NAME" \
+	#	build="out" \
+	#	info="$INFO"
+
 	# Convert to PNG
-	#ffmpeg $FFOPTS -ss 00:00:03 -r 1 -i $NEXT_IN -frames 1 ${NEXT_IN/.mov/.png} < /dev/null
-	ffmpeg $FFOPTS -ss 00:00:03 -r 1 -i $NEXT_OUT -frames 1 ${NEXT_OUT/.mov/.png} < /dev/null
+	# ffmpeg $FFOPTS -ss 00:00:03 -r 1 -i $NEXT_IN -frames 1 ${NEXT_IN/.mov/.png} < /dev/null
+	ffmpeg $FFOPTS -ss 00:00:10 -r 1 -i $NEXT_OUT -frames 1 ${NEXT_OUT/.mov/.png} < /dev/null
 }
 
 # Ident

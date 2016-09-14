@@ -156,17 +156,18 @@
 		<script src="webvfx-setup.js"></script>
 		<script type="text/javascript">
 
-			var pname = 'A thing',
-				pinfo = 'Nice one',
-				ptime = '12:00',
-				pbuild = 'out';
+			var pname = "Mirror's Edge Catalyst: Inspirations",
+				pinfo = "Join Erik Odeldahl (Design Director) to hear about the upcoming Mirror's Edge Catalyst. Discover Faith's origin story.",
+				ptime = "12:00 - 12:40",
+				pimage = "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581",
+				pbuild = "out";
  
 			function read_webvfx_params() {
 				// read parameters supplied by webvfx and update template values
-				//pname = webvfx.getStringParameter("name"));
-				//ptime = webvfx.getStringParameter("time"));
-				//pinfo = webvfx.getStringParameter("info"));
-				//pbuild = webvfx.getStringParameter("build");
+				pname = webvfx.getStringParameter("name");
+				ptime = webvfx.getStringParameter("time");
+				pinfo = webvfx.getStringParameter("info");
+				pbuild = webvfx.getStringParameter("build");
 			}
 
 			function doAnimation() {
@@ -176,7 +177,7 @@
 				var box = {
 					heading: pname,
 					subHeading: pinfo,
-					image: "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581"
+					image: pimage
 				}
 
 				addBox(box.heading, box.subHeading, box.image);
@@ -184,15 +185,15 @@
 				tl
 					.timeScale(1)
 					.add("pos0", 0)
-					.add("pos1", 0)
-					.add("pos2", 0);
+					.add("pos1", 3)
+					.add("pos2", 6);
 
 				//if( pbuild == "in" ) {
-				//	cutIn();
+				cutIn();
 				//}
 				fadeToOverlay();
 				//if( pbuild == "out" ) {
-				//	cutOut();
+				cutOut();
 				//}
 
 			}
@@ -213,7 +214,7 @@
 
 				tl
 					.to("#container", 0.0000001, { css: { backgroundColor : "rgba(0,0,0,0)" } }, "pos1" )
-					.to("#box-img", 2, { css: { opacity: 0 }, ease:Power0.easeIn }, "pos1+=1")
+					.to("#box-img", 0.5, { css: { opacity: 0 }, ease:Power0.easeIn }, "pos1+=1")
 
 			}
 
