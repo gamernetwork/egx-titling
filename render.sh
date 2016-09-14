@@ -2,5 +2,6 @@
 
 # Convenience script to render everything in one go.
 
-./render-lower-thirds-prores.sh $1
+python make_schedule.py schedule/sessions.txt > templates/egx/schedule.js 
+./render-lower-thirds.sh $1
 ./render-slates.sh $1

@@ -43,6 +43,7 @@ echo "- Rendering a $DURATION second clip"
 shift $((2))
 
 melt \
+	-profile atsc_1080p_60 \
 	webvfx:$template \
 	length=$DURATION \
 	"$@" \
