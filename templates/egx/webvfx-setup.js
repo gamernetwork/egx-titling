@@ -9,16 +9,22 @@ Producer.prototype.sync = function(time) {
 	this.tl.progress(time);
 }
 
+function webvfx_get(varname, default_val) {
+	if( typeof webvfx !== "undefined" ) {
+		return webvfx.getStringParameter(varname);
+	}
+	return default_val;
+}
+
 function onLoad() {
 
 	//handleFontSize();
 	
 	// Populate
 	if( typeof webvfx !== "undefined" ) {
-		// read parameters supplied by webvfx and update template values
-		$('#sessionName').text(webvfx.getStringParameter("name"));
-		$('#sessionInfo').text(webvfx.getStringParameter("info"));
-		$('#now').text(webvfx.getStringParameter("title"));
+		if (typeof read_webvfx_params == 'function') { 
+			read_webvfx_params(); 
+		}
 	}
 
 	doAnimation();

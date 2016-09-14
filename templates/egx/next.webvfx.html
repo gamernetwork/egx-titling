@@ -9,7 +9,6 @@
 			body {
 				margin: 0;
 				padding: 0;
-				-webkit-font-smoothing: antialiased;
 				font-size: 20px;
 				color: white;
 			}
@@ -155,16 +154,28 @@
 		<script src="../../lib/jquery-2.1.3.min.js"></script>
 		<script src="../../lib/TweenMax.min.js"></script>
 		<script src="webvfx-setup.js"></script>
-		<script src="schedule1.js"></script>
 		<script type="text/javascript">
+
+			var pname = 'A thing',
+				pinfo = 'Nice one',
+				ptime = '12:00',
+				pbuild = 'out';
+ 
+			function read_webvfx_params() {
+				// read parameters supplied by webvfx and update template values
+				//pname = webvfx.getStringParameter("name"));
+				//ptime = webvfx.getStringParameter("time"));
+				//pinfo = webvfx.getStringParameter("info"));
+				//pbuild = webvfx.getStringParameter("build");
+			}
 
 			function doAnimation() {
 
 				var slate = document.getElementById("slate");
 
 				var box = {
-					heading: "THE ORIGINS OF ACIDNERVE AND <br/>THE DESIGN PHILOSOPHY OF TITAN SOULS",
-					subHeading: "Mark Foster and David Fenn from Devolver Digital",
+					heading: pname,
+					subHeading: pinfo,
 					image: "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581"
 				}
 
@@ -176,9 +187,13 @@
 					.add("pos1", 0)
 					.add("pos2", 0);
 
-				cutIn();
-				//fadeToOverlay();
-				//cutOut();
+				//if( pbuild == "in" ) {
+				//	cutIn();
+				//}
+				fadeToOverlay();
+				//if( pbuild == "out" ) {
+				//	cutOut();
+				//}
 
 			}
 
@@ -230,7 +245,7 @@
 
 		<div id="corner-overlay" class="corner">
 			<div id="branding">
-				<img id="branding-logo" src="logo.png" onclick="doPause()"/>
+				<img id="branding-logo" src="logo.png"/>
 				<div id="branding-text" class="blue">
 					<h2>facebook.com/egx</h2>
 					<h2>youtube.com/egx</h2>

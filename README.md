@@ -4,7 +4,15 @@ Want to work for Gamer Network? [We are hiring!](http://www.gamesindustry.biz/jo
 
 Titling framework using HTML, GSAP, and WebVFX for MLT.
 
-## Installation dev/test tools
+Tested on Linux only (Ubuntu 16.04 LTS).
+
+## Installing render pipeline
+
+You need `melt` and the WebVFX plugin from the MLT project. While `melt` is generally avaiable in most distros, WebVFX is not. Two options:
+
+### HARD WAY
+
+Build it all from source.
 
 ```
 sudo apt-get install libmlt-dev libmlt++-dev build-essential qt4-dev-tools libavcodec-dev libavdevice-dev libavfilter-dev libavresample-dev libavutil-dev libswscale-dev
@@ -15,6 +23,22 @@ Build and install:
   - https://github.com/mltframework/mlt
   - https://github.com/mltframework/webvfx
 
+### EASIER WAY
+
+Install Shotcut, the MLT based video editor, from a all-inc tarball.
+
+https://www.shotcut.org/download/
+
+Unpack somewhere and update your environment.
+
+e.g.
+
+```
+cd ~/opt/
+tar -xjvf shotcut-debian8-x86_64-160901.tar.bz2
+export PATH=~/opt/Shotcut/Shotcut.app/:$PATH
+export LD_LIBRARY_PATH=~/opt/Shotcut/Shotcut.app/lib/:$PATH
+```
 
 ## QUICK: Howto render lower thirds as static PNGs
 

@@ -7,7 +7,8 @@
 # - "Join us next year"
 # Outputs .mov and .png files.
 
-OUTPUT_DIR=~/Videos/egx-rezzed-2016
+OUTPUT_DIR=~/Videos/egx-2016
+FFOPTS=" -loglevel quiet -y "
 mkdir -p $OUTPUT_DIR
 mkdir -p $OUTPUT_DIR/idents
 
@@ -19,33 +20,42 @@ function render {
 	NAME=$4
 	INFO=$5
 
-	NOW="$OUTPUT_DIR/$DAY/now-$START.mov"
-	NEXT="$OUTPUT_DIR/$DAY/next-$START.mov"
+	#NOW="$OUTPUT_DIR/$DAY/now-$START.mov"
+	NEXT_IN="$OUTPUT_DIR/$DAY/next-in-$START.mov"
+	NEXT_OUT="$OUTPUT_DIR/$DAY/next-out-$START.mov"
 
 	mkdir -p $OUTPUT_DIR/$DAY
 
 	# Now
-	./bin/render_slide.sh templates/now.webvfx.html $NOW \
-		time="$START - $FINISH" \
-		name="$NAME" \
-		info="$INFO"
+	#./bin/qtrle_render_slide.sh templates/now.webvfx.html $NOW \
+	#	time="$START - $FINISH" \
+	#	name="$NAME" \
+	#	info="$INFO"
 
 	# Next
-	./bin/render_slide.sh templates/next.webvfx.html $NEXT \
+	#./bin/qtrle_render_slide.sh -d 120 templates/egx/next.webvfx.html $NEXT_IN \
+	#	time="$START - $FINISH" \
+	#	name="$NAME" \
+	#	build="in" \
+	#	info="$INFO"
+
+	echo ./bin/qtrle_render_slide.sh templates/egx/next.webvfx.html $NEXT_OUT \
 		time="$START - $FINISH" \
 		name="$NAME" \
+		build="out" \
 		info="$INFO"
 
 	# Convert to PNG
-	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -ss 00:00:03 -r 1 -i $NOW -frames 1 ${NOW/.mov/.png}
-	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -ss 00:00:03 -r 1 -i $NEXT -frames 1 ${NEXT/.mov/.png}
+	#ffmpeg $FFOPTS -ss 00:00:03 -r 1 -i $NEXT_IN -frames 1 ${NEXT_IN/.mov/.png} < /dev/null
+	ffmpeg $FFOPTS -ss 00:00:03 -r 1 -i $NEXT_OUT -frames 1 ${NEXT_OUT/.mov/.png} < /dev/null
 }
 
 # Ident
-for file in idents/*.mov; do
-	cp $file "$OUTPUT_DIR/${file}"
-	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -ss 00:00:05 -r 1 -i $file -frames 1 "$OUTPUT_DIR/${file/.mov/.png}"
-done
+#for file in idents/*.mov; do
+#	cp $file "$OUTPUT_DIR/${file}"
+#	ffmpeg $FFOPTS -ss 00:00:05 -r 1 -i $file -frames 1 "$OUTPUT_DIR/${file/.mov/.png}" < /dev/null
+#done
+
 
 # Read from sesssions.txt and build the lower thirds
 declare -a tDAY
@@ -77,11 +87,13 @@ while read line; do
 
 done < $1
 
+exit 0
+
 # Do general slates
 for file in "technical_difficulties" "join_us_for_egx"; do
 	OUT="$OUTPUT_DIR/$file.mov"
-	./bin/render_slide.sh -d 10 templates/$file.webvfx.html $OUT
-	LD_LIBRARY_PATH=/usr/local/lib/ /usr/local/bin/ffmpeg -r 1 -i $OUT -frames 1 ${OUT/.mov/.png}
+	./bin/qtrle_render_slide.sh -d 10 templates/$file.webvfx.html $OUT
+	ffmpeg $FFOPTS -r 1 -i $OUT -frames 1 ${OUT/.mov/.png} < /dev/null
 done
 
 ## this is all broken :(

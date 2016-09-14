@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DURATION=240
+DURATION=600
 
 usage()
 {
@@ -11,7 +11,7 @@ Renders egx titling templates to Prores
 
 OPTIONS:
    -h      Show this message
-   -d      Duration of render in seconds (default=150)
+   -d      Duration of render in frames (default=600)
 EOF
 }
 
@@ -42,8 +42,7 @@ echo "- Rendering a $DURATION second clip"
 
 shift $((2))
 
-LD_LIBRARY_PATH=/usr/local/lib/ \
-	melt \
+melt \
 	webvfx:$template \
 	length=$DURATION \
 	"$@" \
@@ -52,8 +51,8 @@ LD_LIBRARY_PATH=/usr/local/lib/ \
 	vcodec=qtrle \
 	no_audio=1 \
 	mlt_image_format=rgb24a \
-	frame_rate_num=30000 \
-	frame_rate_den=1001 \
+	frame_rate_num=60 \
+	frame_rate_den=1 \
 	width=1920 \
 	height=1080 \
 	transparent=1 \
