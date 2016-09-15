@@ -168,7 +168,7 @@
 				pinfo = "Join Erik Odeldahl (Design Director) to hear about the upcoming Mirror's Edge Catalyst. Discover Faith's origin story.",
 				ptime = "12:00 - 12:40",
 				pimage = "http://cdn.akamai.steamstatic.com/steam/apps/297130/ss_398947374cbd6458f9fc3142975ce0a3ac4e5b33.1920x1080.jpg?t=1447361581",
-				pbuild = "out";
+				pbuild = "";
  
 			function read_webvfx_params() {
 				// read parameters supplied by webvfx and update template values
@@ -192,18 +192,35 @@
 				addBox(box.heading, box.subHeading, box.time, box.image);
 
 				tl
-					.timeScale(1)
-					.add("pos0", 0)
-					.add("pos1", 3)
-					.add("pos2", 6);
+					.timeScale(1);
 
-				//if( pbuild == "in" ) {
-				cutIn();
-				//}
-				fadeToOverlay();
-				//if( pbuild == "out" ) {
-				cutOut();
-				//}
+				if( pbuild == "in" ) {
+
+					tl.add("pos0", 0);
+					cutIn();
+
+				}
+				else if ( pbuild == "out" ) {
+
+					document.getElementById('container').style["background-color"] = "rgba(0,0,0,0)";
+					document.getElementById('box-img').style.opacity = "0";
+
+					tl.add("pos2", 0);
+					cutOut();
+
+				}
+				else {
+
+					tl
+						.add("pos0", 0)
+						.add("pos1", 3)
+						.add("pos2", 6);
+
+					cutIn();
+					fadeToOverlay();
+					cutOut();
+
+				}
 
 			}
 
