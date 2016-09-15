@@ -17,7 +17,6 @@ function render {
     FINISH=$3
     NAME=$4
     INFO=$5
-    IMAGE=$6
     
     TEMPLATE_NOW=$EGX_BASE/templates/egx/overlay-lower-left.webvfx.html
     TEMPLATE_NEXT=$EGX_BASE/templates/egx/lower-right-thirds.webvfx.html
@@ -31,14 +30,13 @@ function render {
     mkdir -p $OUTPUT_DIR/$DAY/static/
 
     # Now
-    echo $EGX_BASE/bin/render_template \
+    $EGX_BASE/bin/render_template \
         -d 360 \
 	$TEMPLATE_NOW $NOW_VID \
         title="NOW" \
         start="$START" \
         name="$NAME" \
-        info="$INFO" \
-        image="$IMAGE"
+        info="$INFO"
 
     # Next
     $EGX_BASE/bin/render_template \
@@ -47,8 +45,7 @@ function render {
         title="NEXT" \
         start="$START" \
         name="$NAME" \
-        info="$INFO" \
-        image="$IMAGE"
+        info="$INFO"
 
     # Generate a still
     ffmpeg $FFOPTS -ss 00:00:05 -r 1 -i "$NOW_VID" -frames 1 "$NOW_STATIC" < /dev/null
@@ -63,11 +60,10 @@ while read line; do
     _FINISH=$(echo "$line" | cut -f 3)
     _NAME=$(echo "$line" | cut -f 4)
     _INFO=$(echo "$line" | cut -f 5)
-    _IMAGE=$(echo "$line" | cut -f 6)
     
     echo "Rendering $_DAY, $_START-$_FINISH: $_NAME"
     echo "-------------------------------------------"
-    render "$_DAY" "$_START" "$_FINISH" "$_NAME" "$_INFO" "$_IMAGE"
+    render "$_DAY" "$_START" "$_FINISH" "$_NAME" "$_INFO"
     echo
 
 done < $1
