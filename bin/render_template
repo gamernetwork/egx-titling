@@ -21,7 +21,6 @@ def get_args():
         help="Don't actually run, just print what you would run")
 
     args = parser.parse_args()
-    print (args)
     return args
 
 if __name__=="__main__":
@@ -36,7 +35,7 @@ if __name__=="__main__":
     ]
 
     prog = [
-        "melt",
+        "qmelt",
         "-profile atsc_1080p_60",
         "webvfx:%s" % args.template_name,
         "length=%s" % args.duration
