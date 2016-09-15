@@ -136,6 +136,7 @@
 			}
 
 			#box-text {
+				display: table;
 				background-color: rgba(71, 187, 150, 1);
 				padding-left: 411px;
 				position: absolute;
@@ -144,14 +145,17 @@
 				width: 200%;
 				top: 66%;
 				font-size: 1.5em;
+				height: 34%;
 			}
 
 			.align-middle {
-				position: absolute;
-				top: 50%;
-				width: 1409px;
+				display: table-cell;
+				vertical-align: middle;
 				padding-left: 0;
-				transform: translateY(-50%);
+			}
+
+			.box-contents {
+				width: 1409px;
 			}
 
 		</style>
@@ -237,7 +241,7 @@
 
 				var element = document.createElement("div");
 				element.className = 'box-large';
-				element.innerHTML = '<div id="box-img-container"><img id="box-img" src="' + image + '" /></div><div id="box-text"><div class="align-middle"><h1>' + time + ' ' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
+				element.innerHTML = '<div id="box-img-container"><img id="box-img" src="' + image + '" /></div><div id="box-text"><div class="align-middle"><div class="box-contents"><h1>' + time + ' ' + heading + '</h1><h2>' + subHeading + '</h2></div></div></div>';
 				
 				document.getElementById("container").appendChild(element);
 
