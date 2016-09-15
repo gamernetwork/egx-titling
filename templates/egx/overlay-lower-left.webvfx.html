@@ -112,7 +112,18 @@
 		<script src="webvfx-setup.js"></script>
 		<script type="text/javascript">
 
+			var pname = "Mirror's Edge Catalyst: Inspirations",
+				pinfo = "Join Erik Odeldahl (Design Director) to hear about the upcoming Mirror's Edge Catalyst. Discover Faith's origin story.";
+ 
+			function read_webvfx_params() {
+				// read parameters supplied by webvfx and update template values
+				pname = webvfx.getStringParameter("name");
+				pinfo = webvfx.getStringParameter("info");
+			}
+
 			function doAnimation() {
+
+				addBox(pname, pinfo);
 
 				var delay = 5;
 
@@ -150,24 +161,34 @@
 
 			}
 
-			function splitText(elementId) {
-		
-				var words = elementId.innerText.split(' ');
-				var output = '';
-				for (var i = 0; i < words.length; i++) {
-					output += '<div class="split-word"  style="position:relative; display:inline-block;">';
-					var chars = words[i].split('');
-					if (i != words.length - 1) chars.push('&nbsp;');
-					
-					for (var j = 0; j < chars.length; j++) {
-						output += '<div class="split-char" style="position:relative; display:inline-block;">' + chars[j] + '</div>';
-					}
+			function addBox(heading, subHeading) {
 
-					output += '</div>';
-				}
-				elementId.innerHTML = output;
+				var element = document.createElement("div");
+				element.className = 'textWrapper';
+				element.innerHTML = '<h1 id="sessionName">' + heading + '</h1><p id="sessionInfo">' + subHeading + '</p>';
+				
+				document.getElementById("slate").appendChild(element);
 
 			}
+			
+			// function splitText(elementId) {
+		
+			// 	var words = elementId.innerText.split(' ');
+			// 	var output = '';
+			// 	for (var i = 0; i < words.length; i++) {
+			// 		output += '<div class="split-word"  style="position:relative; display:inline-block;">';
+			// 		var chars = words[i].split('');
+			// 		if (i != words.length - 1) chars.push('&nbsp;');
+					
+			// 		for (var j = 0; j < chars.length; j++) {
+			// 			output += '<div class="split-char" style="position:relative; display:inline-block;">' + chars[j] + '</div>';
+			// 		}
+
+			// 		output += '</div>';
+			// 	}
+			// 	elementId.innerHTML = output;
+
+			// }
 
 		</script>
 	</head>
@@ -178,10 +199,6 @@
 				<div id="slate">
 					<div id="top-right" class="corner"></div>
 					<div id="bottom-left" class="corner"></div>
-	    			<div class="textWrapper">
-		    			<h1 id="sessionName">Name of the Session of the Session of the Session</h1>
-		    			<p id="sessionInfo">Information about the session information and some more information about the session with information about the session.</p>
-	    			</div>
 				</div>
 			</div>
 		</div>
