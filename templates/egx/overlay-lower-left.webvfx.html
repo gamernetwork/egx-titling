@@ -123,12 +123,17 @@
 
 			function doAnimation() {
 
-				addBox(pname, pinfo);
-
 				var delay = 5;
 
 				var slate = document.getElementById("slate");
 				var corner = document.getElementById("corner");
+
+				var box = {
+					heading: pname,
+					subHeading: pinfo
+				}
+
+				addBox(box.heading, box.subHeading);
 
 				//splitText(document.getElementById("sessionName"));
 
@@ -170,7 +175,7 @@
 				document.getElementById("slate").appendChild(element);
 
 			}
-			
+
 			// function splitText(elementId) {
 		
 			// 	var words = elementId.innerText.split(' ');

@@ -2,6 +2,6 @@
 
 # Convenience script to render everything in one go.
 
-python make_schedule.py $1 > templates/egx/schedule.js 
+python bin/make_schedule_js $1 > templates/egx/schedule.js 
 ./render-lower-thirds.sh $1
 ./render-slates.sh $1

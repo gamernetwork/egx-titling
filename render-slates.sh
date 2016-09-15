@@ -19,6 +19,7 @@ function render {
 	FINISH=$3
 	NAME=$4
 	INFO=$5
+	IMAGE=$6
 
 	NEXT_IN_VID="$OUTPUT_DIR/$DAY/video/next-in-$START.mov"
 	NEXT_IN_STATIC="$OUTPUT_DIR/$DAY/static/next-in-$START.png"
@@ -32,9 +33,10 @@ function render {
 		time="$START - $FINISH" \
 		name="$NAME" \
 		build="in" \
-		info="$INFO"
+		info="$INFO" \
+		image="$IMAGE"
 
-	#$EGX_BASE/bin/qtrle_render_slide.sh -d 120 $EGX_BASE/templates/egx/next.webvfx.html $NEXT_OUT \
+	#$EGX_BASE/bin/render_template.sh -d 120 $EGX_BASE/templates/egx/next.webvfx.html $NEXT_OUT \
 	#	time="$START - $FINISH" \
 	#	name="$NAME" \
 	#	build="out" \
@@ -51,6 +53,7 @@ declare -a tSTART
 declare -a tFINISH
 declare -a tNAME
 declare -a tINFO
+declare -a tIMAGE
 COUNTER=0
 SCHEDULE_DURATION=1200
 while read line; do
@@ -60,11 +63,12 @@ while read line; do
 	FINISH=$(echo "$line" | cut -f 3)
 	NAME=$(echo "$line" | cut -f 4)
 	INFO=$(echo "$line" | cut -f 5)
+	IMAGE=$(echo "$line" | cut -f 6)
 
 	echo "-------------------------------------------"
 	echo "Day $DAY, $START-$FINISH: $NAME"
     echo "Rendering lower thirds"
-	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO"
+	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO" "$IMAGE"
     echo "Rendering schedule skip: $COUNTER"
     $EGX_BASE/bin/render_template -d $SCHEDULE_DURATION $EGX_BASE/templates/egx/schedule.webvfx.html $OUTPUT_DIR/$DAY/video/schedule.$START.mov day=$DAY skip=$COUNTER
 	echo "---DONE---"
