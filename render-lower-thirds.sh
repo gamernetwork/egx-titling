@@ -5,7 +5,9 @@
 # - Next
 # Outputs .mov and .png files.
 
-OUTPUT_DIR=~/Videos/egx-2016
+EGX_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+OUTPUT_DIR=~/egx/assets/egx-2016
+FFOPTS=" -loglevel quiet -y "
 mkdir -p $OUTPUT_DIR
 
 function render {
@@ -16,37 +18,40 @@ function render {
 	NAME=$4
 	INFO=$5
 	
-	TEMPLATE_NOW=templates/egx/overlay-lower-left.webvfx.html
-	TEMPLATE_NEXT=templates/egx/lower-right-thirds.webvfx.html
+	TEMPLATE_NOW=$EGX_BASE/templates/egx/overlay-lower-left.webvfx.html
+	TEMPLATE_NEXT=$EGX_BASE/templates/egx/lower-right-thirds.webvfx.html
 	
-	NOW="$OUTPUT_DIR/$DAY/lower-thirds-now-$START.mov"
-	NEXT="$OUTPUT_DIR/$DAY/lower-thirds-next-$START.mov"
+	NOW_VID="$OUTPUT_DIR/$DAY/video/lower-thirds-now-$START.mov"
+	NEXT_VID="$OUTPUT_DIR/$DAY/video/lower-thirds-next-$START.mov"
+	NOW_STATIC="$OUTPUT_DIR/$DAY/static/lower-thirds-now-$START.png"
+	NEXT_STATIC="$OUTPUT_DIR/$DAY/static/lower-thirds-next-$START.png"
 
-	mkdir -p $OUTPUT_DIR/$DAY
+	mkdir -p $OUTPUT_DIR/$DAY/video/
+	mkdir -p $OUTPUT_DIR/$DAY/static/
 
 	# Now
-	./bin/qtrle_render_slide.sh $TEMPLATE_NOW $NOW \
+	$EGX_BASE/bin/render_template $TEMPLATE_NOW $NOW_VID \
+        --duration 360 \
 		title="NOW" \
 		start="$START" \
 		name="$NAME" \
 		info="$INFO"
 
 	# Next
-	./bin/qtrle_render_slide.sh $TEMPLATE_NEXT $NEXT \
+	$EGX_BASE/bin/render_template $TEMPLATE_NEXT $NEXT_VID \
+        --duration 360 \
 		title="NEXT" \
 		start="$START" \
 		name="$NAME" \
 		info="$INFO"
 
-	# Convert to PNG
-	ffmpeg -loglevel quiet -ss 00:00:05 -r 1 -y -i "$NOW" -frames 1 "${NOW/.mov/.png}" < /dev/null
-	ffmpeg -loglevel quiet -ss 00:00:05 -r 1 -y -i "$NEXT" -frames 1 "${NEXT/.mov/.png}" < /dev/null
+	# Generate a still
+	ffmpeg $FFOPTS -ss 00:00:05 -r 1 -i "$NOW_VID" -frames 1 "$NOW_STATIC" < /dev/null
+	ffmpeg $FFOPTS quiet -ss 00:00:05 -r 1 -i "$NEXT_VID" -frames 1 "$NEXT_STATIC" < /dev/null
 }
 
 # Read from sesssions.txt and build the lower thirds
 while read line; do
-
-echo "$line"
 
 	_DAY=$(echo "$line" | cut -f 1)
 	_START=$(echo "$line" | cut -f 2)
