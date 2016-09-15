@@ -50,6 +50,10 @@
 				color: #35BEED;
 			}
 
+			.darkblue {
+				color: #0B3865;
+			}
+
 			#branding {
 				position: relative;
 				z-index: 10;
@@ -145,7 +149,7 @@
 			.align-middle {
 				position: absolute;
 				top: 50%;
-				padding-right: 100px;
+				width: 1409px;
 				padding-left: 0;
 				transform: translateY(-50%);
 			}
@@ -177,10 +181,11 @@
 				var box = {
 					heading: pname,
 					subHeading: pinfo,
+					time: ptime,
 					image: pimage
 				}
 
-				addBox(box.heading, box.subHeading, box.image);
+				addBox(box.heading, box.subHeading, box.time, box.image);
 
 				tl
 					.timeScale(1)
@@ -191,9 +196,9 @@
 				//if( pbuild == "in" ) {
 				cutIn();
 				//}
-				fadeToOverlay();
+				//fadeToOverlay();
 				//if( pbuild == "out" ) {
-				cutOut();
+				//cutOut();
 				//}
 
 			}
@@ -228,11 +233,11 @@
 
 			}
 
-			function addBox(heading, subHeading, image) {
+			function addBox(heading, subHeading, time, image) {
 
 				var element = document.createElement("div");
 				element.className = 'box-large';
-				element.innerHTML = '<div id="box-img-container"><img id="box-img" src="' + image + '" /></div><div id="box-text"><div class="align-middle"><h1>' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
+				element.innerHTML = '<div id="box-img-container"><img id="box-img" src="' + image + '" /></div><div id="box-text"><div class="align-middle"><h1>' + time + ' ' + heading + '</h1><h2>' + subHeading + '</h2></div></div>';
 				
 				document.getElementById("container").appendChild(element);
 
