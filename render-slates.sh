@@ -23,28 +23,29 @@ function render {
 
 	NEXT_IN_VID="$OUTPUT_DIR/$DAY/video/next-in-$START.mov"
 	NEXT_IN_STATIC="$OUTPUT_DIR/$DAY/static/next-in-$START.png"
-	#NEXT_OUT_VID="$OUTPUT_DIR/$DAY/video/next-out-$START.mov"
-	#NEXT_OUT_STATIC="$OUTPUT_DIR/$DAY/static/next-out-$START.png"
+	NEXT_OUT_VID="$OUTPUT_DIR/$DAY/video/next-out-$START.mov"
+	NEXT_OUT_STATIC="$OUTPUT_DIR/$DAY/static/next-out-$START.png"
 
 	mkdir -p $OUTPUT_DIR/$DAY/video
 	mkdir -p $OUTPUT_DIR/$DAY/static
 
-	$EGX_BASE/bin/render_template -d 600 $EGX_BASE/templates/egx/next.webvfx.html $NEXT_IN_VID \
+	$EGX_BASE/bin/render_template -d 120 $EGX_BASE/templates/egx/next.webvfx.html $NEXT_IN_VID \
 		time="$START - $FINISH" \
 		name="$NAME" \
 		build="in" \
 		info="$INFO" \
 		image="$IMAGE"
 
-	#$EGX_BASE/bin/render_template.sh -d 120 $EGX_BASE/templates/egx/next.webvfx.html $NEXT_OUT \
-	#	time="$START - $FINISH" \
-	#	name="$NAME" \
-	#	build="out" \
-	#	info="$INFO"
+	$EGX_BASE/bin/render_template -d 120 $EGX_BASE/templates/egx/next.webvfx.html $NEXT_OUT_VID \
+		time="$START - $FINISH" \
+		name="$NAME" \
+		build="out" \
+		info="$INFO" \
+		image="$IMAGE"
 
 	# Convert to PNG
 	ffmpeg $FFOPTS -ss 00:00:10 -r 1 -i $NEXT_IN_VID -frames 1 $NEXT_IN_STATIC < /dev/null
-	#ffmpeg $FFOPTS -ss 00:00:10 -r 1 -i $NEXT_OUT_VID -frames 1 $NEXT_OUT_STATIC < /dev/null
+	ffmpeg $FFOPTS -ss 00:00:01 -r 1 -i $NEXT_OUT_VID -frames 1 $NEXT_OUT_STATIC < /dev/null
 }
 
 # Read from sesssions.txt and build the lower thirds
@@ -55,7 +56,8 @@ declare -a tNAME
 declare -a tINFO
 declare -a tIMAGE
 COUNTER=0
-SCHEDULE_DURATION=1200
+SCHEDULE_SLIDE_DURATION=180
+SCHEDULE_BASE_DURATION=540
 while read line; do
 
 	DAY=$(echo "$line" | cut -f 1)
@@ -64,6 +66,9 @@ while read line; do
 	NAME=$(echo "$line" | cut -f 4)
 	INFO=$(echo "$line" | cut -f 5)
 	IMAGE=$(echo "$line" | cut -f 6)
+
+	daycount=`grep -ce "^$DAY" $1`
+	SCHEDULE_DURATION=$((SCHEDULE_BASE_DURATION + (daycount - COUNTER) * SCHEDULE_SLIDE_DURATION))
 
 	echo "-------------------------------------------"
 	echo "Day $DAY, $START-$FINISH: $NAME"
@@ -75,7 +80,6 @@ while read line; do
 	echo
 
 	COUNTER=$((COUNTER + 1))
-	SCHEDULE_DURATION=$((SCHEDULE_DURATION - 100))
 
 done < $1
 

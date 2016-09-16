@@ -177,54 +177,56 @@
 
 			function doAnimation() {
 
-        pskip = parseInt(pskip);
+	        pskip = parseInt(pskip);
 
-        for (var i = 0; i < boxes.length; i++) {
-          if( boxes[i].day == pday ) {
-            if( pskip-- <= 0 ) {
-              addBox(boxes[i].heading, boxes[i].subHeading, boxes[i].timeStart, boxes[i].timeEnd, boxes[i].image);
-            }
-          }
-        }
+	        for (var i = 0; i < boxes.length; i++) {
+	          if( boxes[i].day == pday ) {
+	            if( pskip-- <= 0 ) {
+	              addBox(boxes[i].heading, boxes[i].subHeading, boxes[i].timeStart, boxes[i].timeEnd, boxes[i].image);
+	            }
+	          }
+	        }
 
-        var slate = document.getElementById("slate");
-        
-        var leftOffset = 319;
+	        var slate = document.getElementById("slate");
+	        
+	        var leftOffset = 319;
 
-        var delay = 3; // should be >= moveTime
-        var moveTime = .75;
+	        var delay = 3; // should be >= moveTime
+	        var moveTime = .75;
 
-        tl
-          .timeScale(1)
-          .add("start", -delay)
+	        tl
+	          .timeScale(1)
+	          .add("start", -delay)
+	          .seek(0, false)
 
-          .to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn } )
-          .to("#corner-overlay", .5, { css: { left : 0, top : 0 }, ease:Power1.easeOut }, "-=.5" )
-          .from("#schedule", 0.0000001, { css: { left : 3000 } } )
-          .to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn } )
+	          .to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn } )
+	          .to("#corner-overlay", .5, { css: { left : 0, top : 0 }, ease:Power1.easeOut }, "-=.5" )
+	          .from("#schedule", 0.0000001, { css: { left : 3000 } } )
+	          .to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn } )
 
-          .staggerTo(".schedule-box", moveTime, { css: { "left" : 1550 + leftOffset }, ease:Power4.easeIn }, delay, "start" )
+	          .staggerTo(".schedule-box", moveTime, { css: { "left" : 1550 + leftOffset }, ease:Power4.easeIn }, delay, "start" )
 
-          // large
-          .staggerTo(".schedule-box", moveTime, { css: { "left" : 1000 + leftOffset, "transform" : "scale(1.5)" } , ease:Power2.easeIn }, delay, "start+=" + delay )
-          .staggerTo(".schedule-text", moveTime, { css: { "background-color" : "rgba(71, 187, 150, 1)" } , ease:Power2.easeIn }, delay, "start+=" + delay )
-          .staggerTo(".schedule-text-wrapper", moveTime / 2, { css: { "transform" : "scale(0.91)", "padding" : "16px 0" } , ease:Power2.easeIn }, delay, "start+=" + delay )
-          
-          // small
-          .staggerTo(".schedule-box", moveTime, { css: { "left" : 450 + leftOffset, "transform" : "scale(1)" } , ease:Power2.easeIn }, delay, "start+=" + delay * 2 )
-          .staggerTo(".schedule-text", moveTime / 2, { css: { "background-color" : "rgba(71, 187, 150, 0)" } , ease:Power2.easeIn }, delay, "start+=" + delay * 2 )
-          .staggerTo(".schedule-text-wrapper", moveTime, { css: { "transform" : "scale(1)", "padding" : "20px 0" } , ease:Power2.easeIn }, delay, "start+=" + delay * 2 )
+	          // large
+	          .staggerTo(".schedule-box", moveTime, { css: { "left" : 1000 + leftOffset, "transform" : "scale(1.5)" } , ease:Power2.easeIn }, delay, "start+=" + delay )
+	          .staggerTo(".schedule-text", moveTime, { css: { "background-color" : "rgba(71, 187, 150, 1)" } , ease:Power2.easeIn }, delay, "start+=" + delay )
+	          .staggerTo(".schedule-text-wrapper", moveTime / 2, { css: { "transform" : "scale(0.91)", "padding" : "16px 0" } , ease:Power2.easeIn }, delay, "start+=" + delay )
+	          
+	          // small
+	          .staggerTo(".schedule-box", moveTime, { css: { "left" : 450 + leftOffset, "transform" : "scale(1)" } , ease:Power2.easeIn }, delay, "start+=" + delay * 2 )
+	          .staggerTo(".schedule-text", moveTime / 2, { css: { "background-color" : "rgba(71, 187, 150, 0)" } , ease:Power2.easeIn }, delay, "start+=" + delay * 2 )
+	          .staggerTo(".schedule-text-wrapper", moveTime, { css: { "transform" : "scale(1)", "padding" : "20px 0" } , ease:Power2.easeIn }, delay, "start+=" + delay * 2 )
 
-          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset } , ease:Power2.easeIn }, delay, "start+=" + delay * 3 )
-          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset - 450 } , ease:Power2.easeIn }, delay, "start+=" + delay * 4 )
+	          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset } , ease:Power2.easeIn }, delay, "start+=" + delay * 3 )
+	          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset - 450 } , ease:Power2.easeIn }, delay, "start+=" + delay * 4 )
 
-          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset - 900 } , ease:Power0.easeIn }, delay, "start+=" + ((delay * 4) + moveTime) )
-          
-          // out
-          .to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "-=" + ((delay * 3) - 1) )
-          .to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "-=" + ((delay * 3) - 1.85) )
-          .to("#schedule", 0.0000001, { css: { display : "none" } }, "-=" + ((delay * 3) - 1.75) )
-          .to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn }, "-=" + ((delay * 3) - 1.75) )
+	          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset - 900 } , ease:Power0.easeIn }, delay, "start+=" + ((delay * 4) + moveTime) )
+	          
+	          // out
+	          .to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "-=" + ((delay * .75) - 1) )
+	          .to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "-=" + ((delay * .75) - 1.85) )
+	          .to("#schedule", 0.0000001, { css: { display : "none" } }, "-=" + ((delay * .75) - 1.75) )
+          	  .to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn, onComplete:function(){tl.kill();} }, "-=" + ((delay * .75) - 1.75) )
+
 			}
 
 			function addBox(heading, subHeading, timeStart, timeEnd, image) {
