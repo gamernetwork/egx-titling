@@ -222,10 +222,10 @@
 	          .staggerTo(".schedule-box", moveTime, { css: { "left" : leftOffset - 900 } , ease:Power0.easeIn }, delay, "start+=" + ((delay * 4) + moveTime) )
 	          
 	          // out
-	          .to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "-=" + ((delay * .75) - 1) )
-	          .to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "-=" + ((delay * .75) - 1.85) )
-	          .to("#schedule", 0.0000001, { css: { display : "none" } }, "-=" + ((delay * .75) - 1.75) )
-          	  .to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn, onComplete:function(){tl.kill();} }, "-=" + ((delay * .75) - 1.75) )
+	          .to("#corner-wipe", .75, { css: { width: "4700px", height: "3172px", left: 0, top: 0 }, ease:Power0.easeIn }, "-=" + ((delay * 3) - 1) )
+	          .to("#corner-overlay", .75, { css: { top: -1474, left: -1474 }, ease:Power0.easeIn }, "-=" + ((delay * 3) - 1.85) )
+	          .to("#schedule", 0.0000001, { css: { display : "none" } }, "-=" + ((delay * 3) - 1.75) )
+          	  .to("#corner-wipe", .75, { css: { width: "0px", height: "0px", left: -1474, top: -1474 }, ease:Power0.easeIn, onComplete:function(){tl.kill();} }, "-=" + ((delay * 3) - 1.75) )
 
 			}
 
