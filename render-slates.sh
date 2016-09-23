@@ -83,11 +83,4 @@ while read line; do
 
 done < $1
 
-exit 0
-
-# Do general slates
-for file in "technical_difficulties" "egx/end" "egx/end-of-day"; do
-	OUT="$OUTPUT_DIR/$file.mov"
-	$EGX_BASE/bin/render_template -d 10 $EGX_BASE/templates/$file.webvfx.html $OUT
-	ffmpeg $FFOPTS -r 1 -i $OUT -frames 1 ${OUT/.mov/.png} < /dev/null
-done
+rename -E 's/:/_/g' $OUTPUT_DIR/*/*/*
