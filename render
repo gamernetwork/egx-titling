@@ -5,3 +5,4 @@
 python bin/make_schedule_js $1 > templates/egx/schedule.js 
 ./render-lower-thirds.sh $1
 ./render-slates.sh $1
+./render-cards.sh $1

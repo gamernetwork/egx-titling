@@ -56,8 +56,8 @@ declare -a tNAME
 declare -a tINFO
 declare -a tIMAGE
 COUNTER=0
-SCHEDULE_SLIDE_DURATION=180
-SCHEDULE_BASE_DURATION=540
+SCHEDULE_SLIDE_DURATION=240
+SCHEDULE_BASE_DURATION=720
 while read line; do
 
 	DAY=$(echo "$line" | cut -f 1)
@@ -72,7 +72,7 @@ while read line; do
 
 	echo "-------------------------------------------"
 	echo "Day $DAY, $START-$FINISH: $NAME"
-    echo "Rendering lower thirds"
+    echo "Rendering intro cards"
 	render "$DAY" "$START" "$FINISH" "$NAME" "$INFO" "$IMAGE"
     echo "Rendering schedule skip: $COUNTER"
     $EGX_BASE/bin/render_template -d $SCHEDULE_DURATION $EGX_BASE/templates/egx/schedule.webvfx.html $OUTPUT_DIR/$DAY/video/schedule.$START.mov day=$DAY skip=$COUNTER
@@ -83,11 +83,4 @@ while read line; do
 
 done < $1
 
-exit 0
-
-# Do general slates
-for file in "technical_difficulties" "egx/end" "egx/end-of-day"; do
-	OUT="$OUTPUT_DIR/$file.mov"
-	$EGX_BASE/bin/render_template -d 10 $EGX_BASE/templates/$file.webvfx.html $OUT
-	ffmpeg $FFOPTS -r 1 -i $OUT -frames 1 ${OUT/.mov/.png} < /dev/null
-done
+rename -E 's/:/_/g' $OUTPUT_DIR/*/*/*
