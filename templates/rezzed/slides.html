@@ -9,42 +9,44 @@
 	<!-- <script src="../../lib/webvfx-setup.js"></script> -->
 	<style type="text/css">
 		* { box-sizing: border-box; }
-		body { margin: 0; }
+		body { margin: 0px; }
 		main {
 			width: 1920px; height: 1080px;
 			position: relative;
+			top: 0px;
+			left: 0px;
 			overflow: hidden;
 		}
 		.background {
 			width: 3000px; height: 1080px;
-			top: 0; left: 0;
+			top: 0px; left: 0px;
 			position: absolute;
-		    transform-origin: bottom left;
+		    -webkit-transform-origin: bottom left;
 		}
 		.background.dark-blue {
 			background: #360c4e;
-		    transform: rotate(-45deg);
+		    -webkit-transform: rotate(-45deg);
 		}
 		.background.blue {
 			background: #503575;
-		    transform: rotate(-45deg);
+		    -webkit-transform: rotate(-45deg);
 		    left: -540px; top: -540px;
 		}
 		.background.pink {
 			background: #ff57c0;
-		    transform: rotate(-41deg);
+		    -webkit-transform: rotate(-41deg);
 		}
 		main > div {
 			display: none;
 		}
-		h1, h2, h3, h4, h5, h6 { margin: 0; }
+		h1, h2, h3, h4, h5, h6 { margin: 0px; }
 		h1 {
 			font-family: 'NB Grotesk', sans-serif;
 			font-size: 85px; line-height: 85px;
 			color: #ff57c0;
 			text-transform: uppercase;
 			letter-spacing: -5px;
-			margin: 30px 0 0;
+			margin: 30px 0px 0px;
 			max-width: 600px;
 		}
 		h2, h4, h6 {
@@ -61,7 +63,7 @@
 		}
 		ul {
 			list-style: none;
-			margin: 0; padding: 0;
+			margin: 0px; padding: 0px;
 		}
 		.subheading {
 			margin-top: 20px;
@@ -69,8 +71,9 @@
 		}
 		.corner {
 			position: absolute;
-			height: 100%; width: 100%;
-			top: 0; left: 0;
+			height: 100%;
+			width: 100%;
+			top: 0px; left: 0px;
 			padding: 50px;
 		}
 		.corner ul {
@@ -89,8 +92,8 @@
 			width: 600px; max-height: 700px;
 			position: absolute;
 			top: 370px;
-			transform-origin: center 350px;
-			transition: transform 1s;
+			-webkit-transform-origin: center 350px;
+			-webkit-transition: -webkit-transform 1s;
 			color: white;
 			background: #503575;
 		}
@@ -101,7 +104,7 @@
 		}
 		.schedule-item .headings {
 			background: #360c4e;
-			transition: background .25s;
+			-webkit-transition: background .25s;
 			padding: 20px;
 		}
 		.schedule-item span { color: #360c4e; }
@@ -115,7 +118,7 @@
 			margin-bottom: 10px;
 		}
 		.background.next {
-			transform: rotate(-45deg);
+			-webkit-transform: rotate(-45deg);
 			left: -540px; top: -540px;
 			overflow: hidden;
 		}
@@ -131,7 +134,7 @@
 			left: 0; bottom: 0;
 			width: 1920px;
 			background: #503575;
-			transform: translateY(100%);
+			-webkit-transform: translateY(100%);
 		}
 		.next-text {
 			width: 100%;
@@ -193,14 +196,14 @@
 	// 	showUpNext('Friday', 3);
 	// }, 250);
 
-	setTimeout(function() {
+	/*setTimeout(function() {
 		showBackground(true);
 		showOverlay('Coming up');
 		makeSchedule('Friday', 0);
 		startSchedule();
-	}, 250);
+	}, 250);*/
 
-	function showUpNext(day, sessions_done=0) {
+	function showUpNext(day, sessions_done) {
 		var list = getSessions(day, sessions_done, true);
 		if (list.length > 0) {
 			var i = list[0];
@@ -247,8 +250,8 @@
 		$('.next-text h3').text(subheading);
 	}
 
-	function makeSchedule(day, sessions_done=0) {
-		clearSchedule();
+	function makeSchedule(day, sessions_done) {
+		clearSchedule(true);
 		$('.schedule').css({ opacity: 1, });
 
 		var list = getSessions(day, sessions_done);
@@ -272,7 +275,7 @@
 		return list;
 	}
 
-	function clearSchedule(instant=true) {
+	function clearSchedule(instant) {
 		// first_schedule = true;
 		if (instant) $('.schedule').empty();
 		else {
@@ -478,6 +481,16 @@
 		target.children('.headings').css({
 			background: 'transparent',
 		});
+	}
+
+	function update(str) {
+		// do nothing
+	}
+	function play() {
+		// do nothing
+	}
+	function next() {
+		// do nothing
 	}
 </script>
 </body>
