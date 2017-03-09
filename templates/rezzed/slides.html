@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>EGX Rezzed Developer Sessions</title>
+	<script src="../../lib/jquery-3.1.1.min.js"></script>
+	<script src="../../lib/TweenMax.min.js"></script>
+	<!-- <script src="../../lib/webvfx-setup.js"></script> -->
+	<style type="text/css">
+		* { box-sizing: border-box; }
+		body { margin: 0; }
+		main {
+			width: 1920px; height: 1080px;
+			position: relative;
+			overflow: hidden;
+		}
+		.background {
+			width: 3000px; height: 1080px;
+			top: 0; left: 0;
+			position: absolute;
+		    transform-origin: bottom left;
+		}
+		.background.dark-blue {
+			background: #360c4e;
+		    transform: rotate(-45deg);
+		}
+		.background.blue {
+			background: #503575;
+		    transform: rotate(-45deg);
+		    left: -540px; top: -540px;
+		}
+		.background.pink {
+			background: #ff57c0;
+		    transform: rotate(-41deg);
+		}
+		main > div {
+			display: none;
+		}
+		h1, h2, h3, h4, h5, h6 { margin: 0; }
+		h1 {
+			font-family: 'NB Grotesk', sans-serif;
+			font-size: 85px; line-height: 85px;
+			color: #ff57c0;
+			text-transform: uppercase;
+			letter-spacing: -5px;
+			margin: 30px 0 0;
+			max-width: 600px;
+		}
+		h2, h4, h6 {
+			font-family: 'NB Grotesk', sans-serif;
+			font-size: 40px; line-height: 50px;
+			color: white;
+			text-transform: uppercase;
+		}
+		h3, h5 {
+			font-family: Helvetica, sans-serif;
+			font-size: 30px; line-height: 36px;
+			font-weight: normal;
+			color: white;
+		}
+		ul {
+			list-style: none;
+			margin: 0; padding: 0;
+		}
+		.subheading {
+			margin-top: 20px;
+			max-width: 500px;
+		}
+		.corner {
+			position: absolute;
+			height: 100%; width: 100%;
+			top: 0; left: 0;
+			padding: 50px;
+		}
+		.corner ul {
+			position: absolute;
+			left: 277px; top: 50px;
+		}
+		.logo {
+			width: 177px; height: 231px;
+		}
+		.schedule {
+			width: 1920px; height: 1080px;
+			position: absolute;
+			top: 0; left: 0;
+		}
+		.schedule-item {
+			width: 600px; max-height: 700px;
+			position: absolute;
+			top: 370px;
+			transform-origin: center 350px;
+			transition: transform 1s;
+			color: white;
+			background: #503575;
+		}
+		.schedule-item .image {
+			width: 600px; height: 300px;
+			background-size: cover;
+			margin: 0 auto;
+		}
+		.schedule-item .headings {
+			background: #360c4e;
+			transition: background .25s;
+			padding: 20px;
+		}
+		.schedule-item span { color: #360c4e; }
+		.schedule-item h6 {
+			line-height: 40px;
+			height: 50px;
+			margin-left: 0;
+		}
+		.schedule-item h4 {
+			line-height: 40px;
+			margin-bottom: 10px;
+		}
+		.background.next {
+			transform: rotate(-45deg);
+			left: -540px; top: -540px;
+			overflow: hidden;
+		}
+		.next-image	 {
+			position: absolute;
+			right: 0; top: 0;
+			width: 1920px;
+			height: 1080px;
+			background-size: cover;
+		}
+		.next-text-wrapper {
+			position: absolute;
+			left: 0; bottom: 0;
+			width: 1920px;
+			background: #503575;
+			transform: translateY(100%);
+		}
+		.next-text {
+			width: 100%;
+			padding: 50px;
+			padding-left: 270px;
+		}
+	</style>
+</head>
+<body>
+
+<main>
+	<div class="next-image"></div>
+	
+	<div class="background blue"></div>
+	
+	<div class="schedule"></div>
+	
+	<div class="next-text-wrapper">
+		<div class="next-text">
+			<h2></h2>
+			<h3></h3>
+		</div>
+	</div>
+
+	<div class="background pink"></div>
+	<div class="background dark-blue"></div>
+
+	<div class="corner">
+		<img class="logo" src="img/EGX_REZZED_WHITE.png" />
+		<ul>
+			<li><h2>#EGX @EGX</h2></li>
+			<li><h3>facebook.com/egx</h3></li>
+			<li><h3>youtube.com/egx</h3></li>
+			<li><h3>egx.net/egx</h3></li>
+		</ul>
+		<h1 class="heading"></h1>
+		<h2 class="subheading"></h2>
+	</div>
+</main>
+
+<script src="../../schedule/schedule.js"></script>
+<script type="text/javascript">
+
+	$('main > div').show();
+
+	// init timelines
+	var timelines = {
+		'overlay': animOverlay(),
+		'fill_blue': animFillOffset('blue'),
+		'fill_pink': animFill('pink'),
+		'fill_dark_blue': animFill('dark-blue'),
+		'next_text': animNextText(),
+	};
+
+	// test stuff
+	// setTimeout(function() {
+	// 	showBackground(true);
+	// 	showOverlay('Up next');
+	// 	showUpNext('Friday', 3);
+	// }, 250);
+
+	setTimeout(function() {
+		showBackground(true);
+		showOverlay('Coming up');
+		makeSchedule('Friday', 0);
+		startSchedule();
+	}, 250);
+
+	function showUpNext(day, sessions_done=0) {
+		var list = getSessions(day, sessions_done, true);
+		if (list.length > 0) {
+			var i = list[0];
+			showNextImage(sessions[i].image);
+			showNextText(sessions[i].heading, sessions[i].subHeading);
+			setSubheading(sessions[i].timeStart + ' – ' + sessions[i].timeEnd + ' GMT');
+			hideBackground();
+			setTimeout(function() {
+				timelines.next_text.play();
+			}, 1000);
+		}
+	}
+
+	function hideUpNext() {
+		showBackground();
+		timelines.next_text.reverse();
+		setTimeout(function() {
+			hideNextImage(true);
+		}, 2000);
+
+	}
+
+	function hideNextImage(instant) {
+		if (instant) {
+			$('.next-image').css({
+				opacity: 0,
+			});
+		} else {
+			$('.next-image').animate({
+				opacity: 0,
+			});
+		}
+	}
+
+	function showNextImage(image) {
+		$('.next-image').css({
+			backgroundImage: 'url(' + image + ')',
+			opacity: 1,
+		});
+	}
+
+	function showNextText(heading, subheading) {
+		$('.next-text h2').text(heading);
+		$('.next-text h3').text(subheading);
+	}
+
+	function makeSchedule(day, sessions_done=0) {
+		clearSchedule();
+		$('.schedule').css({ opacity: 1, });
+
+		var list = getSessions(day, sessions_done);
+		for (var i = 0; i < list.length; i++) {
+			addBox(sessions[list[i]].heading, sessions[list[i]].subHeading, sessions[list[i]].timeStart, sessions[list[i]].timeEnd, sessions[list[i]].image, i);
+		}
+	}
+
+	function getSessions(day, sessions_done, first_only) {
+		var index = 0 - sessions_done;
+		var list = [];
+		for (var i = 0; i < sessions.length; i++) {
+			if (sessions[i].day == day) {
+				if (index >= 0) {
+					list.push(i);
+					if (first_only) return list;
+				}
+				index ++;
+			}
+		}
+		return list;
+	}
+
+	function clearSchedule(instant=true) {
+		// first_schedule = true;
+		if (instant) $('.schedule').empty();
+		else {
+			$('.schedule').animate({ opacity: 0, }, function() {
+				$('.schedule').empty();
+			});
+		}
+		clearInterval(schedule_timer);
+	}	
+
+	function showOverlay(heading) {
+		setHeading(heading);
+		timelines.overlay.play();
+	}
+
+	function hideOverlay() {
+		timelines.overlay.reverse();
+	}
+
+	function showBackground(instant) {
+		if (instant) timelines.fill_blue.seek('-=0', false);
+		else timelines.fill_blue.play();
+	}
+
+	function hideBackground() {
+		timelines.fill_blue.reverse();
+	}
+	
+	var schedule_timer;
+	function startSchedule() {
+		$('.subheading').css({ opacity: 0, });
+		// first_schedule = true;
+		if ($('.schedule-item').length > 0) {
+			$('.schedule').animate({ opacity: 1, });
+			var schedule_count = 1;
+			moveSchedule();
+			schedule_timer = setInterval(function() {
+				moveSchedule();
+				schedule_count ++;
+				if (schedule_count > $('.schedule-item').length + 1) endSchedule();
+			}, 4000);
+		}
+	}
+
+	function endSchedule() {
+		clearInterval(schedule_timer);
+		$('.schedule').animate({ opacity: 0, });
+		// setTimeout(function() {
+		// 	hideOverlay();
+		// }, 1000);
+		// hideBackground();
+	}
+
+	function animNextText() {
+		var time = 1;
+		var timeline = makeTimeline();
+		timeline
+			.to('.next-text-wrapper', time, { css: {
+				transform: 'translateY(0%)',
+			}, ease: Power2.easeOut }, 0);
+		return timeline;
+	}
+
+	// define timelines
+	function animOverlay() {
+		var time = 1;
+		var timeline = makeTimeline();
+		timeline
+			.from('.corner', time, { css: {
+				top: '-540px', left: '-540px',
+			}, ease: Power2.easeOut }, 0)
+			.from('.background.dark-blue', time, { css: {
+				top: '-540px', left: '-540px',
+			}, ease: Power2.easeOut }, 0)
+			.from('.background.pink', time, { css: {
+				top: '-540px', left: '-540px',
+			}, ease: Power2.easeOut }, 0)
+			.from('.background.pink', time / 2, { css: {
+				transform: 'rotate(-45deg)',
+			}, ease: Power3.easeOut }, time / 3);
+		return timeline;
+	}
+
+	function animFill(target) {
+		var time = 1;
+		var timeline = makeTimeline();
+		timeline
+			.to('.background.' + target, time, { css: {
+				transform: 'rotate(0deg)',
+			}, ease: Power2.easeOut }, 0)
+			.to('.background.' + target + ' > div', time, { css: {
+				transform: 'rotate(0deg)',
+			}, ease: Power2.easeOut }, 0);
+		return timeline;
+	}
+
+	function animFillOffset(target) {
+		var time = 1;
+		var timeline = makeTimeline();
+		timeline
+			.to('.background.' + target, time, { css: {
+				top: 0, left: 0,
+			}, ease: Power2.easeIn }, 0)
+			.to('.background.' + target, time, { css: {
+				transform: 'rotate(0deg)',
+			}, ease: Power2.easeOut }, time)
+			.to('.background.' + target + ' > div', time, { css: {
+				transform: 'rotate(0deg)',
+			}, ease: Power2.easeOut }, time);
+		return timeline;
+	}
+
+	// var first_schedule = true;
+	function moveSchedule(stop_schedule) {
+		if (stop_schedule) clearInterval(schedule_timer);
+
+		var ease = 'Power1.easeOut';
+		var time = 1;
+		var timeline = makeTimeline();
+		var items = $('.schedule-item');
+
+		for (var i = 0; i < items.length; i++) {
+			var item = $(items[i]);
+			var right = parseInt(item.css('right'));
+			if (right >= 1038) {
+				timeline
+					.to(item, time, { css: {
+						right: '+=442px',
+						opacity: 0,
+					}, ease: ease }, 0);
+				if (i == 0) {
+				 // && first_schedule) {
+					// first_schedule = false;
+					var text_time = item.children('h6').text();
+					var text_heading = item.children('.headings').children('h4').text();
+					setSubheading(text_time + '<br />' + text_heading);
+				}
+			} else if (right >= 596) {
+				timeline
+					.to(item, time, { css: {
+						right: '+=442px',
+					}, ease: ease }, 0);
+			} else if (right >= 50) {
+				item.css({
+					transform: 'scale(.7)',
+				});
+				shrinkBox(item);
+				timeline
+					.to(item, time, { css: {
+						right: '+=546px',
+					}, ease: ease }, 0);
+			} else {
+				timeline
+					.to(item, time, { css: {
+						right: '+=650px',
+					}, ease: ease }, 0);
+			}
+		}
+
+		timeline.play();
+	}
+
+	function makeTimeline() {
+		var timeline = new TimelineMax();
+		timeline.pause();
+		return timeline;
+	}
+
+
+	function setHeading(text) {
+		$('.heading').text(text);
+	}
+
+	function setSubheading(text) {
+		var subheading = $('.subheading');
+		// subheading.css({
+		// 	opacity: 0,
+		// });
+		$('.subheading').html(text);
+		subheading.animate({
+			opacity: 1,
+		})
+	}
+
+	function addBox(heading, subheading, time_start, time_end, image, index) {
+		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>GMT</span>' + '</h6>';
+		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
+		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
+		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
+			.css({
+				right: (50 - (index + 1) * 650) + 'px',
+			})
+		$('.schedule').append(item);
+	}
+
+	function shrinkBox(target) {
+		target.children('h6').animate({
+			marginLeft: '20px',
+		});
+		target.children('.image').animate({
+			width: '560px',
+		});
+		target.children('.headings').css({
+			background: 'transparent',
+		});
+	}
+</script>
+</body>
+</html>
