@@ -6,33 +6,32 @@
 	<title>EGX Rezzed Developer Sessions</title>
 	<script src="../../lib/jquery-3.1.1.min.js"></script>
 	<script src="../../lib/TweenMax.min.js"></script>
-	<!-- <script src="../../lib/webvfx-setup.js"></script> -->
 	<style type="text/css">
 		* { box-sizing: border-box; }
 		body { margin: 0px; }
 		main {
 			width: 1920px; height: 1080px;
 			position: relative;
-			top: 0px;
-			left: 0px;
+			top: 0; left: 0;
 			overflow: hidden;
 		}
-		.background {
+		.block {
 			width: 3000px; height: 1080px;
-			top: 0px; left: 0px;
+			top: 0; left: 0;
+			overflow: hidden;
 			position: absolute;
 		    -webkit-transform-origin: bottom left;
 		}
-		.background.dark-blue {
+		.block.dark-blue {
 			background: #360c4e;
 		    -webkit-transform: rotate(-45deg);
 		}
-		.background.blue {
+		.block.blue {
 			background: #503575;
-		    -webkit-transform: rotate(-45deg);
-		    left: -540px; top: -540px;
+		    -webkit-transform: rotate(-0deg);
+		    left: 0; top: 0;
 		}
-		.background.pink {
+		.block.pink {
 			background: #ff57c0;
 		    -webkit-transform: rotate(-41deg);
 		}
@@ -65,10 +64,6 @@
 			list-style: none;
 			margin: 0px; padding: 0px;
 		}
-		.subheading {
-			margin-top: 20px;
-			max-width: 500px;
-		}
 		.corner {
 			position: absolute;
 			height: 100%;
@@ -91,7 +86,7 @@
 		.schedule-item {
 			width: 600px; max-height: 700px;
 			position: absolute;
-			top: 370px;
+			top: 350px;
 			-webkit-transform-origin: center 350px;
 			-webkit-transition: -webkit-transform 1s;
 			color: white;
@@ -117,50 +112,66 @@
 			line-height: 40px;
 			margin-bottom: 10px;
 		}
-		.background.next {
-			-webkit-transform: rotate(-45deg);
-			left: -540px; top: -540px;
-			overflow: hidden;
+		.schedule-item.small {
+			transform: scale(.65);
+		}
+		.schedule-item.small .headings {
+			background: transparent;
 		}
 		.next-image	 {
 			position: absolute;
-			right: 0; top: 0;
-			width: 1920px;
+			left: 0; top: 0;
+			width: 1925px;
 			height: 1080px;
 			background-size: cover;
+		}
+		.next-image-wrapper {
+			position: relative;
+			margin-top: 0; margin-left: 0;
+		}
+		.next-image-outer {
+			position: absolute;
+			top: 0; left: 0;
+			width: 1925px;
 		}
 		.next-text-wrapper {
 			position: absolute;
 			left: 0; bottom: 0;
 			width: 1920px;
 			background: #503575;
-			-webkit-transform: translateY(100%);
+			-webkit-transform: translateY(0);
 		}
 		.next-text {
+			display: block;
+			margin: 0 auto;
 			width: 100%;
+			max-width: 1200px;
 			padding: 50px;
-			padding-left: 270px;
+			padding-left: 160px;
 		}
 	</style>
 </head>
 <body>
 
 <main>
-	<div class="next-image"></div>
-	
-	<div class="background blue"></div>
-	
+	<div class="background block blue"></div>
+
 	<div class="schedule"></div>
-	
-	<div class="next-text-wrapper">
-		<div class="next-text">
-			<h2></h2>
-			<h3></h3>
+
+	<div class="next-image-outer">
+		<div class="next-image-wrapper block">
+			<div class="next-image block"></div>
 		</div>
 	</div>
 
-	<div class="background pink"></div>
-	<div class="background dark-blue"></div>
+	<div class="next-text-wrapper">
+		<div class="next-text"><h2></h2><h3></h3></div>
+	</div>
+
+	<div class="overlay">
+		<div class="block pink"></div>
+		<div class="block dark-blue"></div>
+	</div>
 
 	<div class="corner">
 		<img class="logo" src="img/EGX_REZZED_WHITE.png" />
@@ -171,7 +182,6 @@
 			<li><h3>egx.net/egx</h3></li>
 		</ul>
 		<h1 class="heading"></h1>
-		<h2 class="subheading"></h2>
 	</div>
 </main>
 
@@ -180,307 +190,315 @@
 
 	$('main > div').show();
 
-	// init timelines
+	// build timelines
 	var timelines = {
 		'overlay': animOverlay(),
-		'fill_blue': animFillOffset('blue'),
-		'fill_pink': animFill('pink'),
-		'fill_dark_blue': animFill('dark-blue'),
+		'background': animBackground(),
 		'next_text': animNextText(),
+		'next_image': animNextImage(),
 	};
 
-	// test stuff
-	// setTimeout(function() {
-	// 	showBackground(true);
-	// 	showOverlay('Up next');
-	// 	showUpNext('Friday', 3);
-	// }, 250);
+	// testing
+	// scheduleIn('Friday', 0);
+	upNextIn('Friday', 0);
 
-	/*setTimeout(function() {
-		showBackground(true);
-		showOverlay('Coming up');
-		makeSchedule('Friday', 0);
-		startSchedule();
-	}, 250);*/
-
-	function showUpNext(day, sessions_done) {
-		var list = getSessions(day, sessions_done, true);
-		if (list.length > 0) {
-			var i = list[0];
-			showNextImage(sessions[i].image);
-			showNextText(sessions[i].heading, sessions[i].subHeading);
-			setSubheading(sessions[i].timeStart + ' – ' + sessions[i].timeEnd + ' GMT');
-			hideBackground();
-			setTimeout(function() {
-				timelines.next_text.play();
-			}, 1000);
-		}
-	}
-
-	function hideUpNext() {
+	// slides
+	function upNextIn(day, slot) {
+		showOverlay('Up next');
 		showBackground();
-		timelines.next_text.reverse();
-		setTimeout(function() {
-			hideNextImage(true);
-		}, 2000);
-
+		showNext(day, slot);
 	}
 
-	function hideNextImage(instant) {
-		if (instant) {
-			$('.next-image').css({
-				opacity: 0,
-			});
-		} else {
-			$('.next-image').animate({
-				opacity: 0,
-			});
-		}
+	function upNextOut() {
+		hideOverlay();
+		hideNext();
 	}
 
-	function showNextImage(image) {
-		$('.next-image').css({
-			backgroundImage: 'url(' + image + ')',
-			opacity: 1,
-		});
+	function upNextImageOut() {
+		fadeBackgroundOut(true);
+		hideNextImage();
 	}
 
-	function showNextText(heading, subheading) {
-		$('.next-text h2').text(heading);
-		$('.next-text h3').text(subheading);
+	function scheduleIn(day, slot) {
+		showOverlay('Coming up');
+		showBackground();
+		setSchedule(day, slot);
+		setTimeout(playSchedule, 1250);
 	}
 
-	function makeSchedule(day, sessions_done) {
-		clearSchedule(true);
-		$('.schedule').css({ opacity: 1, });
-
-		var list = getSessions(day, sessions_done);
-		for (var i = 0; i < list.length; i++) {
-			addBox(sessions[list[i]].heading, sessions[list[i]].subHeading, sessions[list[i]].timeStart, sessions[list[i]].timeEnd, sessions[list[i]].image, i);
-		}
-	}
-
-	function getSessions(day, sessions_done, first_only) {
-		var index = 0 - sessions_done;
-		var list = [];
-		for (var i = 0; i < sessions.length; i++) {
-			if (sessions[i].day == day) {
-				if (index >= 0) {
-					list.push(i);
-					if (first_only) return list;
-				}
-				index ++;
-			}
-		}
-		return list;
-	}
-
-	function clearSchedule(instant) {
-		// first_schedule = true;
-		if (instant) $('.schedule').empty();
-		else {
-			$('.schedule').animate({ opacity: 0, }, function() {
-				$('.schedule').empty();
-			});
-		}
+	function scheduleOut() {
 		clearInterval(schedule_timer);
-	}	
+		hideOverlay();
+		hideSchedule();
+	}
 
-	function showOverlay(heading) {
-		setHeading(heading);
+	function killAll(keep_background) {
+		clearInterval(schedule_timer);
+		hideOverlay();
+		hideSchedule();
+		hideNext();
+		if (!keep_background) setTimeout(hideBackground, 950);
+	}
+
+	// show / hide
+	function showOverlay(text) {
+		setHeading(text);
 		timelines.overlay.play();
 	}
 
-	function hideOverlay() {
+	function hideOverlay(text) {
 		timelines.overlay.reverse();
 	}
 
-	function showBackground(instant) {
-		if (instant) timelines.fill_blue.seek('-=0', false);
-		else timelines.fill_blue.play();
+	function showBackground() {
+		fadeBackgroundIn();
+		timelines.background.play();
 	}
 
 	function hideBackground() {
-		timelines.fill_blue.reverse();
+		timelines.background.reverse();
 	}
-	
+
+	function showNext(day, slot) {
+		var slots = getSlots(day, slot, true);
+		if (slots.length > 0) {
+			var i = slots[0];
+			setNextText(sessions[i].heading, sessions[i].subHeading);
+			setNextImage(sessions[i].image);
+			setTimeout(function() {
+				timelines.next_image.play();
+			}, 50);
+			setTimeout(function() {
+				timelines.next_text.play();
+			}, 1500);
+		}
+	}
+
+	function hideNext() {
+		timelines.next_text.reverse();
+		setTimeout(function() {
+			timelines.next_image.reverse();
+		}, 1000);
+	}
+
+	function hideNextImage() {
+		timelines.next_image.reverse();
+	}
+
+	function hideNextText() {
+		timelines.next_text.reverse();
+	}
+
 	var schedule_timer;
-	function startSchedule() {
-		$('.subheading').css({ opacity: 0, });
-		// first_schedule = true;
+	function playSchedule() {
+		var delay = 4000;
+		schedule_pos = 0;
+		clearInterval(schedule_timer);
 		if ($('.schedule-item').length > 0) {
-			$('.schedule').animate({ opacity: 1, });
-			var schedule_count = 1;
-			moveSchedule();
-			schedule_timer = setInterval(function() {
-				moveSchedule();
-				schedule_count ++;
-				if (schedule_count > $('.schedule-item').length + 1) endSchedule();
-			}, 4000);
+			advanceSchedule();
+			schedule_timer = setInterval(function() { advanceSchedule(); }, delay);
 		}
 	}
 
 	function endSchedule() {
 		clearInterval(schedule_timer);
-		$('.schedule').animate({ opacity: 0, });
-		// setTimeout(function() {
-		// 	hideOverlay();
-		// }, 1000);
-		// hideBackground();
 	}
 
-	function animNextText() {
-		var time = 1;
-		var timeline = makeTimeline();
-		timeline
-			.to('.next-text-wrapper', time, { css: {
-				transform: 'translateY(0%)',
-			}, ease: Power2.easeOut }, 0);
-		return timeline;
-	}
+	var schedule_pos = 0;
+	function advanceSchedule() {
+		var positions = [1410, 996, 582, 50, -600];
+		var time = 1, ease = 'Power2.easeInOut';
 
-	// define timelines
-	function animOverlay() {
-		var time = 1;
-		var timeline = makeTimeline();
-		timeline
-			.from('.corner', time, { css: {
-				top: '-540px', left: '-540px',
-			}, ease: Power2.easeOut }, 0)
-			.from('.background.dark-blue', time, { css: {
-				top: '-540px', left: '-540px',
-			}, ease: Power2.easeOut }, 0)
-			.from('.background.pink', time, { css: {
-				top: '-540px', left: '-540px',
-			}, ease: Power2.easeOut }, 0)
-			.from('.background.pink', time / 2, { css: {
-				transform: 'rotate(-45deg)',
-			}, ease: Power3.easeOut }, time / 3);
-		return timeline;
-	}
-
-	function animFill(target) {
-		var time = 1;
-		var timeline = makeTimeline();
-		timeline
-			.to('.background.' + target, time, { css: {
-				transform: 'rotate(0deg)',
-			}, ease: Power2.easeOut }, 0)
-			.to('.background.' + target + ' > div', time, { css: {
-				transform: 'rotate(0deg)',
-			}, ease: Power2.easeOut }, 0);
-		return timeline;
-	}
-
-	function animFillOffset(target) {
-		var time = 1;
-		var timeline = makeTimeline();
-		timeline
-			.to('.background.' + target, time, { css: {
-				top: 0, left: 0,
-			}, ease: Power2.easeIn }, 0)
-			.to('.background.' + target, time, { css: {
-				transform: 'rotate(0deg)',
-			}, ease: Power2.easeOut }, time)
-			.to('.background.' + target + ' > div', time, { css: {
-				transform: 'rotate(0deg)',
-			}, ease: Power2.easeOut }, time);
-		return timeline;
-	}
-
-	// var first_schedule = true;
-	function moveSchedule(stop_schedule) {
-		if (stop_schedule) clearInterval(schedule_timer);
-
-		var ease = 'Power1.easeOut';
-		var time = 1;
-		var timeline = makeTimeline();
 		var items = $('.schedule-item');
+		schedule_pos ++;
+		if (schedule_pos > items.length + 2) endSchedule();
+		var timeline = makeTimeline();
 
 		for (var i = 0; i < items.length; i++) {
 			var item = $(items[i]);
-			var right = parseInt(item.css('right'));
-			if (right >= 1038) {
+			var pos = positions.length - 1 - schedule_pos + i;
+			if (pos > positions.length - 1) pos = positions.length - 1;
+			if (pos < 0) pos = 0;
+			
+			timeline
+				.to(item, time, { css: {
+					right: positions[pos] + 'px',
+				}, ease: ease }, 0);
+
+			if (pos == 0) {
 				timeline
 					.to(item, time, { css: {
-						right: '+=442px',
 						opacity: 0,
-					}, ease: ease }, 0);
-				if (i == 0) {
-				 // && first_schedule) {
-					// first_schedule = false;
-					var text_time = item.children('h6').text();
-					var text_heading = item.children('.headings').children('h4').text();
-					setSubheading(text_time + '<br />' + text_heading);
-				}
-			} else if (right >= 596) {
-				timeline
-					.to(item, time, { css: {
-						right: '+=442px',
-					}, ease: ease }, 0);
-			} else if (right >= 50) {
-				item.css({
-					transform: 'scale(.7)',
-				});
-				shrinkBox(item);
-				timeline
-					.to(item, time, { css: {
-						right: '+=546px',
-					}, ease: ease }, 0);
-			} else {
-				timeline
-					.to(item, time, { css: {
-						right: '+=650px',
-					}, ease: ease }, 0);
+					}, ease: ease }, 0);				
+			} else if (pos == 2) {
+				shrinkScheduleItem(item);
 			}
 		}
 
 		timeline.play();
 	}
 
+	function hideSchedule() {
+		var items = $('.schedule-item');
+		var timeline = makeTimeline();
+
+		for (var i = 0; i < items.length; i++) {
+			var item = $(items[i]);
+			if (!item.hasClass('small')) shrinkScheduleItem(item);
+		}
+
+		timeline
+			.staggerTo(items, .5, { css: {
+				right: 1824 + 'px', opacity: 0,
+			}, ease: Power2.easeIn }, 0.1);
+
+		timeline.play();
+	}
+
+	// define anims
+	function animOverlay() {
+		var time = .75, ease = 'Power1.easeOut';
+		var timeline = makeTimeline();
+		timeline
+			.from('.corner', time, { css: {
+				top: '-540px', left: '-540px',
+			}, ease: ease }, 0)
+			.from('.block.dark-blue', time, { css: {
+				top: '-540px', left: '-540px',
+			}, ease: ease }, 0)
+			.from('.block.pink', time, { css: {
+				top: '-540px', left: '-540px',
+			}, ease: ease }, 0)
+			.from('.block.pink', time / 2, { css: {
+				transform: 'rotate(-45deg)',
+			}, ease: ease }, time / 2);
+		return timeline;
+	}
+
+	function animBackground() {
+		var timeline = makeTimeline();
+		timeline
+			.from('.background', .75, { css: {
+				top: '-580px', left: '-580px',
+			}, ease: Power1.easeInOut }, 0)
+			.from('.background', 1, { css: {
+				transform: 'rotate(-41deg)',
+			}, ease: Power1.easeInOut }, .5);
+		return timeline;
+	}
+
+	function animNextImage() {
+		var time = .75;
+		var timeline = makeTimeline();
+		timeline
+			.from('.next-image-wrapper', time, { css: {
+				top: '-580px', left: '-580px',
+			}, ease: Power1.easeInOut }, 0)
+			.from('.next-image-wrapper', time, { css: {
+				transform: 'rotate(-41deg)',
+			}, ease: Power1.easeInOut }, time)
+			.from('.next-image', time, { css: {
+				transform: 'rotate(41deg)',
+			}, ease: Power1.easeInOut }, time);
+		return timeline;
+	}
+
+	function animNextText() {
+		var time = .75;
+		var timeline = makeTimeline();
+		timeline
+			.from('.next-text-wrapper', 1, { y: '101%', ease: Power2.easeOut })
+		return timeline;
+	}
+
+	// misc functions
 	function makeTimeline() {
 		var timeline = new TimelineMax();
 		timeline.pause();
 		return timeline;
 	}
 
+	function setHeading(text) { $('.heading').text(text); }
 
-	function setHeading(text) {
-		$('.heading').text(text);
+	function setNextText(heading, subheading) {
+		$('.next-text h2').text(heading);
+		$('.next-text h3').text(subheading);
 	}
 
-	function setSubheading(text) {
-		var subheading = $('.subheading');
-		// subheading.css({
-		// 	opacity: 0,
-		// });
-		$('.subheading').html(text);
-		subheading.animate({
+	function setNextImage(image) {
+		$('.next-image').css({
+			backgroundImage: 'url(' + image + ')',
 			opacity: 1,
-		})
+		});
 	}
 
-	function addBox(heading, subheading, time_start, time_end, image, index) {
+	function fadeNextImageOut(instant) {
+		if (instant) $('.next-image').css({ opacity: 0, });
+		else $('.next-image').animate({ opacity: 0, });
+	}
+
+	function fadeNextImageIn(instant) {
+		if (instant) $('.next-image').css({ opacity: 1, });
+		else $('.next-image').animate({ opacity: 1, });
+	}
+
+	function fadeBackgroundOut(instant) {
+		if (instant) $('.background').css({ opacity: .5, });
+		else $('.background').animate({ opacity: .5, });
+	}
+
+	function fadeBackgroundIn(instant) {
+		if (instant) $('.background').css({ opacity: 1, });
+		else $('.background').animate({ opacity: 1, });
+	}
+
+	function setSchedule(day, slot) {
+		clearSchedule();
+		var slots = getSlots(day, slot);
+		for (var i = 0; i < slots.length; i++) {
+			var j = slots[i];
+			addScheduleItem(sessions[j].heading, sessions[j].subHeading, sessions[j].timeStart, sessions[j].timeEnd, sessions[j].image, i);
+		}
+	}
+
+	function clearSchedule() {
+		$('.schedule').empty();
+	}
+
+	function addScheduleItem(heading, subheading, time_start, time_end, image, index) {
 		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>GMT</span>' + '</h6>';
 		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
 		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
 			.css({
-				right: (50 - (index + 1) * 650) + 'px',
+				right: -600 + 'px',
 			})
 		$('.schedule').append(item);
 	}
 
-	function shrinkBox(target) {
+	function shrinkScheduleItem(target) {
+		target.addClass('small');
 		target.children('h6').animate({
 			marginLeft: '20px',
 		});
 		target.children('.image').animate({
 			width: '560px',
 		});
-		target.children('.headings').css({
-			background: 'transparent',
-		});
+	}
+
+	function getSlots(day, slot, first) {
+		var index = 0 - slot;
+		var slots = [];
+		for (var i = 0; i < sessions.length; i++) {
+			if (sessions[i].day == day) {
+				if (index >= 0) {
+					slots.push(i);
+					if (first) return slots;
+				}
+				index ++;
+			}
+		}
+		return slots;
 	}
 
 	function update(str) {
@@ -492,6 +510,7 @@
 	function next() {
 		// do nothing
 	}
+
 </script>
 </body>
 </html>
