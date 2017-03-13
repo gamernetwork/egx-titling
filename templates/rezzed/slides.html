@@ -14,6 +14,7 @@
 			position: relative;
 			top: 0; left: 0;
 			overflow: hidden;
+			/*background: red;*/
 		}
 		.block {
 			width: 3000px; height: 1080px;
@@ -183,17 +184,17 @@
 			padding: 40px;
 			position: relative;
 			bottom: 0; right: 0;
+			display: inline-block;
 		}
 		.lower-right-third h2 {
 			background: #503575;
-			-webkit-transform: translateY(0);
+			/*-webkit-transform: translateY(0);*/
 		}
 		.lower-right-third h4 {
 			color: #ff57c0;
 			background: #360c4e;
-			display: inline-block;
 			text-align: center;
-			-webkit-transform: translateY(1%);
+			/*-webkit-transform: translateY(0);*/
 		}
 	</style>
 </head>
@@ -239,8 +240,7 @@
 	</div>
 
 	<div class="lower-right-third">
-		<h4>Up next</h4>
-		<h2></h2>
+		<h4>Up next</h4><h2></h2>
 	</div>
 </main>
 
@@ -265,7 +265,7 @@
 	// upNextImageOut()
 	// schedule('Friday', 5);
 	// lowerLeft('Friday', 0);
-	// lowerRight('Friday', 0);
+	lowerRight('Friday', 0);
 	// killAll();
 
 	// slides
@@ -517,8 +517,8 @@
 	function animLowerRight() {
 		var timeline = makeTimeline();
 		timeline
-			.from('.lower-right-third h2', 1, { y: '101%', ease: Power4.easeInOut }, 0)
-			.from('.lower-right-third h4', 1, { y: '201%', ease: Power4.easeInOut }, .2);
+			.from('.lower-right-third h4', 1, { y: '101%', ease: Power4.easeInOut }, 0)
+			.from('.lower-right-third h2', 1, { y: '101%', ease: Power4.easeInOut }, .15);
 		return timeline;
 	}
 
