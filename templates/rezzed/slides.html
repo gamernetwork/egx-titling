@@ -50,7 +50,7 @@
 		}
 		h2, h4, h6 {
 			font-family: 'NB Grotesk', sans-serif;
-			font-size: 40px; line-height: 50px;
+			font-size: 40px; line-height: 40px;
 			color: white;
 			text-transform: uppercase;
 		}
@@ -74,6 +74,9 @@
 		.corner ul {
 			position: absolute;
 			left: 277px; top: 50px;
+		}
+		.corner h2 {
+			margin-bottom: 10px;
 		}
 		.logo {
 			width: 177px; height: 231px;
@@ -149,6 +152,49 @@
 			padding: 50px;
 			padding-left: 160px;
 		}
+		.lower-left-third {
+			width: 850px;
+			position: absolute;
+			bottom: 50px; left: 50px;
+			overflow: hidden;
+		}
+		.lower-left-third h2,
+		.lower-left-third h3 {
+			position: relative;
+			left: 0;
+			padding: 40px;
+		}
+		.lower-left-third h2 {
+			background: #360c4e;
+			color: #ff57c0;
+		}
+		.lower-left-third h3 {
+			background: #503575;
+		}
+		.lower-right-third {
+			max-width: 1820px;
+			position: absolute;
+			bottom: 50px; right: 50px;
+			text-align: right;
+			overflow: hidden;
+		}
+		.lower-right-third h2,
+		.lower-right-third h4 {
+			padding: 40px;
+			position: relative;
+			bottom: 0; right: 0;
+		}
+		.lower-right-third h2 {
+			background: #503575;
+			-webkit-transform: translateY(0);
+		}
+		.lower-right-third h4 {
+			color: #ff57c0;
+			background: #360c4e;
+			display: inline-block;
+			text-align: center;
+			-webkit-transform: translateY(1%);
+		}
 	</style>
 </head>
 <body>
@@ -165,7 +211,10 @@
 	</div>
 
 	<div class="next-text-wrapper">
-		<div class="next-text"><h2></h2><h3></h3></div>
+		<div class="next-text">
+			<h2></h2>
+			<h3></h3>
+		</div>
 	</div>
 
 	<div class="overlay">
@@ -183,6 +232,16 @@
 		</ul>
 		<h1 class="heading"></h1>
 	</div>
+
+	<div class="lower-left-third">
+		<h2></h2>
+		<h3></h3>
+	</div>
+
+	<div class="lower-right-third">
+		<h4>Up next</h4>
+		<h2></h2>
+	</div>
 </main>
 
 <script src="../../schedule/schedule.js"></script>
@@ -196,22 +255,30 @@
 		'background': animBackground(),
 		'next_text': animNextText(),
 		'next_image': animNextImage(),
+		'lower_left': animLowerLeft(),
+		'lower_right': animLowerRight(),
 	};
+	var schedule_timer = null, schedule_hold = false;
 
 	// testing
-	// scheduleIn('Friday', 0);
-	// upNextIn('Friday', 0);
+	// upNext('Friday', 0);
+	// upNextImageOut()
+	// schedule('Friday', 5);
+	// lowerLeft('Friday', 0);
+	// lowerRight('Friday', 0);
+	// killAll();
 
 	// slides
-	function upNextIn(day, slot) {
+	function upNext(day, slot) {
 		showOverlay('Up next');
 		showBackground();
 		showNext(day, slot);
 	}
 
-	function upNextOut() {
+	function upNextOut(keep_background=false) {
 		hideOverlay();
 		hideNext();
+		if (!keep_background) setTimeout(hideBackground, 950);
 	}
 
 	function upNextImageOut() {
@@ -219,24 +286,40 @@
 		hideNextImage();
 	}
 
-	function scheduleIn(day, slot) {
+	function schedule(day, slot, hold=false) {
+		schedule_hold = hold;
 		showOverlay('Coming up');
 		showBackground();
 		setSchedule(day, slot);
 		setTimeout(playSchedule, 1250);
 	}
 
-	function scheduleOut() {
+	function scheduleOut(keep_background=false) {
 		clearInterval(schedule_timer);
 		hideOverlay();
 		hideSchedule();
+		if (!keep_background) setTimeout(hideBackground, 950);
 	}
 
-	function killAll(keep_background) {
+	function lowerLeft(day, slot, time=10000) {
+		showLowerLeftThird(day, slot);
+		setTimeout(hideLowerLeftThird, time);
+	}
+
+	function lowerRight(day, slot, time=7000) {
+		showLowerRightThird(day, slot);
+		setTimeout(hideLowerRightThird, time);
+	}
+
+	function killAll(keep_background=false) {
+		stopAllTimeouts();
+		schedule_hold = false;
 		clearInterval(schedule_timer);
 		hideOverlay();
 		hideSchedule();
 		hideNext();
+		hideLowerLeftThird();
+		hideLowerRightThird();
 		if (!keep_background) setTimeout(hideBackground, 950);
 	}
 
@@ -289,7 +372,32 @@
 		timelines.next_text.reverse();
 	}
 
-	var schedule_timer;
+	function showLowerLeftThird(day, slot) {
+		var slots = getSlots(day, slot, true);
+		if (slots.length > 0) {
+			var i = slots[0];
+			setLowerLeftText(sessions[i].heading, sessions[i].subHeading);
+			timelines.lower_left.play();
+		}
+	}
+
+	function hideLowerLeftThird() {
+		timelines.lower_left.reverse();
+	}
+
+	function showLowerRightThird(day, slot) {
+		var slots = getSlots(day, slot, true);
+		if (slots.length > 0) {
+			var i = slots[0];
+			setLowerRightText(sessions[i].heading, sessions[i].timeStart);
+			timelines.lower_right.play();
+		}
+	}
+
+	function hideLowerRightThird() {
+		timelines.lower_right.reverse();
+	}
+
 	function playSchedule() {
 		var delay = 4000;
 		schedule_pos = 0;
@@ -302,6 +410,10 @@
 
 	function endSchedule() {
 		clearInterval(schedule_timer);
+		if (!schedule_hold) {
+			scheduleOut();
+			setTimeout(hideBackground, 950);
+		}
 	}
 
 	var schedule_pos = 0;
@@ -311,7 +423,10 @@
 
 		var items = $('.schedule-item');
 		schedule_pos ++;
-		if (schedule_pos > items.length + 2) endSchedule();
+		if (schedule_pos > items.length) { 
+			endSchedule();
+			return;
+		}
 		var timeline = makeTimeline();
 
 		for (var i = 0; i < items.length; i++) {
@@ -387,6 +502,26 @@
 		return timeline;
 	}
 
+	function animLowerLeft() {
+		var timeline = makeTimeline();
+		timeline
+			.from('.lower-left-third h2', 1, { css: {
+				left: '-100%',
+			}, ease: Power3.easeInOut }, 0)
+			.from('.lower-left-third h3', 1, { css: {
+				left: '-100%',
+			}, ease: Power2.easeInOut }, .1);
+		return timeline;
+	}
+
+	function animLowerRight() {
+		var timeline = makeTimeline();
+		timeline
+			.from('.lower-right-third h2', 1, { y: '101%', ease: Power4.easeInOut }, 0)
+			.from('.lower-right-third h4', 1, { y: '201%', ease: Power4.easeInOut }, .2);
+		return timeline;
+	}
+
 	function animNextImage() {
 		var time = .75;
 		var timeline = makeTimeline();
@@ -419,6 +554,15 @@
 	}
 
 	function setHeading(text) { $('.heading').text(text); }
+
+	function setLowerLeftText(heading, subheading) {
+		$('.lower-left-third h2').text(heading);
+		$('.lower-left-third h3').text(subheading);
+	}
+
+	function setLowerRightText(heading, time_start) {
+		$('.lower-right-third h2').text(time_start + ' ' + heading);
+	}
 
 	function setNextText(heading, subheading) {
 		$('.next-text h2').text(heading);
@@ -499,6 +643,11 @@
 			}
 		}
 		return slots;
+	}
+
+	function stopAllTimeouts() {
+		var id = window.setTimeout(null,0);
+		while (id--) window.clearTimeout(id);
 	}
 
 	function update(str) {
