@@ -188,13 +188,12 @@
 		}
 		.lower-right-third h2 {
 			background: #503575;
-			/*-webkit-transform: translateY(0);*/
+			-webkit-transform: translateY(0);
 		}
 		.lower-right-third h4 {
 			color: #ff57c0;
 			background: #360c4e;
-			text-align: center;
-			/*-webkit-transform: translateY(0);*/
+			-webkit-transform: translateY(0);
 		}
 	</style>
 </head>
@@ -202,6 +201,15 @@
 
 <main>
 	<div class="background block blue"></div>
+
+	<div class="lower-left-third">
+		<h2>&nbsp;</h2>
+		<h3>&nbsp;</h3>
+	</div>
+
+	<div class="lower-right-third">
+		<h4>Up next</h4><h2>&nbsp;</h2>
+	</div>
 
 	<div class="schedule"></div>
 
@@ -213,8 +221,8 @@
 
 	<div class="next-text-wrapper">
 		<div class="next-text">
-			<h2></h2>
-			<h3></h3>
+			<h2>&nbsp;</h2>
+			<h3>&nbsp;</h3>
 		</div>
 	</div>
 
@@ -232,15 +240,6 @@
 			<li><h3>egx.net/egx</h3></li>
 		</ul>
 		<h1 class="heading"></h1>
-	</div>
-
-	<div class="lower-left-third">
-		<h2></h2>
-		<h3></h3>
-	</div>
-
-	<div class="lower-right-third">
-		<h4>Up next</h4><h2></h2>
 	</div>
 </main>
 
@@ -265,7 +264,7 @@
 	// upNextImageOut()
 	// schedule('Friday', 5);
 	// lowerLeft('Friday', 0);
-	lowerRight('Friday', 0);
+	// lowerRight('Friday', 0);
 	// killAll();
 
 	// slides
