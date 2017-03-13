@@ -516,6 +516,9 @@
 	function animLowerRight() {
 		var timeline = makeTimeline();
 		timeline
+			.from('.lower-right-third h4', .75, { css: {
+				opacity: 0,
+			}, ease: Power3.easeInOut }, 0)
 			.from('.lower-right-third h4', 1, { y: '101%', ease: Power4.easeInOut }, 0)
 			.from('.lower-right-third h2', 1, { y: '101%', ease: Power4.easeInOut }, .15);
 		return timeline;
