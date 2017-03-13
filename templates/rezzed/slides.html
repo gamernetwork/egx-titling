@@ -301,13 +301,13 @@
 	}
 
 	function lowerLeft(day, slot, time=10000) {
-		showLowerLeftThird(day, slot);
-		setTimeout(hideLowerLeftThird, time);
+		showLowerLeft(day, slot);
+		setTimeout(hideLowerLeft, time);
 	}
 
 	function lowerRight(day, slot, time=7000) {
-		showLowerRightThird(day, slot);
-		setTimeout(hideLowerRightThird, time);
+		showLowerRight(day, slot);
+		setTimeout(hideLowerRight, time);
 	}
 
 	function killAll(keep_background=false) {
@@ -317,8 +317,8 @@
 		hideOverlay();
 		hideSchedule();
 		hideNext();
-		hideLowerLeftThird();
-		hideLowerRightThird();
+		hideLowerLeft();
+		hideLowerRight();
 		if (!keep_background) setTimeout(hideBackground, 950);
 	}
 
@@ -371,7 +371,7 @@
 		timelines.next_text.reverse();
 	}
 
-	function showLowerLeftThird(day, slot) {
+	function showLowerLeft(day, slot) {
 		var slots = getSlots(day, slot, true);
 		if (slots.length > 0) {
 			var i = slots[0];
@@ -380,11 +380,11 @@
 		}
 	}
 
-	function hideLowerLeftThird() {
+	function hideLowerLeft() {
 		timelines.lower_left.reverse();
 	}
 
-	function showLowerRightThird(day, slot) {
+	function showLowerRight(day, slot) {
 		var slots = getSlots(day, slot, true);
 		if (slots.length > 0) {
 			var i = slots[0];
@@ -393,7 +393,7 @@
 		}
 	}
 
-	function hideLowerRightThird() {
+	function hideLowerRight() {
 		timelines.lower_right.reverse();
 	}
 
