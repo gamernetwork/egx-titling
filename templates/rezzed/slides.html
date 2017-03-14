@@ -200,8 +200,6 @@
 <body>
 
 <main>
-	<div class="background block blue"></div>
-
 	<div class="lower-left-third">
 		<h2>&nbsp;</h2>
 		<h3>&nbsp;</h3>
@@ -210,6 +208,8 @@
 	<div class="lower-right-third">
 		<h4>Up next</h4><h2>&nbsp;</h2>
 	</div>
+
+	<div class="background block blue"></div>
 
 	<div class="schedule"></div>
 
@@ -246,6 +246,9 @@
 <script src="../../schedule/schedule.js"></script>
 <script type="text/javascript">
 
+	var day = 'Friday',
+		slot = 0;
+
 	$('main > div').show();
 
 	// build timelines
@@ -260,21 +263,23 @@
 	var schedule_timer = null, schedule_hold = false;
 
 	// testing
-	// upNext('Friday', 0);
+	// showOverlay('Up next');
+	// upNext();
 	// upNextImageOut()
-	// schedule('Friday', 5);
-	// lowerLeft('Friday', 0);
-	// lowerRight('Friday', 0);
+	// schedule();
+	// lowerLeft(11000);
+	// lowerRight(6000);
+	// image();
 	// killAll();
 
 	// slides
-	function upNext(day, slot) {
+	function upNext() {
 		showOverlay('Up next');
 		showBackground();
-		showNext(day, slot);
+		showNext();
 	}
 
-	function upNextOut(keep_background=false) {
+	function upNextOut(keep_background) {
 		hideOverlay();
 		hideNext();
 		if (!keep_background) setTimeout(hideBackground, 950);
@@ -285,32 +290,52 @@
 		hideNextImage();
 	}
 
-	function schedule(day, slot, hold=false) {
+	function schedule(hold) {
 		schedule_hold = hold;
 		showOverlay('Coming up');
 		showBackground();
-		setSchedule(day, slot);
+		setSchedule();
 		setTimeout(playSchedule, 1250);
 	}
 
-	function scheduleOut(keep_background=false) {
+	function scheduleOut(keep_background) {
 		clearInterval(schedule_timer);
 		hideOverlay();
 		hideSchedule();
 		if (!keep_background) setTimeout(hideBackground, 950);
 	}
 
-	function lowerLeft(day, slot, time=10000) {
-		showLowerLeft(day, slot);
+	function lowerLeft(time) {
+		if (!time) time = 11000;
+		var slots = getSlots(slot, true);
+		if (slots.length > 0) {
+			var i = slots[0];
+			showLowerLeft(sessions[i].heading, sessions[i].subHeading);
+		}
 		setTimeout(hideLowerLeft, time);
 	}
 
-	function lowerRight(day, slot, time=7000) {
-		showLowerRight(day, slot);
+	function lowerRight(time) {
+		if (!time) time = 6000;
+		var slots = getSlots(slot + 1, true);
+		if (slots.length > 0) {
+			var i = slots[0];
+			showLowerRight(sessions[i].timeStart, sessions[i].heading);
+		}
 		setTimeout(hideLowerRight, time);
 	}
 
-	function killAll(keep_background=false) {
+	function image() {
+		timelines.overlay.seek( '-=0', false );
+		var slots = getSlots(slot, true);
+		if (slots.length > 0) {
+			var i = slots[0];
+			setNextImage(sessions[i].image);
+			timelines.next_image.seek( '-=0', false );
+		}
+	}
+
+	function killAll(keep_background) {
 		stopAllTimeouts();
 		schedule_hold = false;
 		clearInterval(schedule_timer);
@@ -341,8 +366,8 @@
 		timelines.background.reverse();
 	}
 
-	function showNext(day, slot) {
-		var slots = getSlots(day, slot, true);
+	function showNext() {
+		var slots = getSlots(slot, true);
 		if (slots.length > 0) {
 			var i = slots[0];
 			setNextText(sessions[i].heading, sessions[i].subHeading);
@@ -371,26 +396,18 @@
 		timelines.next_text.reverse();
 	}
 
-	function showLowerLeft(day, slot) {
-		var slots = getSlots(day, slot, true);
-		if (slots.length > 0) {
-			var i = slots[0];
-			setLowerLeftText(sessions[i].heading, sessions[i].subHeading);
-			timelines.lower_left.play();
-		}
+	function showLowerLeft(heading, subheading) {
+		setLowerLeftText(heading, subheading);
+		timelines.lower_left.play();
 	}
 
 	function hideLowerLeft() {
 		timelines.lower_left.reverse();
 	}
 
-	function showLowerRight(day, slot) {
-		var slots = getSlots(day, slot, true);
-		if (slots.length > 0) {
-			var i = slots[0];
-			setLowerRightText(sessions[i].heading, sessions[i].timeStart);
-			timelines.lower_right.play();
-		}
+	function showLowerRight(time_start, heading) {
+		setLowerRightText(time_start, heading);
+		timelines.lower_right.play();
 	}
 
 	function hideLowerRight() {
@@ -519,8 +536,8 @@
 			.from('.lower-right-third h4', .75, { css: {
 				opacity: 0,
 			}, ease: Power3.easeInOut }, 0)
-			.from('.lower-right-third h4', 1, { y: '101%', ease: Power4.easeInOut }, 0)
-			.from('.lower-right-third h2', 1, { y: '101%', ease: Power4.easeInOut }, .15);
+			.from('.lower-right-third h4', 1, { y: '201%', ease: Power4.easeInOut }, 0)
+			.from('.lower-right-third h2', 1, { y: '101%', ease: Power4.easeInOut }, .2);
 		return timeline;
 	}
 
@@ -562,7 +579,7 @@
 		$('.lower-left-third h3').text(subheading);
 	}
 
-	function setLowerRightText(heading, time_start) {
+	function setLowerRightText(time_start, heading) {
 		$('.lower-right-third h2').text(time_start + ' ' + heading);
 	}
 
@@ -598,9 +615,9 @@
 		else $('.background').animate({ opacity: 1, });
 	}
 
-	function setSchedule(day, slot) {
+	function setSchedule() {
 		clearSchedule();
-		var slots = getSlots(day, slot);
+		var slots = getSlots(slot);
 		for (var i = 0; i < slots.length; i++) {
 			var j = slots[i];
 			addScheduleItem(sessions[j].heading, sessions[j].subHeading, sessions[j].timeStart, sessions[j].timeEnd, sessions[j].image, i);
@@ -622,18 +639,18 @@
 		$('.schedule').append(item);
 	}
 
-	function shrinkScheduleItem(target) {
-		target.addClass('small');
-		target.children('h6').animate({
+	function shrinkScheduleItem(item) {
+		item.addClass('small');
+		item.children('h6').animate({
 			marginLeft: '20px',
 		});
-		target.children('.image').animate({
+		item.children('.image').animate({
 			width: '560px',
 		});
 	}
 
-	function getSlots(day, slot, first) {
-		var index = 0 - slot;
+	function getSlots(n, first) {
+		var index = 0 - n;
 		var slots = [];
 		for (var i = 0; i < sessions.length; i++) {
 			if (sessions[i].day == day) {
@@ -652,6 +669,13 @@
 		while (id--) window.clearTimeout(id);
 	}
 
+	// time management
+	function nextSlot() { slot ++; }
+	function prevSlot() { slot --; }
+	function setSlot(new_slot) { slot = new_slot; }
+	function setDay(new_day) { day = new_day; }
+
+	// CasparCG stuff
 	function update(str) {
 		// do nothing
 	}
