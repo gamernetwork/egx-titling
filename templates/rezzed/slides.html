@@ -45,8 +45,7 @@
 			font-size: 85px; line-height: 85px;
 			color: #ff57c0;
 			text-transform: uppercase;
-			letter-spacing: -5px;
-			margin: 30px 0px 0px;
+			letter-spacing: -.05em;
 			max-width: 600px;
 		}
 		h2, h4, h6 {
@@ -76,6 +75,9 @@
 			position: absolute;
 			left: 277px; top: 50px;
 		}
+		.corner h1 {
+			margin-top: 30px;
+		} 
 		.corner h2 {
 			margin-bottom: 10px;
 		}
@@ -111,6 +113,7 @@
 			line-height: 40px;
 			height: 50px;
 			margin-left: 0;
+			/*color: #ff57c0;*/
 		}
 		.schedule-item h4 {
 			line-height: 40px;
@@ -149,9 +152,12 @@
 			display: block;
 			margin: 0 auto;
 			width: 100%;
-			max-width: 1200px;
+			max-width: 1380px;
 			padding: 50px;
 			padding-left: 160px;
+		}
+		.next-time {
+			color: #ff57c0;
 		}
 		.lower-left-third {
 			width: 850px;
@@ -221,8 +227,9 @@
 
 	<div class="next-text-wrapper">
 		<div class="next-text">
-			<h2>&nbsp;</h2>
-			<h3>&nbsp;</h3>
+			<h2 class="next-time">&nbsp;</h2>
+			<h2 class="next-heading">&nbsp;</h2>
+			<h3 class="next-subheading">&nbsp;</h3>
 		</div>
 	</div>
 
@@ -247,7 +254,8 @@
 <script type="text/javascript">
 
 	var day = 'Friday',
-		slot = 0;
+		slot = 0,
+		schedule_delay = 4000;
 
 	$('main > div').show();
 
@@ -260,10 +268,9 @@
 		'lower_left': animLowerLeft(),
 		'lower_right': animLowerRight(),
 	};
-	var schedule_timer = null, schedule_hold = false;
+	var schedule_timer = null, schedule_hold = false, is_intermission = true;
 
 	// testing
-	showOverlay('Up next');
 	// upNext();
 	// upNextImageOut()
 	// schedule();
@@ -273,6 +280,13 @@
 	// killAll();
 
 	// slides
+	function intermission() {
+		schedule();
+		// var items = $('.schedule-item').length;
+		// console.log(items);
+		is_intermission = true;
+	}
+
 	function upNext() {
 		showOverlay('Up next');
 		showBackground();
@@ -338,6 +352,7 @@
 	function killAll(keep_background) {
 		stopAllTimeouts();
 		schedule_hold = false;
+		is_intermission = false;
 		clearInterval(schedule_timer);
 		hideOverlay();
 		hideSchedule();
@@ -370,7 +385,7 @@
 		var slots = getSlots(slot, true);
 		if (slots.length > 0) {
 			var i = slots[0];
-			setNextText(sessions[i].heading, sessions[i].subHeading);
+			setNextText(sessions[i].heading, sessions[i].subHeading, sessions[i].timeStart, sessions[i].timeEnd);
 			setNextImage(sessions[i].image);
 			setTimeout(function() {
 				timelines.next_image.play();
@@ -415,12 +430,12 @@
 	}
 
 	function playSchedule() {
-		var delay = 4000;
 		schedule_pos = 0;
 		clearInterval(schedule_timer);
-		if ($('.schedule-item').length > 0) {
+		var items = $('.schedule-item').length;
+		if (items > 0) {
 			advanceSchedule();
-			schedule_timer = setInterval(function() { advanceSchedule(); }, delay);
+			schedule_timer = setInterval(function() { advanceSchedule(); }, schedule_delay);
 		}
 	}
 
@@ -429,6 +444,10 @@
 		if (!schedule_hold) {
 			scheduleOut();
 			setTimeout(hideBackground, 950);
+			if (is_intermission) {
+				is_intermission = false;
+				setTimeout(upNext, 950);
+			}
 		}
 	}
 
@@ -583,9 +602,10 @@
 		$('.lower-right-third h2').text(time_start + ' ' + heading);
 	}
 
-	function setNextText(heading, subheading) {
-		$('.next-text h2').text(heading);
-		$('.next-text h3').text(subheading);
+	function setNextText(heading, subheading, time_start, time_end) {
+		$('.next-heading').text(heading);
+		$('.next-subheading').text(subheading);
+		$('.next-time').text(time_start + ' – ' + time_end + ' GMT');
 	}
 
 	function setNextImage(image) {
@@ -629,7 +649,8 @@
 	}
 
 	function addScheduleItem(heading, subheading, time_start, time_end, image, index) {
-		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>GMT</span>' + '</h6>';
+		// var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>GMT</span>' + '</h6>';
+		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' GMT' + '</h6>';
 		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
 		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
