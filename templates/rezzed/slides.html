@@ -14,7 +14,6 @@
 			position: relative;
 			top: 0; left: 0;
 			overflow: hidden;
-			/*background: red;*/
 		}
 		.block {
 			width: 3000px; height: 1080px;
@@ -57,7 +56,7 @@
 		h3, h5 {
 			font-family: Helvetica, sans-serif;
 			font-size: 30px; line-height: 36px;
-			font-weight: normal;
+			font-weight: 300;
 			color: white;
 		}
 		ul {
@@ -75,9 +74,13 @@
 			position: absolute;
 			left: 277px; top: 50px;
 		}
-		.corner h1 {
+		.corner h1.heading {
 			margin-top: 30px;
-		} 
+		}
+		.corner h1.countdown {
+			color: white;
+			text-transform: initial;
+		}
 		.corner h2 {
 			margin-bottom: 10px;
 		}
@@ -152,9 +155,9 @@
 			display: block;
 			margin: 0 auto;
 			width: 100%;
-			max-width: 1380px;
+			max-width: 1280px;
 			padding: 50px;
-			padding-left: 160px;
+			padding-left: 250px;
 		}
 		.next-time {
 			color: #ff57c0;
@@ -247,6 +250,7 @@
 			<li><h3>egx.net/egx</h3></li>
 		</ul>
 		<h1 class="heading"></h1>
+		<h1 class="countdown"></h1>
 	</div>
 </main>
 
@@ -268,7 +272,7 @@
 		'lower_left': animLowerLeft(),
 		'lower_right': animLowerRight(),
 	};
-	var schedule_timer = null, schedule_hold = false, is_intermission = true;
+	var schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
 
 	// testing
 	// upNext();
@@ -288,7 +292,9 @@
 	}
 
 	function upNext() {
+		hideSchedule();
 		showOverlay('Up next');
+		startCountdown();
 		showBackground();
 		showNext();
 	}
@@ -305,6 +311,9 @@
 	}
 
 	function schedule(hold) {
+		hideNextImage();
+		hideNextText();
+		stopCountdown();
 		schedule_hold = hold;
 		showOverlay('Coming up');
 		showBackground();
@@ -320,6 +329,7 @@
 	}
 
 	function lowerLeft(time) {
+		hideLowerRight();
 		if (!time) time = 11000;
 		var slots = getSlots(slot, true);
 		if (slots.length > 0) {
@@ -330,6 +340,7 @@
 	}
 
 	function lowerRight(time) {
+		hideLowerLeft();
 		if (!time) time = 6000;
 		var slots = getSlots(slot + 1, true);
 		if (slots.length > 0) {
@@ -370,6 +381,7 @@
 
 	function hideOverlay(text) {
 		timelines.overlay.reverse();
+		stopCountdown();
 	}
 
 	function showBackground() {
@@ -593,6 +605,8 @@
 
 	function setHeading(text) { $('.heading').text(text); }
 
+	function setCountdown(text) { $('.countdown').text(text).show(); }
+
 	function setLowerLeftText(heading, subheading) {
 		$('.lower-left-third h2').text(heading);
 		$('.lower-left-third h3').text(subheading);
@@ -605,7 +619,7 @@
 	function setNextText(heading, subheading, time_start, time_end) {
 		$('.next-heading').text(heading);
 		$('.next-subheading').text(subheading);
-		$('.next-time').text(time_start + ' – ' + time_end + ' GMT');
+		$('.next-time').text(time_start + ' - ' + time_end + ' BST');
 	}
 
 	function setNextImage(image) {
@@ -649,8 +663,8 @@
 	}
 
 	function addScheduleItem(heading, subheading, time_start, time_end, image, index) {
-		// var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>GMT</span>' + '</h6>';
-		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' GMT' + '</h6>';
+		// var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>BST</span>' + '</h6>';
+		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' BST' + '</h6>';
 		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
 		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
@@ -695,6 +709,44 @@
 	function prevSlot() { slot --; }
 	function setSlot(new_slot) { slot = new_slot; }
 	function setDay(new_day) { day = new_day; }
+
+	// countdown
+	function startCountdown() {
+		updateCountdown();
+		countdown_timer = setInterval(function() {
+			updateCountdown();
+		}, 1000);
+	}
+
+	function updateCountdown() {
+		setCountdown(getCountdown());
+	}
+
+	function stopCountdown() {
+		clearInterval(countdown_timer);
+		$('.countdown').hide();
+	}
+
+	function getCountdown() {
+		var now = new Date();
+		var countdown_date = new Date();
+		var i = getSlots(slot, true);
+		var time = sessions[i].timeStart.split(':');
+		if (time.length == 2) {
+			countdown_date.setHours(time[0]);
+			countdown_date.setMinutes(time[1]);
+			countdown_date.setSeconds(0);
+			var distance = countdown_date - now;
+			if (distance < 0) return 'Starting soon';
+			else {
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+				return hours ? hours + 'h ' : '' + minutes + 'm ' + seconds + 's';
+			}
+		}
+		else return '';
+	}
 
 	// CasparCG stuff
 	function update(str) {
