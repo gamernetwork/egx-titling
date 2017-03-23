@@ -267,7 +267,7 @@
 	</div>
 </main>
 
-<script src="../../schedule/schedule.js"></script>
+<!-- <script src="../../schedule/schedule.js"></script> -->
 <script type="text/javascript">
 
 	var day = 'Friday',
@@ -285,9 +285,18 @@
 		'lower_left': animLowerLeft(),
 		'lower_right': animLowerRight(),
 	};
-	var schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
+	var sessions = [], schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
+
+	function loadSchedule(json) {
+		$.getJSON(json, function(data) {
+			console.log(data);
+			sessions = data;
+			// $.each(data, function(key, val) {});
+		});
+	}
 
 	// testing
+	loadSchedule('../../schedule/schedule.json');
 	// upNext();
 	// upNextImageOut()
 	// schedule();
@@ -752,7 +761,10 @@
 			countdown_date.setMinutes(time[1]);
 			countdown_date.setSeconds(0);
 			var distance = countdown_date - now;
-			if (distance < 0) return 'STARTING SOON';
+			if (distance < 0) {
+				clearInterval(countdown_timer);
+				return 'STARTING SOON';
+			}
 			else {
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
