@@ -45,7 +45,7 @@
 			color: #ff57c0;
 			text-transform: uppercase;
 			/*letter-spacing: -.05em;*/
-			max-width: 650px;
+			max-width: 700px;
 			margin-left: -7px;
 		}
 		h2, h4, h6 {
@@ -752,7 +752,7 @@
 			countdown_date.setMinutes(time[1]);
 			countdown_date.setSeconds(0);
 			var distance = countdown_date - now;
-			if (distance < 0) return 'Starting soon';
+			if (distance < 0) return 'STARTING SOON';
 			else {
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
