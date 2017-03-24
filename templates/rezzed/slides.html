@@ -6,9 +6,14 @@
 	<title>EGX Rezzed Developer Sessions</title>
 	<script src="../../lib/jquery-3.1.1.min.js"></script>
 	<script src="../../lib/TweenMax.min.js"></script>
+	<!-- <script src="../../lib/html2canvas.js"></script> -->
 	<style type="text/css">
 		* { box-sizing: border-box; }
-		body { margin: 0px; }
+		html, body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
 		main {
 			width: 1920px; height: 1080px;
 			position: relative;
@@ -106,6 +111,7 @@
 			width: 600px; height: 300px;
 			background-position: center;
 			background-size: cover;
+			-webkit-background-size: cover;
 			margin: 0 auto;
 		}
 		.schedule-item .headings {
@@ -138,6 +144,7 @@
 			width: 1925px;
 			height: 1080px;
 			background-size: cover;
+			-webkit-background-size: cover;
 		}
 		.next-image-wrapper {
 			position: relative;
@@ -148,14 +155,19 @@
 			top: 0; left: 0;
 			width: 1925px;
 		}
-		.next-text-wrapper {
+		.next-text-wrapper,
+		.caption-text-wrapper {
 			position: absolute;
 			left: 0; bottom: 0;
 			width: 1920px;
 			background: #503575;
 			-webkit-transform: translateY(0);
 		}
-		.next-text {
+		.caption-text-wrapper {
+			left: -100%;
+		}
+		.next-text,
+		.caption-text {
 			display: block;
 			margin: 0 auto;
 			width: 100%;
@@ -174,6 +186,9 @@
 		}
 		.next-text h2 {
 			font-size: 40px; line-height: 40px;
+		}
+		.caption-text h2 {
+			font-size: 80px; line-height: 70px;
 		}
 		h2.next-heading {
 			margin-bottom: 5px;
@@ -248,6 +263,12 @@
 		</div>
 	</div>
 
+	<div class="caption-text-wrapper">
+		<div class="caption-text">
+			<h2 class="caption-heading">&nbsp;</h2>
+		</div>
+	</div>
+
 	<div class="overlay">
 		<div class="block pink"></div>
 		<div class="block dark-blue"></div>
@@ -308,17 +329,20 @@
 	// slides
 	function intermission() {
 		schedule();
-		// var items = $('.schedule-item').length;
-		// console.log(items);
 		is_intermission = true;
 	}
 
-	function upNext(no_countdown) {
+	function getMaxScheduleTime() {
+		var items = $('.schedule-item').length;
+		console.log('Items: ' + items + ' | Time: ' + (4000 * items + 1250 + 1500));
+	}
+
+	function upNext(no_countdown, bst) {
 		stopAllTimeouts();
 		hideSchedule();
 		showOverlay('Up next');
 		if (no_countdown) stopCountdown();
-		else startCountdown();
+		else startCountdown(bst);
 		showBackground();
 		showNext();
 	}
@@ -382,7 +406,27 @@
 			var i = slots[0];
 			setNextImage(sessions[i].image);
 			timelines.next_image.seek( '-=0', false );
+			$('.caption-heading').text(sessions[i].heading);
+			$('.caption-text-wrapper').css('left', 0);
+			$('.logo').css('width', '550px');
 		}
+		$('.corner ul').hide();
+		// $('.next-image').css('background-size', '100%');
+		// setTimeout(function() {
+		// 	html2canvas(document.body, {
+		// 		onrendered: function(canvas) {
+		// 			document.body.appendChild(canvas);
+		// 		}
+		// 	});
+		// }, 0);
+	}
+
+	function imageReset() {
+		timelines.overlay.seek( '0', false );
+		timelines.next_image.seek( '0', false );
+		$('.caption-text-wrapper').css('left', '100%');
+		$('.logo').css('width', '379px');
+		$('.corner ul').show();
 	}
 
 	function killAll(keep_background) {
@@ -689,7 +733,7 @@
 
 	function addScheduleItem(heading, subheading, time_start, time_end, image, index) {
 		// var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>BST</span>' + '</h6>';
-		var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' BST' + '</h6>';
+		var time = '<h6>' + time_start + ' - ' + time_end + ' BST' + '</h6>';
 		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
 		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
@@ -736,15 +780,15 @@
 	function setDay(new_day) { day = new_day; }
 
 	// countdown
-	function startCountdown() {
-		updateCountdown();
+	function startCountdown(bst) {
+		updateCountdown(bst);
 		countdown_timer = setInterval(function() {
-			updateCountdown();
+			updateCountdown(bst);
 		}, 1000);
 	}
 
-	function updateCountdown() {
-		setCountdown(getCountdown());
+	function updateCountdown(bst) {
+		setCountdown(getCountdown(bst));
 	}
 
 	function stopCountdown() {
@@ -752,19 +796,19 @@
 		$('.countdown').hide();
 	}
 
-	function getCountdown() {
+	function getCountdown(bst) {
 		var now = new Date();
 		var countdown_date = new Date();
 		var i = getSlots(slot, true);
 		var time = sessions[i].timeStart.split(':');
 		if (time.length == 2) {
-			countdown_date.setHours(time[0]);
+			countdown_date.setHours(time[0] - (bst ? 1 : 0));
 			countdown_date.setMinutes(time[1]);
 			countdown_date.setSeconds(0);
 			var distance = countdown_date - now;
 			if (distance < 0) {
 				clearInterval(countdown_timer);
-				return 'STARTING SOON';
+				return 'IN A FEW MOMENTS';
 			}
 			else {
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
