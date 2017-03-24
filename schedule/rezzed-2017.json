@@ -2,110 +2,110 @@
     {
         "day": "Thursday",
         "timestart": "12:00",
-        "timeend": "12:45",
+        "timeend": "12:30",
         "heading": "Ken Levine – A Conversation",
         "subheading": "BioShock creator, Ken Levine, speaks with Eurogamer’s Oli Welsh about his love for games, his time as a game designer, and Ghost Story games.",
-        "image": "https://cdn.gamer-network.net/2017/egx/rezzed/dev/ken-levine.jpg"
+        "image": "rezzed-2017/ken-levine.jpg"
     },
     {
         "day": "Thursday",
         "timestart": "13:00",
-        "timeend": "13:45",
+        "timeend": "13:30",
         "heading": "Prey and the Arkane Factor",
         "subheading": "Join Creative Director Raphael Colantonio, as he showcases new Prey gameplay and discusses what makes the immersive sim such a unique and exciting genre.",
-        "image": "http://cdn.edgecast.steamstatic.com/steam/apps/480490/ss_976f1d181de3dc8bc86c78fe900c98be457d0942.1920x1080.jpg?t=1490365670"
+        "image": "rezzed-2017/prey.jpg"
     },
     {
         "day": "Thursday",
         "timestart": "14:00",
-        "timeend": "14:45",
+        "timeend": "14:30",
         "heading": "Divinity: Original Sin 2",
         "subheading": "Swen Vincke's (Larian Studios founder) panel will address the challenges of building fully-fledged narratives that play nice inside the main story when the characters themselves don't.",
-        "image": "http://cdn.edgecast.steamstatic.com/steam/apps/435150/ss_c7d81e172855c3b81a58a2a4de2f435477de359a.1920x1080.jpg?t=1482423515"
+        "image": "rezzed-2017/divinity-2.jpg"
     },
     {
         "day": "Thursday",
         "timestart": "15:00",
-        "timeend": "15:45",
+        "timeend": "15:30",
         "heading": "Knights and Bikes with Rock, Paper, Shotgun",
         "subheading": "Foam Sword - developers behind the charming and energetic eighties-inspired Knights and Bikes - join RPS on stage.",
-        "image": "https://steamuserimages-a.akamaihd.net/ugc/357276526592820485/00CB0C47414BFC4DC7F48C03C98F8AD820E3A6C2/"
+        "image": "rezzed-2017/knights-and-bikes.png"
     },
     {
         "day": "Thursday",
         "timestart": "16:00",
-        "timeend": "16:45",
+        "timeend": "16:30",
         "heading": "William Pugh",
         "subheading": "William Pugh (Crows Crows Crows / The Stanley Parable) tells stories from navigating the games industry and avoiding death at the hand of publishers.",
-        "image": "http://cdn.edgecast.steamstatic.com/steam/apps/409160/ss_79a31280d4f3820bcf53abc65009b56b844479e5.1920x1080.jpg?t=1454678278"
+        "image": "rezzed-2017/william-pugh.jpg"
     },
     {
         "day": "Friday",
         "timestart": "12:00",
-        "timeend": "12:45",
+        "timeend": "12:30",
         "heading": "Cities Skylines with Rock, Paper, Shotgun",
         "subheading": "Mariina Hallikainen, CEO of Colossal Order, talks about the continuous development of Cities: Skylines, and working along side a community."
     },
     {
         "day": "Friday",
         "timestart": "13:00",
-        "timeend": "13:45",
+        "timeend": "13:30",
         "heading": "The Future of Gaming Tech",
         "subheading": "Join the Digital Foundry team as they discuss 4K and the future of PC and console technology."
     },
     {
         "day": "Friday",
         "timestart": "14:00",
-        "timeend": "14:45",
+        "timeend": "14:30",
         "heading": "Stellaris with Rock, Paper, Shotgun",
         "subheading": "Where is Stellaris a year (and a bit!) from launch, and where are we headed, beyond Utopia."
     },
     {
         "day": "Friday",
         "timestart": "15:00",
-        "timeend": "15:45",
+        "timeend": "15:30",
         "heading": "Taking to the Sunless Skies",
         "subheading": "Failbetter Games discuss the sequel to Sunless Sea, which was 377% funded on Kickstarter! Lottie Bevan, Cash DeCuir and Liam Welton in conversation with Eurogamer."
     },
     {
         "day": "Friday",
         "timestart": "16:00",
-        "timeend": "16:45",
+        "timeend": "16:30",
         "heading": "The future of Total War: WARHAMMER",
         "subheading": "Join developers from Creative Assembly for an exclusive look at what's next for the Total War: WARHAMMER series. Fans won't want to miss this!"
     },
     {
         "day": "Saturday",
         "timestart": "12:00",
-        "timeend": "12:45",
+        "timeend": "12:30",
         "heading": "Dean Hall from RocketWerkz",
         "subheading": "Dean Hall, the original creator of DayZ and founder of RocketWerkz, goes in-depth on the studio's new game and takes questions from the audience."
     },
     {
         "day": "Saturday",
         "timestart": "13:00",
-        "timeend": "13:45",
+        "timeend": "13:30",
         "heading": "Battalion 1944",
         "subheading": "Senior Producer and Designer on Battalion Joe Brammer will be discussing what \"old school\" really is when it comes to shooters and he'll be looking to audience for ideas, features and requests."
     },
     {
         "day": "Saturday",
         "timestart": "14:00",
-        "timeend": "14:45",
+        "timeend": "14:30",
         "heading": "Xenonauts-2",
         "subheading": "Chris England from Goldhawk Interactive joins Eurogamer's Chris \"Strategy King\" Bratt to chat about the latest Xenonauts-2 developments."
     },
     {
         "day": "Saturday",
         "timestart": "15:00",
-        "timeend": "15:45",
+        "timeend": "15:30",
         "heading": "Yooka-Laylee",
         "subheading": "Join developers from Playtonic as they play through the opening stages of Yooka-Laylee in a worldwide exclusive session. This is the only chance you'll have to see the final version of Yooka-Laylee before it's released!"
     },
     {
         "day": "Saturday",
         "timestart": "16:00",
-        "timeend": "16:45",
+        "timeend": "16:30",
         "heading": "Halo Wars 2: How we made a game for everyone",
         "subheading": "Cassie Morgan and Dan Brewer from Creative Assembly will talk about the challenges involved in designing for both hardcore RTS fans but also for players new to RTS games."
     }
