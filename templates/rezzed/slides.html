@@ -365,6 +365,7 @@
 		stopCountdown();
 		schedule_hold = hold;
 		showOverlay('Coming up');
+		$('.countdown').hide();
 		showBackground();
 		setSchedule();
 		setTimeout(playSchedule, 1250);
@@ -796,7 +797,7 @@
 
 	function stopCountdown() {
 		clearInterval(countdown_timer);
-		$('.countdown').hide();
+		$('.countdown').text('\0');
 	}
 
 	function getCountdown(bst) {
