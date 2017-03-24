@@ -4,35 +4,40 @@
         "timestart": "12:00",
         "timeend": "12:45",
         "heading": "Ken Levine – A Conversation",
-        "subheading": "BioShock creator, Ken Levine, speaks with Eurogamer’s Oli Welsh about his love for games, his time as a game designer, and Ghost Story games."
+        "subheading": "BioShock creator, Ken Levine, speaks with Eurogamer’s Oli Welsh about his love for games, his time as a game designer, and Ghost Story games.",
+        "image": "https://cdn.gamer-network.net/2017/egx/rezzed/dev/ken-levine.jpg"
     },
     {
         "day": "Thursday",
         "timestart": "13:00",
         "timeend": "13:45",
         "heading": "Prey and the Arkane Factor",
-        "subheading": "Join Creative Director Raphael Colantonio, as he showcases new Prey gameplay and discusses what makes the immersive sim such a unique and exciting genre."
+        "subheading": "Join Creative Director Raphael Colantonio, as he showcases new Prey gameplay and discusses what makes the immersive sim such a unique and exciting genre.",
+        "image": "http://cdn.edgecast.steamstatic.com/steam/apps/480490/ss_976f1d181de3dc8bc86c78fe900c98be457d0942.1920x1080.jpg?t=1490365670"
     },
     {
         "day": "Thursday",
         "timestart": "14:00",
         "timeend": "14:45",
         "heading": "Divinity: Original Sin 2",
-        "subheading": "Swen Vincke's (Larian Studios founder) panel will address the challenges of building fully-fledged narratives that play nice inside the main story when the characters themselves don't."
+        "subheading": "Swen Vincke's (Larian Studios founder) panel will address the challenges of building fully-fledged narratives that play nice inside the main story when the characters themselves don't.",
+        "image": "http://cdn.edgecast.steamstatic.com/steam/apps/435150/ss_c7d81e172855c3b81a58a2a4de2f435477de359a.1920x1080.jpg?t=1482423515"
     },
     {
         "day": "Thursday",
         "timestart": "15:00",
         "timeend": "15:45",
         "heading": "Knights and Bikes with Rock, Paper, Shotgun",
-        "subheading": "Foam Sword - developers behind the charming and energetic eighties-inspired Knights and Bikes - join RPS on stage."
+        "subheading": "Foam Sword - developers behind the charming and energetic eighties-inspired Knights and Bikes - join RPS on stage.",
+        "image": "https://steamuserimages-a.akamaihd.net/ugc/357276526592820485/00CB0C47414BFC4DC7F48C03C98F8AD820E3A6C2/"
     },
     {
         "day": "Thursday",
         "timestart": "16:00",
         "timeend": "16:45",
         "heading": "William Pugh",
-        "subheading": "William Pugh (Crows Crows Crows / The Stanley Parable) tells stories from navigating the games industry and avoiding death at the hand of publishers."
+        "subheading": "William Pugh (Crows Crows Crows / The Stanley Parable) tells stories from navigating the games industry and avoiding death at the hand of publishers.",
+        "image": "http://cdn.edgecast.steamstatic.com/steam/apps/409160/ss_79a31280d4f3820bcf53abc65009b56b844479e5.1920x1080.jpg?t=1454678278"
     },
     {
         "day": "Friday",

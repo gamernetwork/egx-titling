@@ -109,7 +109,7 @@
 		}
 		.schedule-item .image {
 			width: 600px; height: 300px;
-			background-position: center;
+			background-position: bottom center;
 			background-size: cover;
 			-webkit-background-size: cover;
 			margin: 0 auto;
@@ -143,6 +143,7 @@
 			left: 0; top: 0;
 			width: 1925px;
 			height: 1080px;
+			background-position: center;
 			background-size: cover;
 			-webkit-background-size: cover;
 		}
@@ -160,7 +161,8 @@
 			position: absolute;
 			left: 0; bottom: 0;
 			width: 1920px;
-			background: #503575;
+			/*background: #503575;*/
+			background: rgba(80, 53, 117, .75);
 			-webkit-transform: translateY(0);
 		}
 		.caption-text-wrapper {
@@ -313,9 +315,9 @@
 	}
 
 	// testing
-	// loadSchedule('../../schedule/rezzed-2017.json');
-	loadSchedule('../../schedule/schedule.json');
-	setDay('Friday');
+	loadSchedule('../../schedule/rezzed-2017.json');
+	// loadSchedule('../../schedule/schedule.json');
+	// setDay('Friday');
 	// upNext();
 	// upNextImageOut()
 	// schedule();
@@ -397,34 +399,31 @@
 		setTimeout(hideLowerRight, time);
 	}
 
-	function image() {
-		timelines.overlay.seek( '-=0', false );
-		var slots = getSlots(slot, true);
-		if (slots.length > 0) {
-			var i = slots[0];
-			setNextImage(sessions[i].image);
-			timelines.next_image.seek( '-=0', false );
-			$('.caption-heading').text(sessions[i].heading);
-			$('.caption-text-wrapper').css('left', 0);
-			$('.logo').css('width', '550px');
+	function image(confirm) {
+		if (confirm == -1) {
+			timelines.overlay.seek( '-=0', false );
+			var slots = getSlots(slot, true);
+			if (slots.length > 0) {
+				var i = slots[0];
+				setNextImage(sessions[i].image);
+				timelines.next_image.seek( '-=0', false );
+				$('.caption-heading').text(sessions[i].heading);
+				$('.caption-text-wrapper').css('left', 0);
+				$('.logo').css('width', '550px');
+			}
+			$('.corner ul').hide();
+			stopCountdown();
 		}
-		$('.corner ul').hide();
-		stopCountdown();
-		// setTimeout(function() {
-		// 	html2canvas(document.body, {
-		// 		onrendered: function(canvas) {
-		// 			document.body.appendChild(canvas);
-		// 		}
-		// 	});
-		// }, 0);
 	}
 
-	function imageReset() {
-		timelines.overlay.seek( '0', false );
-		timelines.next_image.seek( '0', false );
-		$('.caption-text-wrapper').css('left', '100%');
-		$('.logo').css('width', '379px');
-		$('.corner ul').show();
+	function imageReset(confirm) {
+		if (confirm == -1) {
+			timelines.overlay.seek( '0', false );
+			timelines.next_image.seek( '0', false );
+			$('.caption-text-wrapper').css('left', '100%');
+			$('.logo').css('width', '379px');
+			$('.corner ul').show();
+		}
 	}
 
 	function killAll(keep_background) {
