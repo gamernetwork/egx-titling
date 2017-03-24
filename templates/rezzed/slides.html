@@ -280,7 +280,6 @@
 		<h2 class="countdown"></h2>
 		<ul>
 			<li><h2>#EGX @EGX</h2></li>
-			 <!-- @EGX</h2></li> -->
 			<li><h3>facebook.com/egx</h3></li>
 			<!-- <li><h3>youtube.com/egx</h3></li> -->
 			<li><h3>egx.net</h3></li>
@@ -288,10 +287,9 @@
 	</div>
 </main>
 
-<!-- <script src="../../schedule/schedule.js"></script> -->
 <script type="text/javascript">
 
-	var day = 'Friday',
+	var day = 'Thursday',
 		slot = 0,
 		schedule_delay = 4000;
 
@@ -310,14 +308,12 @@
 
 	function loadSchedule(json) {
 		$.getJSON(json, function(data) {
-			// console.log(data);
 			sessions = data;
-			// $.each(data, function(key, val) {});
 		});
 	}
 
 	// testing
-	loadSchedule('../../schedule/schedule.json');
+	loadSchedule('../../schedule/rezzed-2017.json');
 	// upNext();
 	// upNextImageOut()
 	// schedule();
@@ -327,7 +323,7 @@
 	// killAll();
 
 	// slides
-	function intermission() {
+	function intermission(no_countdown, bst) {
 		schedule();
 		is_intermission = true;
 	}
@@ -383,7 +379,7 @@
 		var slots = getSlots(slot, true);
 		if (slots.length > 0) {
 			var i = slots[0];
-			showLowerLeft(sessions[i].heading, sessions[i].subHeading);
+			showLowerLeft(sessions[i].heading, sessions[i].subheading);
 		}
 		setTimeout(hideLowerLeft, time);
 	}
@@ -394,7 +390,7 @@
 		var slots = getSlots(slot + 1, true);
 		if (slots.length > 0) {
 			var i = slots[0];
-			showLowerRight(sessions[i].timeStart, sessions[i].heading);
+			showLowerRight(sessions[i].timestart, sessions[i].heading);
 		}
 		setTimeout(hideLowerRight, time);
 	}
@@ -411,7 +407,7 @@
 			$('.logo').css('width', '550px');
 		}
 		$('.corner ul').hide();
-		// $('.next-image').css('background-size', '100%');
+		stopCountdown();
 		// setTimeout(function() {
 		// 	html2canvas(document.body, {
 		// 		onrendered: function(canvas) {
@@ -466,7 +462,7 @@
 		var slots = getSlots(slot, true);
 		if (slots.length > 0) {
 			var i = slots[0];
-			setNextText(sessions[i].heading, sessions[i].subHeading, sessions[i].timeStart, sessions[i].timeEnd);
+			setNextText(sessions[i].heading, sessions[i].subheading, sessions[i].timestart, sessions[i].timeend);
 			setNextImage(sessions[i].image);
 			setTimeout(function() {
 				timelines.next_image.play();
@@ -723,7 +719,7 @@
 		var slots = getSlots(slot);
 		for (var i = 0; i < slots.length; i++) {
 			var j = slots[i];
-			addScheduleItem(sessions[j].heading, sessions[j].subHeading, sessions[j].timeStart, sessions[j].timeEnd, sessions[j].image, i);
+			addScheduleItem(sessions[j].heading, sessions[j].subheading, sessions[j].timestart, sessions[j].timeend, sessions[j].image, i);
 		}
 	}
 
@@ -776,8 +772,14 @@
 	// time management
 	function nextSlot() { slot ++; }
 	function prevSlot() { slot --; }
-	function setSlot(new_slot) { slot = new_slot; }
-	function setDay(new_day) { day = new_day; }
+	function setSlot(new_slot) {
+		if (!new_slot) new_slot = 0;
+		slot = new_slot;
+	}
+	function setDay(new_day) {
+		if (!new_day) new_day = 'Thursday';
+		day = new_day;
+	}
 
 	// countdown
 	function startCountdown(bst) {
@@ -800,7 +802,7 @@
 		var now = new Date();
 		var countdown_date = new Date();
 		var i = getSlots(slot, true);
-		var time = sessions[i].timeStart.split(':');
+		var time = sessions[i].timestart.split(':');
 		if (time.length == 2) {
 			countdown_date.setHours(time[0] - (bst ? 1 : 0));
 			countdown_date.setMinutes(time[1]);
@@ -808,7 +810,8 @@
 			var distance = countdown_date - now;
 			if (distance < 0) {
 				clearInterval(countdown_timer);
-				return 'IN A FEW MOMENTS';
+				// return 'IN A FEW MOMENTS';
+				return '\0';
 			}
 			else {
 				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
