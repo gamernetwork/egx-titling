@@ -109,7 +109,7 @@
 		}
 		.schedule-item .image {
 			width: 600px; height: 300px;
-			background-position: bottom center;
+			background-position: center;
 			background-size: cover;
 			-webkit-background-size: cover;
 			margin: 0 auto;
@@ -327,7 +327,7 @@
 	// killAll();
 
 	// slides
-	function intermission(no_countdown, bst) {
+	function intermission(no_countdown) {
 		schedule();
 		is_intermission = true;
 	}
@@ -337,12 +337,12 @@
 		console.log('Items: ' + items + ' | Time: ' + (4000 * items + 1250 + 1500));
 	}
 
-	function upNext(no_countdown, bst) {
+	function upNext(no_countdown) {
 		stopAllTimeouts();
 		hideSchedule();
 		showOverlay('Up next');
 		if (no_countdown) stopCountdown();
-		else startCountdown(bst);
+		else startCountdown();
 		showBackground();
 		showNext();
 	}
@@ -730,7 +730,6 @@
 	}
 
 	function addScheduleItem(heading, subheading, time_start, time_end, image, index) {
-		// var time = '<h6>' + time_start + ' &mdash; ' + time_end + ' <span>BST</span>' + '</h6>';
 		var time = '<h6>' + time_start + ' - ' + time_end + ' BST' + '</h6>';
 		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
@@ -784,15 +783,15 @@
 	}
 
 	// countdown
-	function startCountdown(bst) {
-		updateCountdown(bst);
+	function startCountdown() {
+		updateCountdown();
 		countdown_timer = setInterval(function() {
-			updateCountdown(bst);
+			updateCountdown();
 		}, 1000);
 	}
 
-	function updateCountdown(bst) {
-		setCountdown(getCountdown(bst));
+	function updateCountdown() {
+		setCountdown(getCountdown());
 	}
 
 	function stopCountdown() {
@@ -800,13 +799,13 @@
 		$('.countdown').text('\0');
 	}
 
-	function getCountdown(bst) {
+	function getCountdown() {
 		var now = new Date();
 		var countdown_date = new Date();
 		var i = getSlots(slot, true);
 		var time = sessions[i].timestart.split(':');
 		if (time.length == 2) {
-			countdown_date.setHours(time[0] - (bst ? 1 : 0));
+			countdown_date.setHours(time[0]);
 			countdown_date.setMinutes(time[1]);
 			countdown_date.setSeconds(0);
 			var distance = countdown_date - now;
