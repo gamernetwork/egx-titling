@@ -318,7 +318,6 @@
 
 	// testing
 	loadSchedule('../../schedule/rezzed-2017.json');
-	// loadSchedule('../../schedule/schedule.json');
 	// setDay('Friday');
 	// upNext();
 	// upNextImageOut()
@@ -756,7 +755,7 @@
 		var index = 0 - n;
 		var slots = [];
 		for (var i = 0; i < sessions.length; i++) {
-			if (sessions[i].day == day) {
+			if (sessions[i].day.toUpperCase() === day.toUpperCase()) {
 				if (index >= 0) {
 					slots.push(i);
 					if (first) return slots;
