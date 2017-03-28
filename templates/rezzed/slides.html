@@ -51,7 +51,7 @@
 			text-transform: uppercase;
 			/*letter-spacing: -.05em;*/
 			max-width: 700px;
-			margin-left: -7px;
+			margin-left: -8px;
 		}
 		h2, h4, h6 {
 			font-family: 'NB Grotesk', sans-serif;
@@ -77,14 +77,15 @@
 			padding: 50px 75px;
 		}
 		.corner h3 {
-			line-height: 26px;
+			line-height: 28px;
 		}
 		.corner h2.countdown {
 			color: white;
 			text-transform: initial;
 			font-size: 70px;
 			line-height: 60px;
-			margin-bottom: 3px;
+			margin-bottom: 2px;
+			margin-left: -3px;
 		}
 		/*.corner h2 {
 			margin-bottom: 10px;
@@ -103,7 +104,8 @@
 			position: absolute;
 			top: 340px;
 			-webkit-transform-origin: center 350px;
-			-webkit-transition: -webkit-transform 1s;
+			-webkit-transition: -webkit-transform .5s;
+			-webkit-transition-timing-function: ease-out;
 			color: white;
 			background: #503575;
 		}
@@ -175,7 +177,7 @@
 			width: 100%;
 			max-width: 1280px;
 			padding: 50px;
-			padding-left: 250px;
+			padding-left: 240px;
 		}
 		.next-time {
 			color: #ff57c0;
@@ -283,7 +285,7 @@
 		<ul>
 			<li><h2>#EGX @EGX</h2></li>
 			<li><h3>facebook.com/egx</h3></li>
-			<!-- <li><h3>youtube.com/egx</h3></li> -->
+			<li><h3>youtube.com/egx</h3></li>
 			<li><h3>egx.net</h3></li>
 		</ul>
 	</div>
@@ -320,7 +322,7 @@
 	// setDay('Friday');
 	// upNext();
 	// upNextImageOut()
-	// schedule();
+	// setTimeout(schedule, 100);
 	// lowerLeft(11000);
 	// lowerRight(6000);
 	// image();
@@ -579,7 +581,7 @@
 		timeline
 			.staggerTo(items, .5, { css: {
 				right: 1824 + 'px', opacity: 0,
-			}, ease: Power2.easeIn }, 0.1);
+			}, ease: Power2.easeIn }, .1);
 
 		timeline.play();
 	}

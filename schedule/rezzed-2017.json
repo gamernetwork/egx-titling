@@ -20,7 +20,7 @@
         "timestart": "14:00",
         "timeend": "14:30",
         "heading": "Divinity: Original Sin 2",
-        "subheading": "Swen Vincke's (Larian Studios founder) panel will address the challenges of building fully-fledged narratives that play nice inside the main story when the characters themselves don't.",
+        "subheading": "Swen Vincke (founder of Larian Studios) and his panel will address the challenges of building fully-fledged narratives that play nice within the main story when the characters themselves don't.",
         "image": "rezzed-2017/divinity.jpg"
     },
     {
@@ -28,7 +28,7 @@
         "timestart": "15:00",
         "timeend": "15:30",
         "heading": "Knights and Bikes with Rock, Paper, Shotgun",
-        "subheading": "Foam Sword - developers behind the charming and energetic eighties-inspired Knights and Bikes - join RPS on stage.",
+        "subheading": "Foam Sword, developers behind the charming and energetic eighties-inspired Knights and Bikes, join RPS on stage.",
         "image": "rezzed-2017/knights-and-bikes.jpg"
     },
     {
@@ -36,14 +36,14 @@
         "timestart": "16:00",
         "timeend": "16:30",
         "heading": "William Pugh",
-        "subheading": "William Pugh (Crows Crows Crows / The Stanley Parable) tells stories from navigating the games industry and avoiding death at the hand of publishers.",
-        "image": "rezzed-2017/william-pugh.jpg"
+        "subheading": "William Pugh (founder of Crows Crows Crows and Designer on The Stanley Parable) tells stories from navigating the games industry and avoiding death at the hand of publishers.",
+        "image": "rezzed-2017/dr-langeskov.jpg"
     },
     {
         "day": "Friday",
         "timestart": "12:00",
         "timeend": "12:30",
-        "heading": "Cities Skylines with Rock, Paper, Shotgun",
+        "heading": "Cities: Skylines with Rock, Paper, Shotgun",
         "subheading": "Karoliina Korppoo, Lead Designer at Colossal Order, talks about the continuous development of Cities: Skylines, and working alongside a community.",
         "image": "rezzed-2017/cities-skylines.jpg"
     },
@@ -118,5 +118,13 @@
         "heading": "Halo Wars 2: How we made a game for everyone",
         "subheading": "Cassie Morgan and Dan Brewer from Creative Assembly will talk about the challenges involved in designing for both hardcore RTS fans but also for players new to RTS games.",
         "image": "rezzed-2017/halo-wars.jpg"
+    },
+    {
+        "day": "Saturday",
+        "timestart": "17:00",
+        "timeend": "17:30",
+        "heading": "How 1968 Shaped the Characters and World of Mafia III",
+        "subheading": "Bill Harms, Narrative Director at Hangar 13 and Lead Writer of Mafia III, discusses the challenges involved in creating a video game set in New Bordeaux, a fictional version of 1968 New Orleans.",
+        "image": "rezzed-2017/mafia.jpg"
     }
 ]
