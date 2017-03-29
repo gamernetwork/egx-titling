@@ -349,8 +349,15 @@
 
 	// slides
 	function intermission(no_countdown) {
-		schedule();
-		is_intermission = true;
+		var items = $('.schedule-item').length;
+		if (slot >= items) {
+			endOfDay();
+		} else if (slot >= items - 1) {
+			upNext();
+		} else {
+			schedule();
+			is_intermission = true;
+		}
 	}
 
 	function getMaxScheduleTime() {
@@ -381,20 +388,21 @@
 	}
 
 	function schedule(hold) {
-		if (slot >= $('.schedule-item').length - 1) {
+		stopAllTimeouts();
+		hideNextImage();
+		hideNextText();
+		stopCountdown();
+		resetSchedule();
+		$('.countdown').hide();
+		if (slot >= $('.schedule-item').length) {
+			$('.schedule-item').css('right', positions[4] + 'px');
 			endOfDay();
 		} else {
-			stopAllTimeouts();
-			hideNextImage();
-			hideNextText();
-			stopCountdown();
 			schedule_hold = hold;
 			showOverlay('Coming up');
-			$('.countdown').hide();
 			$('.central-text').hide();
 			showBackground();
 			// setSchedule();
-			resetSchedule();
 			setTimeout(playSchedule, 1250);
 		}
 	}
@@ -430,7 +438,6 @@
 
 	function endOfDay() {
 		showOverlay("That's all for now");
-		// setCountdown('');
 		showBackground();
 		$('.central-text').show();
 	}
@@ -755,7 +762,7 @@
 
 	function setSchedule() {
 		clearSchedule();
-		var slots = getSlots(slot);
+		var slots = getSlots(0);
 		for (var i = 0; i < slots.length; i++) {
 			var j = slots[i];
 			addScheduleItem(sessions[j].heading, sessions[j].subheading, sessions[j].timestart, sessions[j].timeend, sessions[j].image, i);
@@ -769,7 +776,7 @@
 	function resetSchedule() {
 		$('.schedule-item')
 			.css({
-				'right': positions[4],
+				'right': positions[4] + 'px',
 				'opacity': 1,
 			})
 			.removeClass('small')
