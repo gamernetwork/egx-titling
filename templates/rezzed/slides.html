@@ -235,6 +235,19 @@
 			/*background: #360c4e;*/
 			-webkit-transform: translateY(0);
 		}
+		.central-text {
+			width: 1920px; height: 1080px;
+			top: 0; left: 0;
+			position: absolute;
+			display: none;
+		}
+		.central-text h1 {
+			text-align: right;
+			color: white;
+			position: absolute;
+			bottom: 50px; right: 75px;
+			max-width: 1300px;
+		}
 	</style>
 </head>
 <body>
@@ -249,7 +262,11 @@
 		<h4>Up next</h4><h2>&nbsp;</h2>
 	</div>
 
-	<div class="background block blue"></div>
+	<div class="background block blue">
+		<div class="central-text">
+			<h1>We'll be back tomorrow at 12:00</h1>
+		</div>
+	</div>
 
 	<div class="schedule"></div>
 
@@ -291,6 +308,7 @@
 	</div>
 </main>
 
+<!-- <script src="../../schedule/rezzed-2017.js"></script> -->
 <script type="text/javascript">
 
 	var day = 'Thursday',
@@ -308,12 +326,14 @@
 		'lower_left': animLowerLeft(),
 		'lower_right': animLowerRight(),
 	};
-	var sessions = [], schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
+	// var sessions = [];
+	var schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
 
 	function loadSchedule(json) {
 		$.getJSON(json, function(data) {
 			sessions = data;
 		});
+		setSchedule();
 	}
 
 	// testing
@@ -344,6 +364,7 @@
 		showOverlay('Up next');
 		if (no_countdown) stopCountdown();
 		else startCountdown();
+		$('.central-text').hide();
 		showBackground();
 		showNext();
 	}
@@ -360,16 +381,22 @@
 	}
 
 	function schedule(hold) {
-		stopAllTimeouts();
-		hideNextImage();
-		hideNextText();
-		stopCountdown();
-		schedule_hold = hold;
-		showOverlay('Coming up');
-		$('.countdown').hide();
-		showBackground();
-		setSchedule();
-		setTimeout(playSchedule, 1250);
+		if (slot >= $('.schedule-item').length - 1) {
+			endOfDay();
+		} else {
+			stopAllTimeouts();
+			hideNextImage();
+			hideNextText();
+			stopCountdown();
+			schedule_hold = hold;
+			showOverlay('Coming up');
+			$('.countdown').hide();
+			$('.central-text').hide();
+			showBackground();
+			// setSchedule();
+			resetSchedule();
+			setTimeout(playSchedule, 1250);
+		}
 	}
 
 	function scheduleOut(keep_background) {
@@ -399,6 +426,13 @@
 			showLowerRight(sessions[i].timestart, sessions[i].heading);
 		}
 		setTimeout(hideLowerRight, time);
+	}
+
+	function endOfDay() {
+		showOverlay("That's all for now");
+		// setCountdown('');
+		showBackground();
+		$('.central-text').show();
 	}
 
 	function image(confirm) {
@@ -449,7 +483,7 @@
 
 	function hideOverlay(text) {
 		timelines.overlay.reverse();
-		stopCountdown();
+		// stopCountdown();
 	}
 
 	function showBackground() {
@@ -509,11 +543,13 @@
 		timelines.lower_right.reverse();
 	}
 
+	var schedule_items = [];
 	function playSchedule() {
 		schedule_pos = 0;
 		clearInterval(schedule_timer);
-		var items = $('.schedule-item').length;
-		if (items > 0) {
+		schedule_items = $('.schedule-item');
+		if (slot > 0) schedule_items.splice(0, slot);
+		if (schedule_items.length > 0) {
 			advanceSchedule();
 			schedule_timer = setInterval(function() { advanceSchedule(); }, schedule_delay);
 		}
@@ -532,20 +568,19 @@
 	}
 
 	var schedule_pos = 0;
+	var positions = [1410, 996, 582, 50, -600];
 	function advanceSchedule() {
-		var positions = [1410, 996, 582, 50, -600];
+		var timeline = makeTimeline();
 		var time = 1, ease = 'Power2.easeInOut';
 
-		var items = $('.schedule-item');
 		schedule_pos ++;
-		if (schedule_pos > items.length) { 
+		if (schedule_pos > schedule_items.length) { 
 			endSchedule();
 			return;
 		}
-		var timeline = makeTimeline();
 
-		for (var i = 0; i < items.length; i++) {
-			var item = $(items[i]);
+		for (var i = 0; i < schedule_items.length; i++) {
+			var item = $(schedule_items[i]);
 			var pos = positions.length - 1 - schedule_pos + i;
 			if (pos > positions.length - 1) pos = positions.length - 1;
 			if (pos < 0) pos = 0;
@@ -569,8 +604,9 @@
 	}
 
 	function hideSchedule() {
-		var items = $('.schedule-item');
 		var timeline = makeTimeline();
+		var items = $('.schedule-item');
+		if (slot > 0) items.splice(0, slot);
 
 		for (var i = 0; i < items.length; i++) {
 			var item = $(items[i]);
@@ -730,13 +766,25 @@
 		$('.schedule').empty();
 	}
 
+	function resetSchedule() {
+		$('.schedule-item')
+			.css({
+				'right': positions[4],
+				'opacity': 1,
+			})
+			.removeClass('small')
+		$('.schedule-item h6').css('margin-left', 0)
+		$('.schedule-item .image').css('width', '600px');
+	}
+
 	function addScheduleItem(heading, subheading, time_start, time_end, image, index) {
 		var time = '<h6>' + time_start + ' - ' + time_end + ' BST' + '</h6>';
 		var image = '<div class="image" style="background-image: url(' + image + ');"></div>';
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
 		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
 			.css({
-				right: -600 + 'px',
+				right: positions[4] + 'px',
+				opacity: 0,
 			})
 		$('.schedule').append(item);
 	}
