@@ -327,6 +327,7 @@
 		'lower_right': animLowerRight(),
 	};
 	// var sessions = [];
+	var positions = [1410, 996, 582, 50, -600];
 	var schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
 
 	function loadSchedule(json) {
@@ -583,7 +584,6 @@
 	}
 
 	var schedule_pos = 0;
-	var positions = [1410, 996, 582, 50, -600];
 	function advanceSchedule() {
 		var timeline = makeTimeline();
 		var time = 1, ease = 'Power2.easeInOut';
