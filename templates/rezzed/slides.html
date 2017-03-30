@@ -308,7 +308,7 @@
 	</div>
 </main>
 
-<script src="../../schedule/rezzed-2017.js"></script>
+<!-- <script src="../../schedule/rezzed-2017.js"></script> -->
 <script type="text/javascript">
 
 	var day = 'Thursday',
@@ -326,7 +326,7 @@
 		'lower_left': animLowerLeft(),
 		'lower_right': animLowerRight(),
 	};
-	// var sessions = [];
+	var sessions = [];
 	var positions = [1410, 996, 582, 50, -600];
 	var schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
 
@@ -338,8 +338,8 @@
 	}
 
 	// testing
-	// loadSchedule('../../schedule/rezzed-2017.json');
-	makeSchedule();
+	loadSchedule('../../schedule/rezzed-2017.json');
+	// makeSchedule();
 	// setDay('Friday');
 	// upNext();
 	// upNextImageOut()
