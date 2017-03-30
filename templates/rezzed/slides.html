@@ -264,7 +264,7 @@
 
 	<div class="background block blue">
 		<div class="central-text">
-			<h1>We'll be back tomorrow at 12:00</h1>
+			<h1>&nbsp;</h1>
 		</div>
 	</div>
 
@@ -308,7 +308,7 @@
 	</div>
 </main>
 
-<!-- <script src="../../schedule/rezzed-2017.js"></script> -->
+<script src="../../schedule/rezzed-2017.js"></script>
 <script type="text/javascript">
 
 	var day = 'Thursday',
@@ -326,18 +326,18 @@
 		'lower_left': animLowerLeft(),
 		'lower_right': animLowerRight(),
 	};
-	var sessions = [];
+	// var sessions = [];
 	var schedule_timer = null, schedule_hold = false, is_intermission = false, countdown_timer = null;
 
 	function loadSchedule(json) {
 		$.getJSON(json, function(data) {
 			sessions = data;
-			setSchedule();
+			makeSchedule();
 		});
 	}
 
 	// testing
-	loadSchedule('../../schedule/rezzed-2017.json');
+	// loadSchedule('../../schedule/rezzed-2017.json');
 	// setDay('Friday');
 	// upNext();
 	// upNextImageOut()
@@ -402,7 +402,7 @@
 			showOverlay('Coming up');
 			$('.central-text').hide();
 			showBackground();
-			// setSchedule();
+			// makeSchedule();
 			setTimeout(playSchedule, 1250);
 		}
 	}
@@ -439,7 +439,9 @@
 	function endOfDay() {
 		showOverlay("That's all for now");
 		if (day.toUpperCase() === 'SATURDAY') {
-			$('.central-text h1').text('Thanks for watching');
+			setEndText('Thanks for watching');
+		} else {
+			setEndText("We'll be back tomorrow at 12:00");
 		}
 		showBackground();
 		stopCountdown();
@@ -723,6 +725,8 @@
 
 	function setCountdown(text) { $('.countdown').text(text).show(); }
 
+	function setEndText(text) { $('.central-text h1').text(text).show(); }
+
 	function setLowerLeftText(heading, subheading) {
 		$('.lower-left-third h2').text(heading);
 		$('.lower-left-third h3').text(subheading);
@@ -765,7 +769,7 @@
 		else $('.background').animate({ opacity: 1, });
 	}
 
-	function setSchedule() {
+	function makeSchedule() {
 		clearSchedule();
 		var slots = getSlots(0);
 		for (var i = 0; i < slots.length; i++) {
@@ -795,7 +799,7 @@
 		var headings = '<div class="headings"><h4>' + heading + '</h4><h5>' + subheading + '</h5></div>';
 		var item = $('<div class="schedule-item">' + time + image + headings + '</div>')
 			.css({
-				right: positions[4] + 'px',
+				right: positions[3] + 'px',
 				opacity: 0,
 			})
 		$('.schedule').append(item);
