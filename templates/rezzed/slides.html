@@ -332,8 +332,8 @@
 	function loadSchedule(json) {
 		$.getJSON(json, function(data) {
 			sessions = data;
+			setSchedule();
 		});
-		setSchedule();
 	}
 
 	// testing
