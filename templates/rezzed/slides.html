@@ -438,6 +438,9 @@
 
 	function endOfDay() {
 		showOverlay("That's all for now");
+		if (day.toUpperCase() === 'SATURDAY') {
+			$('.central-text h2').text('Thanks for watching');
+		}
 		showBackground();
 		stopCountdown();
 		$('.countdown').hide();
