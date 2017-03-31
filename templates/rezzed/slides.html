@@ -311,7 +311,7 @@
 <!-- <script src="../../schedule/rezzed-2017.js"></script> -->
 <script type="text/javascript">
 
-	var day = 'Thursday',
+	var day = 'Friday',
 		slot = 0,
 		schedule_delay = 4000;
 
@@ -393,9 +393,10 @@
 		stopAllTimeouts();
 		hideNextImage();
 		hideNextText();
-		stopCountdown();
+		// stopCountdown();
 		resetSchedule();
-		$('.countdown').hide();
+		// $('.countdown').hide();
+		startCountdown();
 		if (slot >= $('.schedule-item').length) {
 			$('.schedule-item').css('right', positions[4] + 'px');
 			endOfDay();
@@ -499,7 +500,7 @@
 
 	function hideOverlay(text) {
 		timelines.overlay.reverse();
-		// stopCountdown();
+		stopCountdown();
 	}
 
 	function showBackground() {
@@ -862,6 +863,10 @@
 
 	function stopCountdown() {
 		clearInterval(countdown_timer);
+		setTimeout(hideCountdown, 1000);
+	}
+
+	function hideCountdown() {
 		$('.countdown').text('\0');
 	}
 
