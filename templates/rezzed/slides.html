@@ -241,12 +241,15 @@
 			position: absolute;
 			display: none;
 		}
-		.central-text h1 {
+		.central-text > div {
 			text-align: right;
 			color: white;
 			position: absolute;
 			bottom: 50px; right: 75px;
-			max-width: 1300px;
+			max-width: 1000px;
+		}
+		.central-text h1 {
+			max-width: initial;
 		}
 	</style>
 </head>
@@ -264,7 +267,10 @@
 
 	<div class="background block blue">
 		<div class="central-text">
-			<h1>&nbsp;</h1>
+			<div>
+				<h1>&nbsp;</h1>
+				<h2></h2>
+			</div>
 		</div>
 	</div>
 
@@ -440,16 +446,19 @@
 	}
 
 	function endOfDay() {
-		showOverlay("That's all for now");
 		if (day.toUpperCase() === 'SATURDAY') {
-			setEndText('Thanks for watching');
+			showOverlay("That's a wrap");
+			setEndText('Join us in September for EGX', 'Tickets available now');
 		} else {
-			setEndText("We'll be back tomorrow at 12:00");
+			showOverlay("That's all for now");
+			setEndText("We'll be back tomorrow at 12:00", '');
 		}
 		showBackground();
 		stopCountdown();
 		$('.countdown').hide();
-		$('.central-text').show();
+		setTimeout(function() {
+			$('.central-text').fadeIn();
+		}, 1500);
 	}
 
 	function image(confirm) {
@@ -727,7 +736,10 @@
 
 	function setCountdown(text) { $('.countdown').text(text).show(); }
 
-	function setEndText(text) { $('.central-text h1').text(text).show(); }
+	function setEndText(h1, h2) {
+		$('.central-text h1').text(h1).show();
+		$('.central-text h2').text(h2).show();
+	}
 
 	function setLowerLeftText(heading, subheading) {
 		$('.lower-left-third h2').text(heading);
